@@ -1,5 +1,4 @@
 package entities;
-import java.util.List;
 import java.time.LocalDateTime;
 
 public class Flight {
@@ -15,5 +14,5 @@ public class Flight {
     private String currentLocation;
 
     // Constructor, getters, and setters
-    // Additional methods if needed
+    // Additional methods
 }
