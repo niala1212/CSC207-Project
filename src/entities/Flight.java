@@ -1,6 +1,10 @@
 package entities;
 import java.time.LocalDateTime;
 
+/**
+ * The representation of a flight in our program.
+ */
+
 public class Flight {
     private String flightNumber;
     private String airline;
@@ -68,5 +72,43 @@ public class Flight {
 
     public String getCurrentLocation() {
         return currentLocation;
+    }
+
+    // Setters
+    public void setArrivalAirport(String arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setEstimatedArrivalTime(LocalDateTime estimatedArrivalTime) {
+        this.estimatedArrivalTime = estimatedArrivalTime;
+    }
+
+    public void setActualDepartureTime(LocalDateTime actualDepartureTime) {
+        this.actualDepartureTime = actualDepartureTime;
+    }
+
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    // toString method
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightNumber='" + flightNumber + '\'' +
+                ", airline='" + airline + '\'' +
+                ", departureAirport='" + departureAirport + '\'' +
+                ", arrivalAirport='" + arrivalAirport + '\'' +
+                ", status='" + status + '\'' +
+                ", scheduledDepartureTime=" + scheduledDepartureTime +
+                ", scheduledArrivalTime=" + scheduledArrivalTime +
+                ", actualDepartureTime=" + actualDepartureTime +
+                ", estimatedArrivalTime=" + estimatedArrivalTime +
+                ", currentLocation='" + currentLocation + '\'' +
+                '}';
     }
 }
