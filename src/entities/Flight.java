@@ -1,5 +1,6 @@
 package entities;
-import java.time.LocalDateTime;
+
+import java.util.Arrays;
 
 /**
  * The representation of a flight in our program.
@@ -11,29 +12,53 @@ public class Flight {
     private String departureAirport;
     private String arrivalAirport;
     private String status;
-    private LocalDateTime scheduledArrivalTime;
-    private LocalDateTime scheduledDepartureTime;
-    private LocalDateTime estimatedArrivalTime;
-    private LocalDateTime actualDepartureTime;
-    private String currentLocation;
+    private String scheduledArrivalTime;
+    private String scheduledDepartureTime;
+    private String estimatedArrivalTime;
+    private String estimatedDepartureTime;
+//    ALL TIMES ARE GIVEN IN UTC
+    private double[] currentLocation;
 
-    // Constructor
-    public Flight(String flightNumber, String airline, String departureAirport, String arrivalAirport,
-                  String status, LocalDateTime scheduledArrivalTime, LocalDateTime scheduledDepartureTime,
-                  LocalDateTime estimatedArrivalTime, LocalDateTime actualDepartureTime, String currentLocation) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.departureAirport = departureAirport;
-        this.arrivalAirport = arrivalAirport;
-        this.status = status;
-        this.scheduledArrivalTime = scheduledArrivalTime;
-        this.scheduledDepartureTime = scheduledDepartureTime;
-        this.estimatedArrivalTime = estimatedArrivalTime;
-        this.actualDepartureTime = actualDepartureTime;
+    public void setCurrentLocation(double[] currentLocation) {
         this.currentLocation = currentLocation;
     }
 
-    // Getters
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public void setDepartureAirport(String string) {
+        this.departureAirport = string;
+    }
+
+    public void setArrivalAirport(String string) {
+        this.arrivalAirport = string;
+    }
+
+    public void setStatus(String flightStatus) {
+        this.status = flightStatus;
+    }
+
+    public void setScheduledDepartureTime(String parse) {
+        this.scheduledDepartureTime = parse  + " UTC";
+    }
+
+    public void setEstimatedDepartureTime(String parse) {
+        this.estimatedDepartureTime = parse  + " UTC";
+    }
+
+    public void setScheduledArrivalTime(String parse) {
+        this.scheduledArrivalTime = parse  + " UTC";
+    }
+
+    public void setEstimatedArrivalTime(String parse) {
+        this.estimatedArrivalTime = parse  + " UTC";
+    }
+
     public String getFlightNumber() {
         return flightNumber;
     }
@@ -54,61 +79,23 @@ public class Flight {
         return status;
     }
 
-    public LocalDateTime getScheduledArrivalTime() {
-        return scheduledArrivalTime;
-    }
-
-    public LocalDateTime getScheduledDepartureTime() {
+    public String getScheduledDepartureTime() {
         return scheduledDepartureTime;
     }
 
-    public LocalDateTime getEstimatedArrivalTime() {
+    public String getEstimatedDepartureTime() {
+        return estimatedDepartureTime;
+    }
+
+    public String getScheduledArrivalTime() {
+        return scheduledArrivalTime;
+    }
+
+    public String getEstimatedArrivalTime() {
         return estimatedArrivalTime;
     }
 
-    public LocalDateTime getActualDepartureTime() {
-        return actualDepartureTime;
-    }
-
-    public String getCurrentLocation() {
-        return currentLocation;
-    }
-
-    // Setters
-    public void setArrivalAirport(String arrivalAirport) {
-        this.arrivalAirport = arrivalAirport;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setEstimatedArrivalTime(LocalDateTime estimatedArrivalTime) {
-        this.estimatedArrivalTime = estimatedArrivalTime;
-    }
-
-    public void setActualDepartureTime(LocalDateTime actualDepartureTime) {
-        this.actualDepartureTime = actualDepartureTime;
-    }
-
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
-    // toString method
-    @Override
-    public String toString() {
-        return "Flight{" +
-                "flightNumber='" + flightNumber + '\'' +
-                ", airline='" + airline + '\'' +
-                ", departureAirport='" + departureAirport + '\'' +
-                ", arrivalAirport='" + arrivalAirport + '\'' +
-                ", status='" + status + '\'' +
-                ", scheduledDepartureTime=" + scheduledDepartureTime +
-                ", scheduledArrivalTime=" + scheduledArrivalTime +
-                ", actualDepartureTime=" + actualDepartureTime +
-                ", estimatedArrivalTime=" + estimatedArrivalTime +
-                ", currentLocation='" + currentLocation + '\'' +
-                '}';
+    public String getCoordinates() {
+        return Arrays.toString(currentLocation);
     }
 }
