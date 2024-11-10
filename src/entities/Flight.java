@@ -1,6 +1,10 @@
 package entities;
 import java.time.LocalDateTime;
 
+/**
+ * The representation of a flight in our program.
+ */
+
 public class Flight {
     private String flightNumber;
     private String airline;
