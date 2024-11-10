@@ -1,5 +1,6 @@
 package entities;
-import java.time.LocalDateTime;
+
+import java.util.Arrays;
 
 public class Flight {
     private String flightNumber;
@@ -7,18 +8,23 @@ public class Flight {
     private String departureAirport;
     private String arrivalAirport;
     private String status;
-    private LocalDateTime scheduledArrivalTime;
-    private LocalDateTime scheduledDepartureTime;
-    private LocalDateTime estimatedArrivalTime;
-    private LocalDateTime estimatedDepartureTime;
-    private String currentLocation;
+    private String scheduledArrivalTime;
+    private String scheduledDepartureTime;
+    private String estimatedArrivalTime;
+    private String estimatedDepartureTime;
+//    ALL TIMES ARE GIVEN IN UTC
+    private double[] currentLocation;
 
-    public void setFlightNumber(String FLightNumber) {
-        this.flightNumber = FLightNumber;
+    public void setCurrentLocation(double[] currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
-    public void setAirline(String Airline) {
-        this.airline = Airline;
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
     }
 
     public void setDepartureAirport(String string) {
@@ -33,20 +39,20 @@ public class Flight {
         this.status = flightStatus;
     }
 
-    public void setScheduledDepartureTime(LocalDateTime parse) {
-        this.scheduledDepartureTime = parse;
+    public void setScheduledDepartureTime(String parse) {
+        this.scheduledDepartureTime = parse  + " UTC";
     }
 
-    public void setEstimatedDepartureTime(LocalDateTime parse) {
-        this.estimatedDepartureTime = parse;
+    public void setEstimatedDepartureTime(String parse) {
+        this.estimatedDepartureTime = parse  + " UTC";
     }
 
-    public void setScheduledArrivalTime(LocalDateTime parse) {
-        this.scheduledArrivalTime = parse;
+    public void setScheduledArrivalTime(String parse) {
+        this.scheduledArrivalTime = parse  + " UTC";
     }
 
-    public void setEstimatedArrivalTime(LocalDateTime parse) {
-        this.estimatedArrivalTime = parse;
+    public void setEstimatedArrivalTime(String parse) {
+        this.estimatedArrivalTime = parse  + " UTC";
     }
 
     public String getFlightNumber() {
@@ -70,21 +76,22 @@ public class Flight {
     }
 
     public String getScheduledDepartureTime() {
-        return scheduledDepartureTime.toString();
+        return scheduledDepartureTime;
     }
 
     public String getEstimatedDepartureTime() {
-        return estimatedDepartureTime.toString();
+        return estimatedDepartureTime;
     }
 
     public String getScheduledArrivalTime() {
-        return scheduledArrivalTime.toString();
+        return scheduledArrivalTime;
     }
 
     public String getEstimatedArrivalTime() {
-        return estimatedArrivalTime.toString();
+        return estimatedArrivalTime;
     }
 
-    // Constructor, getters, and setters
-    // Additional methods
+    public String getCoordinates() {
+        return Arrays.toString(currentLocation);
+    }
 }

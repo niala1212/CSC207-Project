@@ -14,7 +14,9 @@ import org.json.JSONArray;
 public class Call_API {
     public static void main(String[] args) {
         String accessKey = "f3b8e30f646315a2874f86284f52d5b9";  // Replace with your access key
-        String flightNumber = "WS702";  // The specific flight to look up
+        String flightNumber = "MS996";  // The specific flight to look up
+        String flightDate = "2024-11-10"; // Keep this stuff for later
+//        "&flight_date=" + flightDate // and this stuff
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + accessKey + "&flight_iata=" + flightNumber;
 
         try {
@@ -35,12 +37,11 @@ public class Call_API {
                 in.close();
                 connection.disconnect();
 
-                // Parse JSON response
                 JSONObject jsonResponse = new JSONObject(content.toString());
                 JSONArray data = jsonResponse.getJSONArray("data");
 
-                if (data.length() > 0) {
-                    JSONObject flightData = data.getJSONObject(0); // Assuming the first result matches the flight
+                if (!data.isEmpty()) {
+                    JSONObject flightData = data.getJSONObject(0);
 
 
                     Flight flight = new Flight();
@@ -50,23 +51,43 @@ public class Call_API {
                     flight.setArrivalAirport(flightData.getJSONObject("arrival").getString("airport"));
                     flight.setStatus(flightData.getString("flight_status"));
 
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-//
-//                    flight.setScheduledDepartureTime(LocalDateTime.parse(flightData.getJSONObject("departure").getString("scheduled"), formatter));
-//                    flight.setEstimatedDepartureTime(LocalDateTime.parse(flightData.getJSONObject("departure").getString("estimated"), formatter));
-//                    flight.setScheduledArrivalTime(LocalDateTime.parse(flightData.getJSONObject("arrival").getString("scheduled"), formatter));
-//                    flight.setEstimatedArrivalTime(LocalDateTime.parse(flightData.getJSONObject("arrival").getString("estimated"), formatter));
+                    try {
+                        double lat = flightData.getJSONObject("live").getDouble("latitude");
+                        double lng = flightData.getJSONObject("live").getDouble("longitude");
+                        double[] coordinates = {lat, lng};
+                        flight.setCurrentLocation(coordinates);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
+                    String time_format = "yyyy/MM/dd HH:mm";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(time_format);
+                    String d_sch = flightData.getJSONObject("departure").getString("scheduled");
+                    String d_est = flightData.getJSONObject("departure").getString("estimated");
+                    String a_sch = flightData.getJSONObject("arrival").getString("scheduled");
+                    String a_est = flightData.getJSONObject("arrival").getString("estimated");
+                    LocalDateTime source_ds = LocalDateTime.parse(d_sch,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                    LocalDateTime source_de = LocalDateTime.parse(d_est,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                    LocalDateTime source_as = LocalDateTime.parse(a_sch,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                    LocalDateTime source_ae = LocalDateTime.parse(a_est,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+                    flight.setScheduledDepartureTime(source_ds.format(formatter));
+                    flight.setEstimatedDepartureTime(source_de.format(formatter));
+                    flight.setScheduledArrivalTime(source_as.format(formatter));
+                    flight.setEstimatedArrivalTime(source_ae.format(formatter));
+
+
+                    // Comment all of this out in order to just declare the flight class and no prints
                     System.out.println("Flight Details:");
                     System.out.println("Flight Number: " + flight.getFlightNumber());
                     System.out.println("Airline: " + flight.getAirline());
                     System.out.println("Departure Airport: " + flight.getDepartureAirport());
                     System.out.println("Arrival Airport: " + flight.getArrivalAirport());
                     System.out.println("Status: " + flight.getStatus());
-//                    System.out.println("Scheduled Departure: " + flight.getScheduledDepartureTime());
-//                    System.out.println("Estimated Departure: " + flight.getEstimatedDepartureTime());
-//                    System.out.println("Scheduled Arrival: " + flight.getScheduledArrivalTime());
-//                    System.out.println("Estimated Arrival: " + flight.getEstimatedArrivalTime());
+                    System.out.println("Scheduled Departure: " + flight.getScheduledDepartureTime());
+                    System.out.println("Estimated Departure: " + flight.getEstimatedDepartureTime());
+                    System.out.println("Scheduled Arrival: " + flight.getScheduledArrivalTime());
+                    System.out.println("Estimated Arrival: " + flight.getEstimatedArrivalTime());
+                    System.out.println("Coordinates: " + flight.getCoordinates());
                 } else {
                     System.out.println("No flight data found for " + flightNumber);
                 }
