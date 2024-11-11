@@ -1,6 +1,10 @@
 package entities;
 import java.util.List;
 
+/**
+ * The representation of a map in our program.
+ */
+
 public class Map {
     private int mapID;
     private List<Flight> flightList;
@@ -33,29 +37,22 @@ public class Map {
     }
 
     // Setters
-    public void setMapID(int mapID) {
-        this.mapID = mapID;
-    }
-
-    public void setFlightList(List<Flight> flightList) {
-        this.flightList = flightList;
-    }
-
-    public void setZoomLevel(int zoomLevel) {
-        this.zoomLevel = zoomLevel;
-    }
-
-    public void setCentreCoordinates(String centreCoordinates) {
-        this.centreCoordinates = centreCoordinates;
-    }
-
     public void addFlight(Flight flight) {
         if (flightList != null && flight != null) {
-            flightList.add(flight);
+            for (Flight existingFlight : flightList) {
+                if (existingFlight.getFlightNumber().equalsIgnoreCase(flight.getFlightNumber())) {
+                    return; // Flight is already in the list, so we skip adding
+                }
+            }
+            flightList.add(flight); // No duplicate found, so add the flight
         }
     }
 
     public void updateCentreCoordinates(String newCoordinates) {
         this.centreCoordinates = newCoordinates;
+    }
+
+    public void updateZoomLevel(int zoomLevel) {
+        this.zoomLevel = zoomLevel;
     }
 }
