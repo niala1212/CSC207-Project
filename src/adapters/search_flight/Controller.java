@@ -1,21 +1,26 @@
-package adapters;
+package adapters.search_flight;
 
+import use_case.SearchByFlightNumber.SearchByFlightNumberInputBoundary;
+import use_case.SearchByFlightNumber.SearchByFlightNumberInputData;
+
+/**
+ * The controller for the search use case.
+ */
 public class SearchController {
 
-    private final SearchFlightUseCase searchFlightUseCase:
-    private final FlightPresenter presenter:
+    private final SearchByFlightNumberInputBoundary searchByFlightNumberInteractor;
 
-    public SearchController(SearchFlightUseCase searchFlightUseCase, FlightPresenter presenter) {
-        this.searchFlightUseCase = searchFlightUseCase;
-        this.presenter = presenter;
+    public SearchController(SearchByFlightNumberInputBoundary searchByFlightNumberInteractor) {
+        this.searchByFlightNumberInteractor = searchByFlightNumberInteractor;
     }
 
-    public String search(String input) {
-        Flight flight = searchFlightUseCase.searchByFlightNumber(input);
-        if (flight != null) {
-            return presenter.presentFlightDetails(flight);
-        } else {
-            return presenter.presentFlightNotFound(input);
-        }
+    /**
+     * Executes the search by flight number use case.
+     * @param flightNumber
+     */
+    public void execute(String flightNumber) {
+        final SearchByFlightNumberInputData inputData = new SearchByFlightNumberInputData(flightNumber);
+        this.searchByFlightNumberInteractor.execute(inputData);
+
     }
 }
