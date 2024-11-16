@@ -7,7 +7,8 @@ import java.util.Arrays;
  */
 
 public class Flight {
-    private String flightNumber;
+    private final String flightNumber;
+    private final String flightDate;
     private String airline;
     private String departureAirport;
     private String arrivalAirport;
@@ -19,13 +20,15 @@ public class Flight {
 //    ALL TIMES ARE GIVEN IN UTC
     private double[] currentLocation;
 
+    public Flight(String flightNUmber, String flightDate) {
+        this.flightNumber = flightNUmber;
+        this.flightDate = flightDate;
+    }
+
     public void setCurrentLocation(double[] currentLocation) {
         this.currentLocation = currentLocation;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
 
     public void setAirline(String airline) {
         this.airline = airline;
@@ -97,5 +100,9 @@ public class Flight {
 
     public String getCoordinates() {
         return Arrays.toString(currentLocation);
+    }
+
+    public String getFlightDate() {
+        return flightDate;
     }
 }
