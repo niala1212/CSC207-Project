@@ -1,5 +1,6 @@
 package entities;
-import java.time.LocalDateTime;
+
+import data_access.Call_API;
 
 /**
  * Factory for creating Flight objects.
@@ -7,10 +8,9 @@ import java.time.LocalDateTime;
 
 public class FlightFactory {
 
-    public Flight create(String flightNumber, String airline, String departureAirport, String arrivalAirport,
-                         String status, LocalDateTime scheduledArrivalTime, LocalDateTime scheduledDepartureTime,
-                         LocalDateTime estimatedArrivalTime, LocalDateTime actualDepartureTime, String currentLocation){
-        return new Flight(flightNumber, airline, departureAirport, arrivalAirport, status, scheduledArrivalTime,
-                scheduledDepartureTime, estimatedArrivalTime, actualDepartureTime, currentLocation);
+    public Flight create(String flightNumber, String departureDate){
+        Flight flight = new Flight(flightNumber, departureDate);
+        Call_API.callAPI(flight);
+        return flight;
     }
 }

@@ -12,11 +12,13 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class Call_API {
-    public static void main(String[] args) {
+    public static void callAPI(Flight flight) {
         String accessKey = "f3b8e30f646315a2874f86284f52d5b9";  // Replace with your access key
-        String flightNumber = "MS996";  // The specific flight to look up
-        String flightDate = "2024-11-10"; // Keep this stuff for later
+//        String flightNumber = "MS996";  // The specific flight to look up
+//        String flightDate = "2024-11-10"; // Keep this stuff for later
 //        "&flight_date=" + flightDate // and this stuff
+        String flightNumber = flight.getFlightNumber();
+        String flightDate = flight.getFlightDate();
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + accessKey + "&flight_iata=" + flightNumber;
 
         try {
@@ -41,14 +43,16 @@ public class Call_API {
                 JSONArray data = jsonResponse.getJSONArray("data");
 
                 if (!data.isEmpty()) {
-                    JSONObject flightData = data.getJSONObject(0);
+                    JSONObject flightData = getDateJSON(data, flightDate);
+//                    Make sure to add an exception for when flightData is null
+//                    JSONObject flightData = data.getJSONObject(0); Keep this just in case
 
-
-                    Flight flight = new Flight();
-                    flight.setFlightNumber(flightData.getJSONObject("flight").getString("iata"));
+                    JSONObject departureData = flightData.getJSONObject("departure");
+                    JSONObject arrivalData = flightData.getJSONObject("arrival");
+//                    flight.setFlightNumber(flightData.getJSONObject("flight").getString("iata"));
                     flight.setAirline(flightData.getJSONObject("airline").getString("name"));
-                    flight.setDepartureAirport(flightData.getJSONObject("departure").getString("airport"));
-                    flight.setArrivalAirport(flightData.getJSONObject("arrival").getString("airport"));
+                    flight.setDepartureAirport(departureData.getString("airport"));
+                    flight.setArrivalAirport(arrivalData.getString("airport"));
                     flight.setStatus(flightData.getString("flight_status"));
 
                     try {
@@ -62,10 +66,10 @@ public class Call_API {
 
                     String time_format = "yyyy/MM/dd HH:mm";
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(time_format);
-                    String d_sch = flightData.getJSONObject("departure").getString("scheduled");
-                    String d_est = flightData.getJSONObject("departure").getString("estimated");
-                    String a_sch = flightData.getJSONObject("arrival").getString("scheduled");
-                    String a_est = flightData.getJSONObject("arrival").getString("estimated");
+                    String d_sch = departureData.getString("scheduled");
+                    String d_est = departureData.getString("estimated");
+                    String a_sch = arrivalData.getString("scheduled");
+                    String a_est = arrivalData.getString("estimated");
                     LocalDateTime source_ds = LocalDateTime.parse(d_sch,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
                     LocalDateTime source_de = LocalDateTime.parse(d_est,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
                     LocalDateTime source_as = LocalDateTime.parse(a_sch,DateTimeFormatter.ISO_OFFSET_DATE_TIME);
@@ -77,17 +81,17 @@ public class Call_API {
 
 
                     // Comment all of this out in order to just declare the flight class and no prints
-                    System.out.println("Flight Details:");
-                    System.out.println("Flight Number: " + flight.getFlightNumber());
-                    System.out.println("Airline: " + flight.getAirline());
-                    System.out.println("Departure Airport: " + flight.getDepartureAirport());
-                    System.out.println("Arrival Airport: " + flight.getArrivalAirport());
-                    System.out.println("Status: " + flight.getStatus());
-                    System.out.println("Scheduled Departure: " + flight.getScheduledDepartureTime());
-                    System.out.println("Estimated Departure: " + flight.getEstimatedDepartureTime());
-                    System.out.println("Scheduled Arrival: " + flight.getScheduledArrivalTime());
-                    System.out.println("Estimated Arrival: " + flight.getEstimatedArrivalTime());
-                    System.out.println("Coordinates: " + flight.getCoordinates());
+//                    System.out.println("Flight Details:");
+//                    System.out.println("Flight Number: " + flight.getFlightNumber());
+//                    System.out.println("Airline: " + flight.getAirline());
+//                    System.out.println("Departure Airport: " + flight.getDepartureAirport());
+//                    System.out.println("Arrival Airport: " + flight.getArrivalAirport());
+//                    System.out.println("Status: " + flight.getStatus());
+//                    System.out.println("Scheduled Departure: " + flight.getScheduledDepartureTime());
+//                    System.out.println("Estimated Departure: " + flight.getEstimatedDepartureTime());
+//                    System.out.println("Scheduled Arrival: " + flight.getScheduledArrivalTime());
+//                    System.out.println("Estimated Arrival: " + flight.getEstimatedArrivalTime());
+//                    System.out.println("Coordinates: " + flight.getCoordinates());
                 } else {
                     System.out.println("No flight data found for " + flightNumber);
                 }
@@ -98,5 +102,18 @@ public class Call_API {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static JSONObject getDateJSON(JSONArray data, String flightDate) {
+        int range = data.length();
+        JSONObject flightData = null;
+        for (int i = 0; i < range; i++) {
+            JSONObject Data = data.getJSONObject(i);
+            if (Data.getString("flight_date").equals(flightDate)) {
+                flightData = Data;
+                return flightData;
+            }
+        }
+        return flightData;
     }
 }
