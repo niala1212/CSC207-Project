@@ -1,38 +1,27 @@
 package main.java.entities;
 
-import java.util.List;
-
 /**
- * Factory for creating Flight objects.
+ * Factory for creating empty Flight objects.
  */
-
 public class FlightFactory {
 
-    /**
-     *
-     * @param flightInfo given as an array with the following format:
-*             [flightNumber, flightDate, Airline, Dep_Airport,
-     *         Arr_Airport, Status, departureScheduled, departureEstimated,
-     *         arrivalScheduled, arrivalEstimated]
-     * @param coordinates given as <latitude, longitude>
-     * @return Populated flight class
-     */
+    public Flight create(String flightNumber, String flightDate, Airline airline, Airport departureAirport, Airport arrivalAirport,
+                         String status, String scheduledArrivalTime, String scheduledDepartureTime,
+                         String estimatedArrivalTime, String estimatedDepartureTime, double[] currentLocation) {
 
-    public static Flight create(List<String> flightInfo, double[] coordinates) {
-        Flight flight = new Flight(flightInfo.get(0), flightInfo.get(1));
+        Flight flight = new Flight();
 
-        if (coordinates != null) {
-            flight.setCurrentLocation(coordinates);
-        }
-
-        flight.setAirline(flightInfo.get(2));
-        flight.setDepartureAirport(flightInfo.get(3));
-        flight.setArrivalAirport(flightInfo.get(4));
-        flight.setStatus(flightInfo.get(5));
-        flight.setScheduledDepartureTime(flightInfo.get(6));
-        flight.setEstimatedDepartureTime(flightInfo.get(7));
-        flight.setScheduledArrivalTime(flightInfo.get(8));
-        flight.setEstimatedArrivalTime(flightInfo.get(9));
+        flight.setFlightNumber(flightNumber);
+        flight.setFlightDate(flightDate);
+        flight.setAirline(airline);
+        flight.setDepartureAirport(departureAirport);
+        flight.setArrivalAirport(arrivalAirport);
+        flight.setStatus(status);
+        flight.setScheduledArrivalTime(scheduledArrivalTime);
+        flight.setScheduledDepartureTime(scheduledDepartureTime);
+        flight.setEstimatedArrivalTime(estimatedArrivalTime);
+        flight.setEstimatedDepartureTime(estimatedDepartureTime);
+        flight.setCurrentLocation(currentLocation);
 
         return flight;
     }

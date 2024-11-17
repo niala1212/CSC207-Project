@@ -1,4 +1,4 @@
-package main.java.use_case.SearchByFlightNumber;
+package main.java.use_case.SearchByAirlineID;
 
 import main.java.entities.Flight;
 import java.util.List;
@@ -6,19 +6,19 @@ import java.util.List;
 /**
  * Output Data for the SearchByAirline Use Case.
  */
-public class SearchByFlightNumberOutputData {
+public class SearchByAirlineIDOutputData {
 
     private final List<Flight> filteredFlights;
     private final String errorMessage;
 
     // Constructor for success (with filtered flights)
-    public SearchByFlightNumberOutputData(List<Flight> filteredFlights) {
+    public SearchByAirlineIDOutputData(List<Flight> filteredFlights) {
         this.filteredFlights = filteredFlights;
         this.errorMessage = null;
     }
 
     // Constructor for failure (when no flights are found or an error occurs)
-    public SearchByFlightNumberOutputData(String errorMessage) {
+    public SearchByAirlineIDOutputData(String errorMessage) {
         this.filteredFlights = null;
         this.errorMessage = errorMessage;
     }
