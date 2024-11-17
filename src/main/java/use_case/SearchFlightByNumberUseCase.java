@@ -1,6 +1,6 @@
-package use_case;
+package main.java.use_case;
 
-import entities.Flight;
+import main.java.entities.Flight;
 import java.util.List;
 
 public class SearchFlightByNumberUseCase {

@@ -1,4 +1,4 @@
-package data_access;
+package main.java.data_access;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-import entities.Flight;
-import entities.FlightFactory;
+import main.java.entities.Flight;
+import main.java.entities.FlightFactory;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
