@@ -1,4 +1,4 @@
-package main.java.entities;
+package entities;
 
 /**
  * Factory for creating empty Flight objects.

@@ -1,4 +1,4 @@
-package main.java.use_case.SearchByFlightNumber;
+package use_case.SearchByFlightNumber;
 
 /**
  * Input Boundary for actions which are related to searching by Flight Number.

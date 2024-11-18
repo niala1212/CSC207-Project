@@ -1,6 +1,6 @@
-package main.java.use_case.SearchByAirlineID;
+package use_case.SearchByAirlineID;
 
-import main.java.entities.Flight;
+import entities.Flight;
 import java.util.List;
 
 /**
@@ -31,4 +31,3 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
         }
     }
 }
-

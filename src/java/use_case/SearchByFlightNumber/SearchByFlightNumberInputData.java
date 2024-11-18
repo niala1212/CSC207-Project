@@ -1,4 +1,4 @@
-package main.java.use_case.SearchByFlightNumber;
+package use_case.SearchByFlightNumber;
 
 /**
  * The input data for the SearchByFlightNumber Use Case.
@@ -16,4 +16,3 @@ public class SearchByFlightNumberInputData {
         return flightNumber;
     }
 }
-

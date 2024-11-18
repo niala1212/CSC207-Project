@@ -1,4 +1,4 @@
-package main.java.adapters;
+package adapters;
 
 public class Controller {
 
