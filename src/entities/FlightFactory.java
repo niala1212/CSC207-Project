@@ -9,7 +9,7 @@ import java.util.List;
 public class FlightFactory {
 
     /**
-     *
+     * The updated flight factory that works with the api calls.
      * @param flightInfo given as an array with the following format:
 *             [flightNumber, flightDate, Airline, Dep_Airport,
      *         Arr_Airport, Status, departureScheduled, departureEstimated,
