@@ -24,15 +24,19 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
 
     @Override
     public void prepareSuccessView(SearchByFlightNumberOutputData response) {
-        // 1. Clear search-related errors
-        searchViewModel.setError(""); // Reset any prior errors.
+        // 1. Clear search-related errors in the search view model
+        searchViewModel.setError("");
+        searchViewModel.firePropertyChanged(); // Reset any prior errors.
 
-        // 2. Update the FlightDetailsViewModel with data from the response
-        searchByFlightNumberViewModel.setFlightNumber(response.getFlightNumber());
-        searchByFlightNumberViewModel.setDepartureTime(response.getDepartureTime());
-        searchByFlightNumberViewModel.setArrivalTime(response.getArrivalTime());
-        searchByFlightNumberViewModel.setStatus(response.getStatus());
-        searchByFlightNumberViewModel.firePropertyChanged(); // Notify View to update.
+        // 2. Update the SearchByFlightNumberState with data from the response
+        SearchByFlightNumberState state = searchByFlightNumberViewModel.getState();
+        state.setFlightNumber(response.getFlightNumber());
+        state.setDepartureTime(response.getDepartureTime());
+        state.setArrivalTime(response.getArrivalTime());
+        state.setStatus(response.getStatus());
+
+        // Notify View to update the flight details
+        searchByFlightNumberViewModel.firePropertyChanged("flightDetails");
 
         // 3. Navigate to the Flight Details View
         viewManagerModel.setState(searchByFlightNumberViewModel.getViewName());
@@ -40,9 +44,9 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
     }
 
     @Override
-    public void prepareFailView(String error) {
-        // Update the SearchViewModel to show the error message.
+    public void prepareFailView(SearchByFlightNumberOutputData error) {
+        // 1. Update the SearchViewModel to show the error message
         searchViewModel.setError(error);
-        searchViewModel.firePropertyChanged(); // Notify View to update.
+        searchViewModel.firePropertyChanged(); // Notify View to update the error message
     }
 }

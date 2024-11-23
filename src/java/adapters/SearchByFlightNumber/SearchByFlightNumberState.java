@@ -5,6 +5,9 @@ package adapters.SearchByFlightNumber;
  */
 public class SearchByFlightNumberState {
     private String flightNumber = "";
+    private String departureTime = "";
+    private String arrivalTime = "";
+    private String status = "";
     private String searchError;
 
     public String getFlightNumber() {
@@ -15,6 +18,12 @@ public class SearchByFlightNumberState {
         return searchError;
     }
 
+    public String getDepartureTime() {return departureTime;}
+
+    public String getArrivalTime() {return arrivalTime;}
+
+    public String getStatus() {return status;}
+
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
     }
@@ -22,4 +31,10 @@ public class SearchByFlightNumberState {
     public void setSearchError(String searchError) {
         this.searchError = searchError;
     }
+
+    public void setStatus(String status) {this.status = status;}
+
+    public void setDepartureTime(String DepartureTime) {this.departureTime = DepartureTime;}
+
+    public void setArrivalTime(String ArrivalTime) {this.arrivalTime = ArrivalTime;}
 }
