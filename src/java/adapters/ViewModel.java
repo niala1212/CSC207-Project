@@ -5,6 +5,7 @@ public class ViewModel {
         SEARCHBYFLIGHT,
         SEARCHBYAIRPORTID,
         SEARCHBYAIRLINEID,
-        SEEWORLDMAP
+        SEEWORLDMAP,
+        HISTORY,
     };
 }
