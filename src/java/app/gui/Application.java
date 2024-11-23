@@ -1,7 +1,5 @@
 package app.gui;
 
-import adapters.ViewManagerModel;
-
 import javax.swing.*;
 
 /**
@@ -13,11 +11,9 @@ public class Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                JFrame menu = new Menu(viewManagerModel);
+                JFrame menu = new Menu();
 
             }
         });

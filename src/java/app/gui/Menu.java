@@ -3,8 +3,6 @@ package app.gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.HeadlessException;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,21 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import adapters.ViewManagerModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
  * The starting menu showing options: search by flight #, airlines, and airports.
  */
-public class Menu extends JFrame implements PropertyChangeListener {
+public class Menu extends JFrame {
     static final int MENU_WIDTH = 500;
     static final int MENU_HEIGHT = 300;
     static final int MENU_BORDER = 10;
     static final int MENU_BUTTON_FONT_SIZE = 20;
     static final int MENU_TITLE_FONT_SIZE = 30;
     static final String MENU_FONT = "Arial";
-
-    private final ViewManagerModel viewManagerModel;
 
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
@@ -38,10 +33,7 @@ public class Menu extends JFrame implements PropertyChangeListener {
             "insets" + MENU_BUTTON_FONT_SIZE + ", fill"
     ));
 
-    public Menu(ViewManagerModel viewManagerModel) throws HeadlessException {
-        this.viewManagerModel = viewManagerModel;
-        viewManagerModel.addPropertyChangeListener(this);
-
+    public Menu() throws HeadlessException {
         setTitle("Flight Tracker Application");
         setSize(MENU_WIDTH, MENU_HEIGHT);
         setComponents();
@@ -61,52 +53,24 @@ public class Menu extends JFrame implements PropertyChangeListener {
         searchByFlightB.setFont(buttonFont);
         panel.add(searchByFlightB, "span, grow");
         searchByFlightB.addActionListener(event -> {
-            viewManagerModel.setState(ViewManagerModel.State.SEARCHBYFLIGHT);
+            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame();
         });
 
         searchByAirportB.setFont(buttonFont);
         panel.add(searchByAirportB, "span, grow");
         searchByAirportB.addActionListener(event -> {
-            viewManagerModel.setState(ViewManagerModel.State.SEARCHBYAIRPORTID);
         });
 
         searchByAirlineB.setFont(buttonFont);
         panel.add(searchByAirlineB, "span, grow");
         searchByAirlineB.addActionListener(event -> {
-            viewManagerModel.setState(ViewManagerModel.State.SEARCHBYAIRLINEID);
         });
 
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
-            viewManagerModel.setState(ViewManagerModel.State.SEEWORLDMAP);
         });
 
         add(panel, BorderLayout.CENTER);
-    }
-
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source
-     *            and the property that has changed.
-     */
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("state")) {
-            ViewManagerModel.State newValue = (ViewManagerModel.State) evt.getNewValue();
-            switch (newValue) {
-                case SEARCHBYFLIGHT:
-                    SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame(viewManagerModel);
-                case SEARCHBYAIRLINEID:
-                    ;
-                case SEARCHBYAIRPORTID:
-                    ;
-                case SEEWORLDMAP:
-                    ;
-//                default -> throw new IllegalStateException("Unexpected value: " + newValue);
-            }
-        }
-
     }
 }

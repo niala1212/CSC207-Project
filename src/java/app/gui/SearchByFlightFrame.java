@@ -3,8 +3,6 @@ package app.gui;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 
 import javax.swing.JButton;
@@ -14,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import adapters.ViewManagerModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -24,8 +21,6 @@ public class SearchByFlightFrame extends JFrame {
     static final int SEARCHBYFLIGHT_WIDTH = 600;
     static final int SEARCHBYFLIGHT_HEIGHT = 600;
     static final String SEARCHBYFLIGHT_FONT = "Arial";
-
-    private final ViewManagerModel viewManagerModel;
 
     private final String placeholderText = "Enter Flight Number (IATA code)";
     private final JTextField searchField = new JTextField(placeholderText);
@@ -39,20 +34,10 @@ public class SearchByFlightFrame extends JFrame {
             "insets 10, fill"
     ));
 
-    public SearchByFlightFrame(ViewManagerModel viewManagerModel) throws HeadlessException {
-        this.viewManagerModel = viewManagerModel;
-
+    public SearchByFlightFrame() throws HeadlessException {
         setTitle("Flight Tracker Search By Flight Number");
         setSize(SEARCHBYFLIGHT_WIDTH, SEARCHBYFLIGHT_HEIGHT);
         setComponents();
-
-        // set state to MENU when window closes
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                viewManagerModel.setState(ViewManagerModel.State.MENU);
-            }
-        });
 
         setVisible(true);
         // Request focus for the frame itself, not the text field
