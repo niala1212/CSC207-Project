@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,7 +35,7 @@ public class SearchByFlightFrame extends JFrame {
     ));
 
     public SearchByFlightFrame() throws HeadlessException {
-        super("Flight Tracker Search By Flight Number");
+        setTitle("Flight Tracker Search By Flight Number");
         setSize(SEARCHBYFLIGHT_WIDTH, SEARCHBYFLIGHT_HEIGHT);
         setComponents();
 
@@ -82,9 +83,7 @@ public class SearchByFlightFrame extends JFrame {
 
     private void setTable() {
         searchButton.addActionListener(event -> {
-            System.out.println("Searched: " + searchField.getText());
-//            searchResult.setModel(DbUtils.resultSetToTableModel(
-//                    new DataBase().search(searchField.getText(), panel)));
+
         });
     }
 }
