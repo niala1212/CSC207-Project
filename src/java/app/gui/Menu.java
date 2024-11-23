@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import adapters.ViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -26,6 +27,8 @@ public class Menu extends JFrame {
     static final int MENU_TITLE_FONT_SIZE = 30;
     static final String MENU_FONT = "Arial";
 
+    private final ViewModel viewModel;
+
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlight = new JButton("Search By Flight Number");
     private final JButton searchByAirport = new JButton("Search By Airport");
@@ -35,8 +38,10 @@ public class Menu extends JFrame {
             "insets" + MENU_BUTTON_FONT_SIZE + ", fill"
     ));
 
-    public Menu() throws HeadlessException {
-        super("Flight Tracker Application");
+    public Menu(ViewModel viewModel) throws HeadlessException {
+        this.viewModel = viewModel;
+
+        setTitle("Flight Tracker Application");
         setSize(MENU_WIDTH, MENU_HEIGHT);
         setComponents();
 
@@ -55,7 +60,7 @@ public class Menu extends JFrame {
         searchByFlight.setFont(buttonFont);
         panel.add(searchByFlight, "span, grow");
         searchByFlight.addActionListener(event -> {
-            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame();
+            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame(viewModel);
         });
 
         searchByAirport.setFont(buttonFont);

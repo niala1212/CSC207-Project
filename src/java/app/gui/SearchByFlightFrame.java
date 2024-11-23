@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import adapters.ViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -20,6 +21,8 @@ public class SearchByFlightFrame extends JFrame {
     static final int SEARCHBYFLIGHT_WIDTH = 600;
     static final int SEARCHBYFLIGHT_HEIGHT = 600;
     static final String SEARCHBYFLIGHT_FONT = "Arial";
+
+    private final ViewModel viewModel;
 
     private final String placeholderText = "Enter Flight Number (IATA code)";
     private final JTextField searchField = new JTextField(placeholderText);
@@ -33,8 +36,10 @@ public class SearchByFlightFrame extends JFrame {
             "insets 10, fill"
     ));
 
-    public SearchByFlightFrame() throws HeadlessException {
-        super("Flight Tracker Search By Flight Number");
+    public SearchByFlightFrame(ViewModel viewModel) throws HeadlessException {
+        this.viewModel = viewModel;
+
+        setTitle("Flight Tracker Search By Flight Number");
         setSize(SEARCHBYFLIGHT_WIDTH, SEARCHBYFLIGHT_HEIGHT);
         setComponents();
 
@@ -82,9 +87,7 @@ public class SearchByFlightFrame extends JFrame {
 
     private void setTable() {
         searchButton.addActionListener(event -> {
-            System.out.println("Searched: " + searchField.getText());
-//            searchResult.setModel(DbUtils.resultSetToTableModel(
-//                    new DataBase().search(searchField.getText(), panel)));
+
         });
     }
 }
