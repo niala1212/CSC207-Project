@@ -5,9 +5,9 @@ import java.util.Arrays;
 /**
  * The representation of a flight in our program.
  */
-
 public class Flight {
-    private String flightNumber;
+    private final String flightNumber;
+    private final String flightDate;
     private String airline;
     private String departureAirport;
     private String arrivalAirport;
@@ -16,16 +16,18 @@ public class Flight {
     private String scheduledDepartureTime;
     private String estimatedArrivalTime;
     private String estimatedDepartureTime;
-//    ALL TIMES ARE GIVEN IN UTC
+    //    ALL TIMES ARE GIVEN IN UTC
     private double[] currentLocation;
+
+    public Flight(String flightNUmber, String flightDate) {
+        this.flightNumber = flightNUmber;
+        this.flightDate = flightDate;
+    }
 
     public void setCurrentLocation(double[] currentLocation) {
         this.currentLocation = currentLocation;
     }
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
 
     public void setAirline(String airline) {
         this.airline = airline;
@@ -97,5 +99,28 @@ public class Flight {
 
     public String getCoordinates() {
         return Arrays.toString(currentLocation);
+    }
+
+    public String getFlightDate() {
+        return flightDate;
+    }
+
+    // string method
+    @Override
+    public String toString() {
+        return "Flight Information:\n" +
+                "  flightNumber= '" + flightNumber + "',\n" +
+                "  flightDate= '" + flightDate + "',\n" +
+                "  airline= " + (airline != null ? airline : "N/A") + ",\n" +
+                "  departureAirport= " + (departureAirport != null ? departureAirport : "N/A") + ",\n" +
+                "  arrivalAirport= " + (arrivalAirport != null ? arrivalAirport : "N/A") + ",\n" +
+                "  status= '" + status + "',\n" +
+                "  scheduledDepartureTime= '" + scheduledDepartureTime + "',\n" +
+                "  scheduledArrivalTime= '" + scheduledArrivalTime + "',\n" +
+                "  estimatedDepartureTime= '" + estimatedDepartureTime + "',\n" +
+                "  estimatedArrivalTime= '" + estimatedArrivalTime + "',\n" +
+                "  currentLocation= " + (currentLocation != null && currentLocation.length >= 2
+                ? "[" + currentLocation[0] + ", " + currentLocation[1] + "]"
+                : "N/A") + "\n";
     }
 }
