@@ -1,4 +1,4 @@
-package use_case.SearchByAirlineID;
+package use_case.search_by_airline_id;
 
 /**
  * Input Data for the Search By Airline ID Use Case.

@@ -1,4 +1,4 @@
-package use_case.SearchByAirlineID;
+package use_case.search_by_airline_id;
 
 import entities.Flight;
 import java.util.List;
