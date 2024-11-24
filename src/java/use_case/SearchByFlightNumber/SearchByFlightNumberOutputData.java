@@ -1,30 +1,29 @@
 package use_case.SearchByFlightNumber;
 
 import entities.Flight;
-import java.util.List;
 
 /**
  * Output Data for the SearchByAirline Use Case.
  */
 public class SearchByFlightNumberOutputData {
 
-    private final List<Flight> filteredFlights;
+    private final Flight filteredFlight;
     private final String errorMessage;
 
     // Constructor for success (with filtered flights)
-    public SearchByFlightNumberOutputData(List<Flight> filteredFlights) {
-        this.filteredFlights = filteredFlights;
+    public SearchByFlightNumberOutputData(Flight filteredFlight) {
+        this.filteredFlight = filteredFlight;
         this.errorMessage = null;
     }
 
     // Constructor for failure (when no flights are found or an error occurs)
     public SearchByFlightNumberOutputData(String errorMessage) {
-        this.filteredFlights = null;
+        this.filteredFlight = null;
         this.errorMessage = errorMessage;
     }
 
-    public List<Flight> getFilteredFlights() {
-        return filteredFlights;
+    public Flight getFilteredFlight() {
+        return filteredFlight;
     }
 
     public String getErrorMessage() {
