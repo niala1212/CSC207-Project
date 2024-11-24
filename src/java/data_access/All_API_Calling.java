@@ -14,7 +14,7 @@ import entities.Flight;
 import entities.FlightFactory;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import use_case.search_by_airline_id.SearchByAirlineIDDataAccessInterface;
+import use_case.SearchByAirlineID.SearchByAirlineIDDataAccessInterface;
 
 public class All_API_Calling implements SearchByAirlineIDDataAccessInterface {
 

@@ -1,4 +1,4 @@
-package use_case.search_by_airline_id;
+package use_case.SearchByAirlineID;
 
 /**
  * Input Boundary for actions which are related to searching by Airline ID.
