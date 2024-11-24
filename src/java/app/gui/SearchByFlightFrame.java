@@ -3,7 +3,8 @@ package app.gui;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,15 +13,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import adapters.SearchByFlightNumber.SearchByFlightNumberController;
+import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
  * The searchbox to search up flight by IATA code.
  */
-public class SearchByFlightFrame extends JFrame {
+public class SearchByFlightFrame extends JFrame implements PropertyChangeListener {
     static final int SEARCHBYFLIGHT_WIDTH = 600;
     static final int SEARCHBYFLIGHT_HEIGHT = 600;
     static final String SEARCHBYFLIGHT_FONT = "Arial";
+
+    private final SearchByFlightNumberViewModel searchByFlightNumberViewModel;
+    private final SearchByFlightNumberController searchByFlightNumberController;
 
     private final String placeholderText = "Enter Flight Number (IATA code)";
     private final JTextField searchField = new JTextField(placeholderText);
@@ -34,7 +40,11 @@ public class SearchByFlightFrame extends JFrame {
             "insets 10, fill"
     ));
 
-    public SearchByFlightFrame() throws HeadlessException {
+    public SearchByFlightFrame(SearchByFlightNumberController searchByFlightNumberController,
+                               SearchByFlightNumberViewModel searchByFlightNumberViewModel) throws HeadlessException {
+        this.searchByFlightNumberViewModel = searchByFlightNumberViewModel;
+        this.searchByFlightNumberController = searchByFlightNumberController;
+
         setTitle("Flight Tracker Search By Flight Number");
         setSize(SEARCHBYFLIGHT_WIDTH, SEARCHBYFLIGHT_HEIGHT);
         setComponents();
@@ -83,7 +93,20 @@ public class SearchByFlightFrame extends JFrame {
 
     private void setTable() {
         searchButton.addActionListener(event -> {
+            System.out.println(searchField.getText());
+            searchByFlightNumberController.execute(searchField.getText());
 
         });
+    }
+
+    /**
+     * This method gets called when a bound property is changed.
+     *
+     * @param evt A PropertyChangeEvent object describing the event source
+     *            and the property that has changed.
+     */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
     }
 }

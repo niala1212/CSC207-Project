@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -24,6 +25,8 @@ public class Menu extends JFrame {
     static final int MENU_TITLE_FONT_SIZE = 30;
     static final String MENU_FONT = "Arial";
 
+    private final SearchByFlightNumberViewModel searchByFlightNumberViewModel;
+
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
     private final JButton searchByAirportB = new JButton("Search By Airport");
@@ -33,7 +36,9 @@ public class Menu extends JFrame {
             "insets" + MENU_BUTTON_FONT_SIZE + ", fill"
     ));
 
-    public Menu() throws HeadlessException {
+    public Menu(SearchByFlightNumberViewModel searchByFlightNumberViewModel) throws HeadlessException {
+        this.searchByFlightNumberViewModel = searchByFlightNumberViewModel;
+
         setTitle("Flight Tracker Application");
         setSize(MENU_WIDTH, MENU_HEIGHT);
         setComponents();
@@ -53,7 +58,7 @@ public class Menu extends JFrame {
         searchByFlightB.setFont(buttonFont);
         panel.add(searchByFlightB, "span, grow");
         searchByFlightB.addActionListener(event -> {
-            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame();
+            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame(searchByFlightNumberViewModel);
         });
 
         searchByAirportB.setFont(buttonFont);

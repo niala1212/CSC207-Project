@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
  * The ViewModel class that holds the data and provides the functionality to fire property changes.
  * The class is generic to support different types of state for different views.
  */
-public class ViewModel<T> {
+public abstract class AbstractViewModel<T> {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
@@ -27,7 +27,7 @@ public class ViewModel<T> {
      * Constructor for ViewModel with a specific view state.
      * @param viewState The initial view state.
      */
-    public ViewModel(State viewState) {
+    public AbstractViewModel(State viewState) {
         this.viewState = viewState;
     }
 

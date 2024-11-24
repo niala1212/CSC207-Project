@@ -1,5 +1,7 @@
 package app.gui;
 
+import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+
 import javax.swing.*;
 
 /**
@@ -11,9 +13,11 @@ public class Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
+        SearchByFlightNumberViewModel searchByFlightNumberViewModel = new SearchByFlightNumberViewModel();
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                JFrame menu = new Menu();
+                JFrame menu = new Menu(searchByFlightNumberViewModel);
 
             }
         });

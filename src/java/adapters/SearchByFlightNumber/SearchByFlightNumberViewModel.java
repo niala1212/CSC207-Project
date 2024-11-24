@@ -1,8 +1,8 @@
 package adapters.SearchByFlightNumber;
 
-import adapters.ViewModel;
+import adapters.AbstractViewModel;
 
-public class SearchByFlightNumberViewModel extends ViewModel<SearchByFlightNumberState> {
+public class SearchByFlightNumberViewModel extends AbstractViewModel<SearchByFlightNumberState> {
 
     public SearchByFlightNumberViewModel() {
         super(State.SEARCHBYFLIGHT); // Set the initial view state
