@@ -1,5 +1,7 @@
 package adapters.SearchByFlightNumber;
 
+import use_case.SearchByFlightNumber.SearchByFlightNumberOutputData;
+
 /**
  * The state for the Search By Number View Model.
  */
@@ -8,13 +10,13 @@ public class SearchByFlightNumberState {
     private String departureTime = "";
     private String arrivalTime = "";
     private String status = "";
-    private String searchError;
+    private SearchByFlightNumberOutputData searchError;
 
     public String getFlightNumber() {
         return flightNumber;
     }
 
-    public String getSearchError() {
+    public SearchByFlightNumberOutputData getSearchError() {
         return searchError;
     }
 
@@ -28,7 +30,7 @@ public class SearchByFlightNumberState {
         this.flightNumber = flightNumber;
     }
 
-    public void setSearchError(String searchError) {
+    public void setSearchError(SearchByFlightNumberOutputData searchError) {
         this.searchError = searchError;
     }
 
