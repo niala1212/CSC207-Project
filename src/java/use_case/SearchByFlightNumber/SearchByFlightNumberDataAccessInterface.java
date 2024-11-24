@@ -1,7 +1,6 @@
 package use_case.SearchByFlightNumber;
 
 import entities.Flight;
-import java.util.List;
 
 /**
  * The interface of the DAO for the SearchByFlightNumber Use Case.
@@ -9,8 +8,9 @@ import java.util.List;
 public interface SearchByFlightNumberDataAccessInterface {
 
     /**
-     * Retrieves a list of flights from the system.
+     * Retrieves the flight from the system given the IATA flight number.
+     * @param flightNumber the IATA flight number
      * @return a list of flights
      */
-    List<Flight> getFlightsByFlightNumber(String flightNumber);
+    Flight getFlightByFlightNumber(String flightNumber);
 }
