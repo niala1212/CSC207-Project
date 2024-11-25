@@ -22,15 +22,13 @@ public class SearchByFlightNumberOutputData {
         this.errorMessage = errorMessage;
     }
 
-    public Flight getFilteredFlight() {
-        return filteredFlight;
+    public String getFlightNumber() {
+        return filteredFlight.getFlightNumber();
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
+    public String getDepartureTime() { return filteredFlight.getScheduledDepartureTime(); }
 
-    public boolean isUseCaseFailed() {
-        return errorMessage != null;
-    }
+    public String getArrivalTime() { return filteredFlight.getScheduledArrivalTime(); }
+
+    public String getStatus() { return filteredFlight.getStatus(); }
 }
