@@ -19,17 +19,17 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
         SearchByFlightNumberState state = searchByFlightNumberViewModel.getState();
 
         // 2. Update the SearchByFlightNumberState with data from the response
-//        state.setFlightNumber(response.getFlightNumber());
-//        state.setDepartureTime(response.getDepartureTime());
-//        state.setArrivalTime(response.getArrivalTime());
-//        state.setStatus(response.getStatus());
-        state.setArrivalTime("9:15");
-        state.setDepartureTime("12:15");
-        state.setStatus("OK");
+        state.setFlightNumber(response.getFlightNumber());
+        state.setDepartureTime(response.getDepartureTime());
+        state.setArrivalTime(response.getArrivalTime());
+        state.setStatus(response.getStatus());
+//        state.setArrivalTime("9:15");
+//        state.setDepartureTime("12:15");
+//        state.setStatus("OK");
 
         // Notify View to update the flight details
         searchByFlightNumberViewModel.firePropertyChanged("flightDetails");
-
+        System.out.println("hi");
     }
 
     @Override

@@ -112,7 +112,9 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
             addTable(searchByFlightNumberViewModel.getState());
         }
         else if ("error".equals(event.getPropertyName())) {
-            resultPanel.add(new JLabel("Error"), "grow");
+            resultPanel.add(new JLabel("error"), "grow");
+            resultPanel.revalidate();
+//            resultPanel.repaint();
         }
     }
 }
