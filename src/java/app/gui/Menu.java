@@ -28,6 +28,10 @@ public class Menu extends JFrame {
 
     private final SearchByFlightNumberViewModel searchByFlightNumberViewModel;
     private final SearchByFlightNumberController searchByFlightNumberController;
+    private final SearchByAirportViewModel searchByAirportViewModel;
+    private final SearchByAirportController searchByAirportController;
+    private final SearchByAirlineIDViewModel searchByAirlineIDViewModel;
+    private final SearchByAirlineIDController searchByAirlineIDController;
 
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
@@ -35,13 +39,21 @@ public class Menu extends JFrame {
     private final JButton searchByAirlineB = new JButton("Search By Airline");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
-            "insets" + MENU_BUTTON_FONT_SIZE + ", fill"
+            "insets" + MENU_BORDER + ", fill"
     ));
 
     public Menu(SearchByFlightNumberController searchByFlightNumberController,
-                SearchByFlightNumberViewModel searchByFlightNumberViewModel) throws HeadlessException {
+                SearchByFlightNumberViewModel searchByFlightNumberViewModel,
+                SearchByAirportViewModel searchByAirportViewModel,
+                SearchByAirportController searchByAirportController,
+                SearchByAirlineIDViewModel searchByAirlineIDViewModel,
+                SearchByAirlineIDController searchByAirlineIDController) throws HeadlessException {
         this.searchByFlightNumberViewModel = searchByFlightNumberViewModel;
         this.searchByFlightNumberController = searchByFlightNumberController;
+        this.searchByAirportViewModel = searchByAirportViewModel;
+        this.searchByAirportController = searchByAirportController;
+        this.searchByAirlineIDViewModel = searchByAirlineIDViewModel;
+        this.searchByAirlineIDController = searchByAirlineIDController;
 
         setTitle("Flight Tracker Application");
         setSize(MENU_WIDTH, MENU_HEIGHT);
@@ -62,13 +74,15 @@ public class Menu extends JFrame {
         searchByFlightB.setFont(buttonFont);
         panel.add(searchByFlightB, "span, grow");
         searchByFlightB.addActionListener(event -> {
-            SearchByFlightFrame searchByFlightFrame =
-                    new SearchByFlightFrame(searchByFlightNumberController, searchByFlightNumberViewModel);
+            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame(
+                    searchByFlightNumberController, searchByFlightNumberViewModel);
         });
 
         searchByAirportB.setFont(buttonFont);
         panel.add(searchByAirportB, "span, grow");
         searchByAirportB.addActionListener(event -> {
+            SearchByAirportFrame searchByAirportFrame = new SearchByAirportFrame(
+                    searchByAirportController, searchByAirportViewModel);
         });
 
         searchByAirlineB.setFont(buttonFont);

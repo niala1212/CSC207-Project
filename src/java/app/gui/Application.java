@@ -15,9 +15,14 @@ import javax.swing.*;
  */
 public class Application {
     private final SearchByFlightNumberViewModel searchByFlightNumberViewModel = new SearchByFlightNumberViewModel();
+    private final SearchByAirportViewModel searchByAirportViewModel;
+    private final SearchByAirlineIDViewModel searchByAirlineIDViewModel;
+
 
     public Application() {
         SearchByFlightNumberController searchByFlightNumberController = createSearchByFlightNumberUseCase();
+        SearchByAirportController searchByAirportController = createSearchByAirportUseCase();
+        SearchByAirlineIDController searchByAirlineIDController = createSearchByAirlineIDUseCase();
 
         JFrame menu = new Menu(searchByFlightNumberController, searchByFlightNumberViewModel);
     }
@@ -30,4 +35,9 @@ public class Application {
         return new SearchByFlightNumberController(searchByFlightNumberInteractor);
     }
 
+    private SearchByAirportController createSearchByAirportUseCase() {
+    }
+
+    private SearchByAirlineIDController createSearchByAirlineIDUseCase() {
+    }
 }
