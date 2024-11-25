@@ -1,4 +1,4 @@
-package tests.java.use_case;
+package use_case.SearchByFlightNumber;
 
 public class SearchByFlightNumberInteractorTest {
 }

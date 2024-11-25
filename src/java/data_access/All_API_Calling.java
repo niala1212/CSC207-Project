@@ -14,8 +14,10 @@ import entities.Flight;
 import entities.FlightFactory;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import use_case.SearchByAirlineID.SearchByAirlineIDDataAccessInterface;
+import use_case.SearchByFlightNumber.SearchByFlightNumberDataAccessInterface;
 
-public class All_API_Calling {
+public class All_API_Calling implements SearchByAirlineIDDataAccessInterface, SearchByFlightNumberDataAccessInterface {
 
     private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9"; // Replace with your access key
 
@@ -51,7 +53,8 @@ public class All_API_Calling {
         }
     }
 
-    public static Flight IATA_DATE(String flightNumber, String flightDate) {
+    @Override
+    public Flight getFlightByFlightNumber(String flightNumber, String flightDate) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_iata=" + flightNumber;
         Flight flight = null;
         JSONArray data = API_Call(apiUrl);
@@ -68,7 +71,8 @@ public class All_API_Calling {
         }
     }
 
-    public static List<Flight> AIRLINE_IATA(String AirlineID) {
+    @Override
+    public List<Flight> getFlightsByAirlineId(String AirlineID) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&airline_iata=" + AirlineID;
         return getFlightsFromURL(apiUrl);
     }
