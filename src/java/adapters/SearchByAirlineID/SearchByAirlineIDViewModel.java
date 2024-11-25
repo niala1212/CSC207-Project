@@ -23,15 +23,16 @@ public class SearchByAirlineIDViewModel extends AbstractViewModel<SearchByAirlin
 
     // Getters for UI access
     public String getAirportName() {
-        return getState().getAirportName();
+        // Ensure the state is properly updated with the message
+        return getState() != null ? getState().getAirportName() : "No state available";
     }
 
     public List<String> getFlightNumbers() {
-        return getState().getFlightNumbers();
+        return getState() != null ? getState().getFlightNumbers() : List.of();
     }
 
     public List<Flight> getFlights() {
-        return getState().getFlights();  // Allows access to full flight data
+        return getState() != null ? getState().getFlights() : List.of();
     }
 }
 

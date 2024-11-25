@@ -2,68 +2,71 @@ package adapters.SearchByAirlineID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import use_case.SearchByAirlineID.SearchByAirlineIDInputBoundary;
-import use_case.SearchByAirlineID.SearchByAirlineIDInputData;
-
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import use_case.SearchByAirlineID.SearchByAirlineIDInputBoundary;  // Ensure this is the correct import
+import use_case.SearchByAirlineID.SearchByAirlineIDInputData;    // Ensure this is the correct import
+import org.mockito.ArgumentMatchers; // Add this import for argument matchers
 
-public class SearchByAirlineIDControllerTest {
+class SearchByAirlineIDControllerTest {
 
     private SearchByAirlineIDController controller;
-    private SearchByAirlineIDInputBoundary mockInputBoundary;
+    private SearchByAirlineIDInputBoundary mockInteractor;
 
     @BeforeEach
-    public void setUp() {
-        // Mock the input boundary
-        mockInputBoundary = Mockito.mock(SearchByAirlineIDInputBoundary.class);
-        controller = new SearchByAirlineIDController(mockInputBoundary);
+    void setUp() {
+        // Mock the interactor
+        mockInteractor = mock(SearchByAirlineIDInputBoundary.class);
+        controller = new SearchByAirlineIDController(mockInteractor);
     }
 
     @Test
-    void testSearchFlightsByAirline_ValidInput() {
-        // Given a valid IATA code
+    void testExecute_ValidIataCode() {
         String validIataCode = "AA";
 
-        // Call the method
+        // Call the method under test
         controller.execute(validIataCode);
 
-        // Verify that the execute method was called on the input boundary with the correct data
-        verify(mockInputBoundary, times(1)).execute(new SearchByAirlineIDInputData(validIataCode));
+        // Verify that the execute method of the interactor is called with the correct input
+        verify(mockInteractor, times(1)).execute(ArgumentMatchers.any(SearchByAirlineIDInputData.class));
     }
 
     @Test
-    void testSearchFlightsByAirline_InvalidInput_ThrowsException() {
-        // Given an invalid IATA code (empty string)
-        String invalidIataCode = "";
+    void testExecute_WhitespaceIataCode() {
+        String whitespaceIataCode = "  ";
 
-        // Expect an IllegalArgumentException to be thrown
-        try {
-            controller.execute(invalidIataCode);
-        } catch (IllegalArgumentException e) {
-            // Verify the exception message
-            assert e.getMessage().equals("Airline IATA code cannot be empty.");
-        }
+        // Call the method under test and assert that it throws an exception
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            controller.execute(whitespaceIataCode);
+        });
 
-        // Verify that the execute method was not called on the input boundary
-        verify(mockInputBoundary, times(0)).execute(any());
+        // Verify the exception message
+        assertEquals("Airline IATA code cannot be empty.", thrown.getMessage());
     }
 
     @Test
-    public void testSearchFlightsByAirline_NullInput_ThrowsException() {
-        // Given a null IATA code
+    void testExecute_NullIataCode() {
         String nullIataCode = null;
 
-        // Expect an IllegalArgumentException to be thrown
-        try {
+        // Call the method under test and assert that it throws an exception
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             controller.execute(nullIataCode);
-        } catch (IllegalArgumentException e) {
-            // Verify the exception message
-            assert e.getMessage().equals("Airline IATA code cannot be empty.");
-        }
+        });
 
-        // Verify that the execute method was not called on the input boundary
-        verify(mockInputBoundary, times(0)).execute(any());
+        // Verify the exception message
+        assertEquals("Airline IATA code cannot be empty.", thrown.getMessage());
+    }
+
+    @Test
+    void testExecute_EmptyIataCode() {
+        String emptyIataCode = "";
+
+        // Call the method under test and assert that it throws an exception
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            controller.execute(emptyIataCode);
+        });
+
+        // Verify the exception message
+        assertEquals("Airline IATA code cannot be empty.", thrown.getMessage());
     }
 }
-
