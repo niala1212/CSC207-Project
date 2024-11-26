@@ -1,4 +1,4 @@
-package use_case.SearchByAirport;
+package use_case.SearchAirportLanded;
 
 import entities.Flight;
 import java.util.List;
@@ -6,19 +6,19 @@ import java.util.List;
 /**
  * Output Data for the Search By Airport Use Case.
  */
-public class SearchByAirportOutputData {
+public class SearchAirportLandedOutputData {
 
     private final List<Flight> filteredFlights;
     private final String errorMessage;
 
     // Constructor for success (with filtered flights)
-    public SearchByAirportOutputData(List<Flight> filteredFlights) {
+    public SearchAirportLandedOutputData(List<Flight> filteredFlights) {
         this.filteredFlights = filteredFlights;
         this.errorMessage = null;
     }
 
     // Constructor for failure (when no flights are found or an error occurs)
-    public SearchByAirportOutputData(String errorMessage) {
+    public SearchAirportLandedOutputData(String errorMessage) {
         this.filteredFlights = null;
         this.errorMessage = errorMessage;
     }

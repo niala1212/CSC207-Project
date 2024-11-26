@@ -11,8 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import adapters.SearchAirportArrivals.SearchAirportArrivalsController;
+import adapters.SearchAirportArrivals.SearchAirportArrivalsViewModel;
+import adapters.SearchAirportLanded.SearchAirportLandedController;
+import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
 import adapters.SearchByAirlineID.SearchByAirlineIDController;
 import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
+import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
+import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
 import adapters.SearchByFlightNumber.SearchByFlightNumberController;
 import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
 import net.miginfocom.swing.MigLayout;
@@ -34,27 +40,45 @@ public class Menu extends JFrame {
     private final SearchByFlightNumberController searchByFlightNumberController;
     private final SearchByAirlineIDViewModel searchByAirlineIDViewModel;
     private final SearchByAirlineIDController searchByAirlineIDController;
+    private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel;
+    private final SearchByDepartureAirportController searchByDepartureAirportController;
+    private final SearchAirportArrivalsViewModel searchAirportArrivalsViewModel;
+    private final SearchAirportArrivalsController searchAirportArrivalsController;
+    private final SearchAirportLandedViewModel searchAirportLandedViewModel;
+    private final SearchAirportLandedController searchAirportLandedController;
 
     // UI Components
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
-    private final JButton searchByAirportB = new JButton("Search By Airport");
     private final JButton searchByAirlineB = new JButton("Search By Airline");
+    private final JButton searchByAirportB = new JButton("Search By Airport");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
-            "insets" + MENU_BUTTON_FONT_SIZE + ", fill"
+            "insets" + MENU_BORDER + ", fill"
     ));
 
     // Constructor to initialize the frame with controllers and view models
-    public Menu(SearchByFlightNumberController searchByFlightNumberController,
-                SearchByFlightNumberViewModel searchByFlightNumberViewModel,
+    public Menu(SearchByFlightNumberViewModel searchByFlightNumberViewModel,
+                SearchByFlightNumberController searchByFlightNumberController,
+                SearchByAirlineIDViewModel searchByAirlineIDViewModel,
                 SearchByAirlineIDController searchByAirlineIDController,
-                SearchByAirlineIDViewModel searchByAirlineIDViewModel) throws HeadlessException {
+                SearchByDepartureAirportViewModel searchByDepartureAirportViewModel,
+                SearchByDepartureAirportController searchByDepartureAirportController,
+                SearchAirportArrivalsViewModel searchAirportArrivalsViewModel,
+                SearchAirportArrivalsController searchAirportArrivalsController,
+                SearchAirportLandedViewModel searchAirportLandedViewModel,
+                SearchAirportLandedController searchAirportLandedController) throws HeadlessException {
         // Initialize controllers and view models
         this.searchByFlightNumberViewModel = searchByFlightNumberViewModel;
         this.searchByFlightNumberController = searchByFlightNumberController;
         this.searchByAirlineIDViewModel = searchByAirlineIDViewModel;
         this.searchByAirlineIDController = searchByAirlineIDController;
+        this.searchByDepartureAirportViewModel = searchByDepartureAirportViewModel;
+        this.searchByDepartureAirportController = searchByDepartureAirportController;
+        this.searchAirportArrivalsViewModel = searchAirportArrivalsViewModel;
+        this.searchAirportArrivalsController = searchAirportArrivalsController;
+        this.searchAirportLandedViewModel = searchAirportLandedViewModel;
+        this.searchAirportLandedController = searchAirportLandedController;
 
         // Set the window title and size
         setTitle("Flight Tracker Application");
@@ -86,15 +110,9 @@ public class Menu extends JFrame {
         panel.add(searchByFlightB, "span, grow");
         searchByFlightB.addActionListener(event -> {
             // Opens the SearchByFlightFrame for flight number search
-            SearchByFlightFrame searchByFlightFrame =
-                    new SearchByFlightFrame(searchByFlightNumberController, searchByFlightNumberViewModel);
-        });
-
-        // Setup Search By Airport button (to be implemented later)
-        searchByAirportB.setFont(buttonFont);
-        panel.add(searchByAirportB, "span, grow");
-        searchByAirportB.addActionListener(event -> {
-            // Placeholder for airport search functionality
+            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame(
+                    searchByFlightNumberController, searchByFlightNumberViewModel
+            );
         });
 
         // Setup Search By Airline button and action listener
@@ -102,8 +120,21 @@ public class Menu extends JFrame {
         panel.add(searchByAirlineB, "span, grow");
         searchByAirlineB.addActionListener(event -> {
             // Opens the SearchByAirlineIDFrame for airline search
-            SearchByAirlineIDFrame searchByAirlineFrame =
-                    new SearchByAirlineIDFrame(searchByAirlineIDController, searchByAirlineIDViewModel);
+            SearchByAirlineIDFrame searchByAirlineFrame = new SearchByAirlineIDFrame(
+                    searchByAirlineIDController, searchByAirlineIDViewModel
+            );
+        });
+
+        // Setup Search By Airport button and action listener
+        searchByAirportB.setFont(buttonFont);
+        panel.add(searchByAirportB, "span, grow");
+        searchByAirportB.addActionListener(event -> {
+            // Opens the SearchByAirlineIDFrame to search for flights by airport
+            SearchByAirportFrame searchByAirportFrame = new SearchByAirportFrame(
+                    searchByDepartureAirportController, searchByDepartureAirportViewModel,
+                    searchAirportArrivalsController, searchAirportArrivalsViewModel,
+                    searchAirportLandedController, searchAirportLandedViewModel
+            );
         });
 
         // Setup See World Map button (to be implemented later)

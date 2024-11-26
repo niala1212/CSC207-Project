@@ -1,4 +1,4 @@
-package use_case.SearchByAirport;
+package use_case.SearchAirportArrivals;
 
 import entities.Flight;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Data Access Interface for the Search By Airport Use Case.
  */
-public interface SearchByAirportDataAccessInterface {
+public interface SearchAirportArrivalsDataAccessInterface {
 
     /**
      * Retrieves all flights departing or arriving at the given airport code.
@@ -14,5 +14,5 @@ public interface SearchByAirportDataAccessInterface {
      * @param airportCode the IATA code of the airport
      * @return a list of flights for the given airport
      */
-    List<Flight> getFlightsByAirport(String airportCode);
+    List<Flight> getArrivalFlightsByAirport(String airportCode);
 }

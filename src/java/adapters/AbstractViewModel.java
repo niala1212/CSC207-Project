@@ -13,13 +13,13 @@ public abstract class AbstractViewModel<T> {
 
     private T state; // This will hold the data state, such as SearchByFlightNumberState
 
-    private State viewState; // Enum representing the current view state (e.g., SEARCHBYFLIGHT)
+    private ViewState viewState; // Enum representing the current view state (e.g., SEARCHBYFLIGHT)
 
-    public enum State {
+    public enum ViewState {
         SEARCHBYFLIGHT,
         SEARCHBYAIRPORTID,
         SEARCHBYAIRLINEID,
-        SEEWORLDMAP,
+        WORLDMAP,
         MENU
     }
 
@@ -27,7 +27,7 @@ public abstract class AbstractViewModel<T> {
      * Constructor for ViewModel with a specific view state.
      * @param viewState The initial view state.
      */
-    public AbstractViewModel(State viewState) {
+    public AbstractViewModel(ViewState viewState) {
         this.viewState = viewState;
     }
 
@@ -54,19 +54,19 @@ public abstract class AbstractViewModel<T> {
      * Returns the current view state (the enum representing the view).
      * @return the current view state
      */
-    public State getViewState() {
+    public ViewState getViewState() {
         return this.viewState;
     }
 
     /**
      * Sets the current view state.
      * Fires a property change event to notify listeners.
-     * @param newState the new view state to set
+     * @param newViewState the new view state to set
      */
-    public void setViewState(State newState) {
-        State oldState = this.viewState;
-        this.viewState = newState;
-        this.support.firePropertyChange("viewState", oldState, this.viewState);
+    public void setViewState(ViewState newViewState) {
+        ViewState oldViewState = this.viewState;
+        this.viewState = newViewState;
+        this.support.firePropertyChange("viewState", oldViewState, this.viewState);
     }
 
     /**
