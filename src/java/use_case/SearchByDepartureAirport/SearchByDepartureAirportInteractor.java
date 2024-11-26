@@ -14,9 +14,9 @@ public class SearchByDepartureAirportInteractor implements SearchByDepartureAirp
         this.searchByDepartureAirportPresenter = searchByDepartureAirportPresenter;
     }
 
-    public void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData){
+    public void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData) {
         String airportCode = searchByDepartureAirportInputData.getAirportCode();
-        List<Flight> foundFlights = flightDataAccessObject.getFlightsByDepartureAirport(airportCode);
+        List<Flight> foundFlights = flightDataAccessObject.getDepartureFlightsByAirport(airportCode);
 
         if (foundFlights != null && !foundFlights.isEmpty()) {
             SearchByDepartureAirportOutputData outputData = new SearchByDepartureAirportOutputData(foundFlights);

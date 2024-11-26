@@ -33,6 +33,7 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
         // Update the SearchViewModel to show the error message
         SearchByFlightNumberState state = searchByFlightNumberViewModel.getState();
         state.setSearchError(error.getErrorMessage());
-        searchByFlightNumberViewModel.firePropertyChanged("error"); // Notify View to update the error message
+        // Notify View to update the error message
+        searchByFlightNumberViewModel.firePropertyChanged("error");
     }
 }

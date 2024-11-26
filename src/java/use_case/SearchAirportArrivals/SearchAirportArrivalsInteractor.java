@@ -1,4 +1,4 @@
-package use_case.SearchByDepartureAirport;
+package use_case.SearchAirportArrivals;
 
 import entities.Flight;
 import java.util.List;
@@ -6,27 +6,27 @@ import java.util.List;
 /**
  * The Search by Airport Interactor.
  */
-public class SearchAirportArrivalsInteractor implements use_case.SearchByDepartureAirport.SearchAirportLandedInputBoundary {
+public class SearchAirportArrivalsInteractor implements SearchAirportArrivalsInputBoundary {
 
     private final SearchAirportArrivalsDataAccessInterface flightDataAccessObject;
-    private final use_case.SearchByDepartureAirport.SearchAirportLandedOutputBoundary searchByAirportPresenter;
+    private final SearchAirportArrivalsOutputBoundary searchByAirportPresenter;
 
     public SearchAirportArrivalsInteractor(SearchAirportArrivalsDataAccessInterface flightDataAccessObject,
-                                           use_case.SearchByDepartureAirport.SearchAirportLandedOutputBoundary searchByAirportPresenter) {
+                                           SearchAirportArrivalsOutputBoundary searchByAirportPresenter) {
         this.flightDataAccessObject = flightDataAccessObject;
         this.searchByAirportPresenter = searchByAirportPresenter;
     }
 
     @Override
-    public void execute(use_case.SearchByDepartureAirport.SearchAirportLandedInputData searchAirportLandedInputData) {
-        String airportCode = searchAirportLandedInputData.getAirportCode();
-        List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirport(airportCode);
+    public void execute(SearchAirportArrivalsInputData SearchAirportArrivalsInputData) {
+        String airportCode = SearchAirportArrivalsInputData.getAirportCode();
+        List<Flight> foundFlights = flightDataAccessObject.getArrivalFlightsByAirport(airportCode);
 
         if (foundFlights != null && !foundFlights.isEmpty()) {
-            use_case.SearchByDepartureAirport.SearchAirportLandedOutputData outputData = new use_case.SearchByDepartureAirport.SearchAirportLandedOutputData(foundFlights);
+            SearchAirportArrivalsOutputData outputData = new SearchAirportArrivalsOutputData(foundFlights);
             searchByAirportPresenter.prepareSuccessView(outputData);
         } else {
-            use_case.SearchByDepartureAirport.SearchAirportLandedOutputData outputData = new use_case.SearchByDepartureAirport.SearchAirportLandedOutputData("No flights found for the specified airport.");
+            SearchAirportArrivalsOutputData outputData = new SearchAirportArrivalsOutputData("No flights found for the specified airport.");
             searchByAirportPresenter.prepareFailView(outputData);
         }
     }

@@ -80,6 +80,7 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
         searchField.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.PLAIN, 20));
 
         JButton searchButton = new JButton("Search");
+        searchButton.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.PLAIN, 15));
         searchPanel.add(searchButton, "height 40, grow");
         searchButton.addActionListener(event -> {
             System.out.println(searchField.getText());

@@ -1,4 +1,4 @@
-package use_case.SearchByDepartureAirport;
+package use_case.SearchAirportLanded;
 
 /**
  * Output Boundary for the Search by Airport use case.

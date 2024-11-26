@@ -14,5 +14,5 @@ public interface SearchByDepartureAirportDataAccessInterface {
      * @param airportCode the IATA code of the airport
      * @return a list of flights for the given airport
      */
-    List<Flight> getFlightsByDepartureAirport(String airportCode);
+    List<Flight> getDepartureFlightsByAirport(String airportCode);
 }

@@ -1,4 +1,4 @@
-package use_case.SearchByDepartureAirport;
+package use_case.SearchAirportArrivals;
 
 import entities.Flight;
 import java.util.List;
