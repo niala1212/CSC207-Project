@@ -45,7 +45,17 @@ public class SearchByAirlineIDState {
     }
 
 
-    //Success Checker
+    //To String
+    public String getFlightDetailsString(String flightNumber) {
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber().equals(flightNumber)) {
+                return flight.toString(); // Format this string as needed
+            }
+        }
+        return null; // Return null if no flight is found
+    }
+
+    // Success Checker
     public boolean isSuccessful() {
         return errorMessage == null;
     }

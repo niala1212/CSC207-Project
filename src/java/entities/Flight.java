@@ -98,7 +98,7 @@ public class Flight {
     }
 
     public String getCoordinates() {
-        return Arrays.toString(currentLocation);
+        return currentLocation == null ? null : Arrays.toString(currentLocation);
     }
 
     public String getFlightDate() {

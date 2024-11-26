@@ -20,6 +20,19 @@ public class Map {
         this.centreCoordinates = centreCoordinates;
     }
 
+//    // Default Constructor
+//    public Map() {
+//        this.flightList = new ArrayList<>(); // Initialize to an empty list
+//    }
+//
+//    // Parameterized Constructor
+//    public Map(int mapID, List<Flight> flightList, int zoomLevel, double[] centreCoordinates) {
+//        this.mapID = mapID;
+//        this.flightList = (flightList != null) ? flightList : new ArrayList<>(); // Ensure non-null list
+//        this.zoomLevel = zoomLevel;
+//        this.centreCoordinates = centreCoordinates;
+//    }
+
     // Getters
     public int getMapID() {
         return mapID;

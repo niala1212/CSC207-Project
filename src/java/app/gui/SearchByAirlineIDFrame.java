@@ -110,14 +110,13 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
     }
 
     private void showFlightDetails(String flightNumber) {
-        for (Flight flight : searchByAirlineIDViewModel.getState().getFlights()) {
-            if (flight.getFlightNumber().equals(flightNumber)) {
-                new FlightDetailsFrame(flight);
-                return;
-            }
+        String flightDetails = searchByAirlineIDViewModel.getState().getFlightDetailsString(flightNumber);
+        if (flightDetails != null) {
+            new FlightDetailsFrame(searchByAirlineIDViewModel.getState(), flightNumber);
+        } else {
+            JOptionPane.showMessageDialog(this, "Flight details not found for: " + flightNumber,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(this, "Flight details not found for: " + flightNumber,
-                "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override
