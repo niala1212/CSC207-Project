@@ -21,6 +21,7 @@ public class SearchByAirportInteractor implements SearchByAirportInputBoundary {
     public void execute(SearchByAirportInputData searchByAirportInputData) {
         String airportCode = searchByAirportInputData.getAirportCode();
         List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirport(airportCode);
+        
 
         if (foundFlights != null && !foundFlights.isEmpty()) {
             SearchByAirportOutputData outputData = new SearchByAirportOutputData(foundFlights);

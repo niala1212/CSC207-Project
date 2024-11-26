@@ -7,34 +7,51 @@ import entities.Flight;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Presenter for the Search By Airline ID Use Case.
+ */
 public class SearchByAirlineIDPresenter implements SearchByAirlineIDOutputBoundary {
 
-    private final SearchByAirlineIDViewModel viewModel;
+    private final SearchByAirlineIDViewModel searchByAirlineIDViewModel;
 
-    public SearchByAirlineIDPresenter(SearchByAirlineIDViewModel viewModel) {
-        this.viewModel = viewModel;
+    public SearchByAirlineIDPresenter(SearchByAirlineIDViewModel searchByAirlineIDViewModel) {
+        this.searchByAirlineIDViewModel = searchByAirlineIDViewModel;
     }
 
     @Override
     public void prepareSuccessView(SearchByAirlineIDOutputData outputData) {
+        SearchByAirlineIDState state = searchByAirlineIDViewModel.getState();
         List<Flight> flights = outputData.getFilteredFlights();
-        if (flights.isEmpty()) {
-            // Case: No flights found
-            viewModel.updateNoFlightsFound("No flights found for the specified airline.");
+        if (outputData.isUseCaseFailed()) {
+            // Case: No flights found - update the state
+            state.setErrorMessage(outputData.getErrorMessage());
+
+            // Update the ViewModel with the changed property
+            searchByAirlineIDViewModel.firePropertyChanged("noFlightsError");
         } else {
             // Case: Flights found
-            String airportName = flights.get(0).getDepartureAirport(); // Example: Use the departure airport as airport name
+            String airlineName = flights.get(0).getAirline(); // Example: Use the departure airport as airport name
             List<String> flightNumbers = extractFlightNumbers(flights);
 
-            // Update the ViewModel with the full list of flights
-            viewModel.updateFlights(airportName, flightNumbers, flights);
+            //Update the state
+            state.setAirlineName(airlineName);
+            state.setFlightNumbers(flightNumbers);
+            state.setFlights(flights);
+
+            // Update the ViewModel with the changed property
+            searchByAirlineIDViewModel.firePropertyChanged("airlineFlights");
         }
     }
 
     @Override
     public void prepareFailView(SearchByAirlineIDOutputData outputData) {
-        // Case: Error occurred, update ViewModel with an error message
-        viewModel.updateNoFlightsFound("An error occurred: " + outputData.getErrorMessage());
+        SearchByAirlineIDState state = searchByAirlineIDViewModel.getState();
+
+        // Case: Error occurred, update state with an error message
+        state.setErrorMessage(outputData.getErrorMessage());
+
+        // Update the ViewModel with the changed property
+        searchByAirlineIDViewModel.firePropertyChanged("noFlightsError");
     }
 
     // Helper method to extract flight numbers from the list of flights
