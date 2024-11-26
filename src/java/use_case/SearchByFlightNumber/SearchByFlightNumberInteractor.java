@@ -27,7 +27,8 @@ public class SearchByFlightNumberInteractor implements SearchByFlightNumberInput
             if (foundFlight == null) {
                 // Critical failure: API or connection issue
                 SearchByFlightNumberOutputData outputData = new SearchByFlightNumberOutputData(
-                        "Error retrieving the requested flight data. Please try again later.");
+                        "Error retrieving the requested flight data of \"" + flightnumber
+                                + "\". Please enter a valid IATA flight number");
                 searchByFlightNumberPresenter.prepareFailView(outputData);
             } else {
                 // Flight found: Success
