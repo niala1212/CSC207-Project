@@ -1,13 +1,13 @@
-package use_case.SearchByAirport;
+package use_case.SearchByDepartureAirport;
 
 /**
  * Input Data for the Search By Airport Use Case.
  */
-public class SearchByAirportInputData {
+public class SearchAirportLandedInputData {
     private final String airportCode; // IATA code for the airport (e.g., "JFK" for John F. Kennedy International Airport)
 
     // Constructor to initialize the fields
-    public SearchByAirportInputData(String airportCode) {
+    public SearchAirportLandedInputData(String airportCode) {
         this.airportCode = airportCode;
     }
 

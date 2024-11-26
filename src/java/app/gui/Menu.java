@@ -86,15 +86,8 @@ public class Menu extends JFrame {
         panel.add(searchByFlightB, "span, grow");
         searchByFlightB.addActionListener(event -> {
             // Opens the SearchByFlightFrame for flight number search
-            SearchByFlightFrame searchByFlightFrame =
-                    new SearchByFlightFrame(searchByFlightNumberController, searchByFlightNumberViewModel);
-        });
-
-        // Setup Search By Airport button (to be implemented later)
-        searchByAirportB.setFont(buttonFont);
-        panel.add(searchByAirportB, "span, grow");
-        searchByAirportB.addActionListener(event -> {
-            // Placeholder for airport search functionality
+            SearchByFlightFrame searchByFlightFrame = new SearchByFlightFrame(
+                    searchByFlightNumberController, searchByFlightNumberViewModel);
         });
 
         // Setup Search By Airline button and action listener
@@ -102,8 +95,17 @@ public class Menu extends JFrame {
         panel.add(searchByAirlineB, "span, grow");
         searchByAirlineB.addActionListener(event -> {
             // Opens the SearchByAirlineIDFrame for airline search
-            SearchByAirlineIDFrame searchByAirlineFrame =
-                    new SearchByAirlineIDFrame(searchByAirlineIDController, searchByAirlineIDViewModel);
+            SearchByAirlineIDFrame searchByAirlineFrame = new SearchByAirlineIDFrame(
+                    searchByAirlineIDController, searchByAirlineIDViewModel);
+        });
+
+        // Setup Search By Airport button (to be implemented later)
+        searchByAirportB.setFont(buttonFont);
+        panel.add(searchByAirportB, "span, grow");
+        searchByAirportB.addActionListener(event -> {
+            // Opens the SearchByAirportFrame to search flights by airport
+            SearchByAirportFrame searchByAirportFrame = new SearchByAirportFrame(
+                    );
         });
 
         // Setup See World Map button (to be implemented later)
