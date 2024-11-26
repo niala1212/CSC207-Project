@@ -19,7 +19,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class SearchByFlightFrame extends JFrame implements PropertyChangeListener {
     static final int SEARCHBYFLIGHT_WIDTH = 600;
-    static final int SEARCHBYFLIGHT_HEIGHT = 600;
+    static final int SEARCHBYFLIGHT_HEIGHT = 400;
     static final String SEARCHBYFLIGHT_FONT = "Arial";
 
     private final SearchByFlightNumberViewModel searchByFlightNumberViewModel;
@@ -30,6 +30,8 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
     private final JPanel searchPanel = new JPanel(new MigLayout("insets 10"));
 
     // result panel
+    private final JLabel errorLabel = new JLabel();
+    private final JScrollPane scrollPane = new JScrollPane();
     private final JPanel resultPanel = new JPanel(new MigLayout("insets 10, fill"));
 
     public SearchByFlightFrame(SearchByFlightNumberController searchByFlightNumberController,
@@ -38,7 +40,9 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
         this.searchByFlightNumberViewModel.addPropertyChangeListener(this);
         this.searchByFlightNumberController = searchByFlightNumberController;
 
+        // create the search bar JPanel
         addSearchBar();
+        // create the result JPanel
         add(resultPanel, BorderLayout.CENTER);
 
         setTitle("Flight Tracker Search By Flight Number");
@@ -85,8 +89,8 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
         add(searchPanel, BorderLayout.NORTH);
     }
 
-    private void addTable(SearchByFlightNumberState searchByFlightNumberState) {
-        String[] columnNames = {"IATA Flight Number", "Arrival Time (UTC)", "Departure Time (UTC)", "Status"};
+    private void showResult(SearchByFlightNumberState searchByFlightNumberState) {
+        String[] columnNames = {"IATA Flight Number", "Arrival Time", "Departure Time", "Status"};
         Object[][] data = {{
             searchByFlightNumberState.getFlightNumber(),
             searchByFlightNumberState.getArrivalTime(),
@@ -96,8 +100,25 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
 
         JTable table = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setViewportView(table);
+
         resultPanel.add(scrollPane, "grow");
+        resultPanel.remove(errorLabel);
+        resultPanel.revalidate();
+    }
+
+    private void showError(String errorMessage) {
+        // html ensures the text wraps
+        errorLabel.setText("<html><body style='width: 300px;'>" + errorMessage + "</body></html>");
+
+        errorLabel.setForeground(Color.RED);
+        errorLabel.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.BOLD, 20));
+        errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        errorLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+        resultPanel.remove(scrollPane);
+        resultPanel.add(errorLabel, "grow");
+        resultPanel.revalidate();
     }
 
     /**
@@ -109,12 +130,10 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if ("flightDetails".equals(event.getPropertyName())) {
-            addTable(searchByFlightNumberViewModel.getState());
+            showResult(searchByFlightNumberViewModel.getState());
         }
         else if ("error".equals(event.getPropertyName())) {
-            resultPanel.add(new JLabel("error"), "grow");
-            resultPanel.revalidate();
-//            resultPanel.repaint();
+            showError(searchByFlightNumberViewModel.getState().getSearchError());
         }
     }
 }

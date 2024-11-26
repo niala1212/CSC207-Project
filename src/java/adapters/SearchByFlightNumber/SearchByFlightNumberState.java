@@ -6,19 +6,15 @@ import use_case.SearchByFlightNumber.SearchByFlightNumberOutputData;
  * The state for the Search By Number View Model.
  */
 public class SearchByFlightNumberState {
+    private String searchError;
     private String flightNumber = "";
     private String departureTime = "";
     private String arrivalTime = "";
     private String status = "";
-    private SearchByFlightNumberOutputData searchError;
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
+    public String getSearchError() { return searchError; }
 
-    public SearchByFlightNumberOutputData getSearchError() {
-        return searchError;
-    }
+    public String getFlightNumber() { return flightNumber; }
 
     public String getDepartureTime() {return departureTime;}
 
@@ -26,13 +22,9 @@ public class SearchByFlightNumberState {
 
     public String getStatus() {return status;}
 
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
+    public void setSearchError(String searchError) { this.searchError = searchError; }
 
-    public void setSearchError(SearchByFlightNumberOutputData searchError) {
-        this.searchError = searchError;
-    }
+    public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
 
     public void setStatus(String status) {this.status = status;}
 
