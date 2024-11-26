@@ -19,7 +19,9 @@ import use_case.SearchByFlightNumber.SearchByFlightNumberDataAccessInterface;
 
 public class All_API_Calling implements SearchByAirlineIDDataAccessInterface, SearchByFlightNumberDataAccessInterface {
 
-    private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9"; // Replace with your access key
+//    private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9"; // Replace with your access key
+//    private static final String ACCESSKEY = "90f868a7c24be8eb22abbb87da67ed55"; // Replace with your access key
+    private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
 
     public static JSONArray API_Call(String apiUrl) {
         try {
@@ -84,6 +86,16 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface, Se
 
     public static List<Flight> AIRPORT_IATA_ARRIVAL(String AirportID) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&arr_iata=" + AirportID;
+        return getFlightsFromURL(apiUrl);
+    }
+
+    public static List<Flight> RANDOM_FLIGHTS() {
+        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_status=" + "active";
+        return getFlightsFromURL(apiUrl);
+    }
+
+    public static List<Flight> Search_By_landed_at_airport(String AirportID) {
+        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&arr_iata=" + AirportID + "&flight_status=landed";
         return getFlightsFromURL(apiUrl);
     }
 
