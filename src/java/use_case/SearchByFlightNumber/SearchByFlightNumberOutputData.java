@@ -22,6 +22,8 @@ public class SearchByFlightNumberOutputData {
         this.errorMessage = errorMessage;
     }
 
+    public String getErrorMessage() { return errorMessage; }
+
     public String getFlightNumber() {
         return filteredFlight.getFlightNumber();
     }
