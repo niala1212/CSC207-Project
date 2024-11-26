@@ -38,7 +38,8 @@ public class Menu extends JFrame {
     // UI Components
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
-    private final JButton searchByAirportB = new JButton("Search By Airport");
+    private final JButton searchByAirportArrivals = new JButton("Search Arrivals By Airport");
+    private final JButton searchByAirportDepartures = new JButton("Search Departures By Airport");
     private final JButton searchByAirlineB = new JButton("Search By Airline");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
@@ -91,9 +92,16 @@ public class Menu extends JFrame {
         });
 
         // Setup Search By Airport button (to be implemented later)
-        searchByAirportB.setFont(buttonFont);
-        panel.add(searchByAirportB, "span, grow");
-        searchByAirportB.addActionListener(event -> {
+        searchByAirportArrivals.setFont(buttonFont);
+        panel.add(searchByAirportArrivals, "span, grow");
+        searchByAirportArrivals.addActionListener(event -> {
+            // Placeholder for airport search functionality
+        });
+
+        // Setup Search By Airport button (to be implemented later)
+        searchByAirportDepartures.setFont(buttonFont);
+        panel.add(searchByAirportDepartures, "span, grow");
+        searchByAirportDepartures.addActionListener(event -> {
             // Placeholder for airport search functionality
         });
 
