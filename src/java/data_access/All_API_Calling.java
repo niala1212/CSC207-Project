@@ -16,13 +16,13 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import use_case.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
 import use_case.SearchByAirlineID.SearchByAirlineIDDataAccessInterface;
-import use_case.SearchAirportArrivals.SearchAirportArrivalsDataAccessInterface;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportDataAccessInterface;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
 import use_case.SearchByFlightNumber.SearchByFlightNumberDataAccessInterface;
 
 public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         SearchByFlightNumberDataAccessInterface, SearchByDepartureAirportDataAccessInterface,
-        SearchAirportArrivalsDataAccessInterface, SearchAirportLandedDataAccessInterface {
+        SearchByArrivalAirportDataAccessInterface, SearchAirportLandedDataAccessInterface {
 
 //    private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9"; // Replace with your access key
 //    private static final String ACCESSKEY = "90f868a7c24be8eb22abbb87da67ed55"; // Replace with your access key
@@ -89,7 +89,8 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         return getFlightsFromURL(apiUrl);
     }
 
-    public static List<Flight> AIRPORT_IATA_ARRIVAL(String AirportID) {
+    @Override
+    public List<Flight> getArrivalFlights(String AirportID) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&arr_iata=" + AirportID;
         return getFlightsFromURL(apiUrl);
     }
@@ -212,17 +213,7 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
      * @param airportCode the IATA code of the airport
      * @return a list of flights for the given airport
      */
-    @Override
-    public List<Flight> getArrivalFlightsByAirport(String airportCode) {
-        return List.of();
-    }
 
-    /**
-     * Retrieves all flights departing or arriving at the given airport code.
-     *
-     * @param airportCode the IATA code of the airport
-     * @return a list of flights for the given airport
-     */
     @Override
     public List<Flight> getLandedFlightsByAirport(String airportCode) {
         return List.of();
