@@ -3,31 +3,27 @@ package use_case.SearchByDepartureAirport;
 import entities.Flight;
 import java.util.List;
 
-/**
- * The Search by Airport Interactor.
- */
-public class SearchByDepartureAirportInteractor implements use_case.SearchByDepartureAirport.SearchAirportLandedInputBoundary {
+public class SearchByDepartureAirportInteractor implements SearchByDepartureAirportInputBoundary {
 
-    private final use_case.SearchByDepartureAirport.SearchAirportLandedDataAccessInterface flightDataAccessObject;
-    private final use_case.SearchByDepartureAirport.SearchAirportLandedOutputBoundary searchByAirportPresenter;
+    private final SearchByDepartureAirportDataAccessInterface flightDataAccessObject;
+    private final SearchByDepartureAirportOutputBoundary searchByDepartureAirportPresenter;
 
-    public SearchByDepartureAirportInteractor(use_case.SearchByDepartureAirport.SearchAirportLandedDataAccessInterface flightDataAccessObject,
-                                              use_case.SearchByDepartureAirport.SearchAirportLandedOutputBoundary searchByAirportPresenter) {
+    public SearchByDepartureAirportInteractor(SearchByDepartureAirportDataAccessInterface flightDataAccessObject,
+                                              SearchByDepartureAirportOutputBoundary searchByDepartureAirportPresenter) {
         this.flightDataAccessObject = flightDataAccessObject;
-        this.searchByAirportPresenter = searchByAirportPresenter;
+        this.searchByDepartureAirportPresenter = searchByDepartureAirportPresenter;
     }
 
-    @Override
-    public void execute(use_case.SearchByDepartureAirport.SearchAirportLandedInputData searchAirportLandedInputData) {
-        String airportCode = searchAirportLandedInputData.getAirportCode();
-        List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirport(airportCode);
+    public void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData){
+        String airportCode = searchByDepartureAirportInputData.getAirportCode();
+        List<Flight> foundFlights = flightDataAccessObject.getFlightsByDepartureAirport(airportCode);
 
         if (foundFlights != null && !foundFlights.isEmpty()) {
-            use_case.SearchByDepartureAirport.SearchAirportLandedOutputData outputData = new use_case.SearchByDepartureAirport.SearchAirportLandedOutputData(foundFlights);
-            searchByAirportPresenter.prepareSuccessView(outputData);
+            SearchByDepartureAirportOutputData outputData = new SearchByDepartureAirportOutputData(foundFlights);
+            searchByDepartureAirportPresenter.prepareSuccessView(outputData);
         } else {
-            use_case.SearchByDepartureAirport.SearchAirportLandedOutputData outputData = new use_case.SearchByDepartureAirport.SearchAirportLandedOutputData("No flights found for the specified airport.");
-            searchByAirportPresenter.prepareFailView(outputData);
+            SearchByDepartureAirportOutputData outputData = new SearchByDepartureAirportOutputData("No flights found for the specified airport.");
+            searchByDepartureAirportPresenter.prepareFailView(outputData);
         }
     }
 }

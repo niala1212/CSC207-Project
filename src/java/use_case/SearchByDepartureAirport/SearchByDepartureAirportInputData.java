@@ -1,7 +1,7 @@
 package use_case.SearchByDepartureAirport;
 
 /**
- * Input Data for the Search By Airport Use Case.
+ * Input Data for the Search Departures By Airport Use Case.
  */
 public class SearchByDepartureAirportInputData {
     private final String airportCode; // IATA code for the airport (e.g., "JFK" for John F. Kennedy International Airport)

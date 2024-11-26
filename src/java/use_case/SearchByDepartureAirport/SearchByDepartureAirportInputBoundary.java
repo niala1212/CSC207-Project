@@ -5,9 +5,9 @@ package use_case.SearchByDepartureAirport;
  */
 public interface SearchByDepartureAirportInputBoundary {
 
-    /**
-     * Executes the search by Airport use case.
-     * @param searchAirportLandedInputData the input data
-     */
-    void execute(use_case.SearchByDepartureAirport.SearchAirportLandedInputData searchAirportLandedInputData);
+        /**
+         * Executes the search by Airport use case.
+         * @param searchByDepartureAirportInputData the input data
+         */
+        void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData);
 }
