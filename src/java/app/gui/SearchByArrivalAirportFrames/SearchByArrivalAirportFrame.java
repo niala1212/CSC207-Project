@@ -1,24 +1,16 @@
-package app.gui;
+package app.gui.SearchByArrivalAirportFrames;
 
-import java.util.List;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import entities.Flight;
 import adapters.SearchByArrivalAirport.SearchByArrivalAirportController;
 import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
 import adapters.SearchByArrivalAirport.SearchByArrivalAirportState;
 import net.miginfocom.swing.MigLayout;
 
-/**
- * The searchbox to search up flights by airport.
- */
 public class SearchByArrivalAirportFrame extends JFrame implements PropertyChangeListener {
     static final int SEARCHBYAIRPORT_WIDTH = 600;
     static final int SEARCHBYAIRPORT_HEIGHT = 600;
@@ -27,47 +19,43 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
     private final SearchByArrivalAirportViewModel searchByArrivalAirportViewModel;
     private final SearchByArrivalAirportController searchByArrivalAirportController;
 
-    // search panel
-    private final String placeholderText = "Enter Airport IATA Code";
+    private final String placeholderText = "Enter Arrival Airport Code; eg: JFK";
     private final JPanel searchPanel = new JPanel(new MigLayout("insets 10"));
-
-    // result panel
     private final JPanel resultPanel = new JPanel(new MigLayout("insets 10, fill"));
+    private final JLabel airportNameLabel = new JLabel("", SwingConstants.CENTER);
+    private final JScrollPane scrollPane = new JScrollPane();
+    private final JLabel errorLabel = new JLabel("", SwingConstants.CENTER);
 
     public SearchByArrivalAirportFrame(SearchByArrivalAirportController searchByArrivalAirportController,
-                                       SearchByArrivalAirportViewModel searchByArrivalAirportViewModel) throws HeadlessException {
+                                       SearchByArrivalAirportViewModel searchByArrivalAirportViewModel) {
         this.searchByArrivalAirportViewModel = searchByArrivalAirportViewModel;
         this.searchByArrivalAirportViewModel.addPropertyChangeListener(this);
         this.searchByArrivalAirportController = searchByArrivalAirportController;
 
         addSearchBar();
+        resultPanel.setLayout(new BorderLayout());
         add(resultPanel, BorderLayout.CENTER);
 
-        setTitle("Flight Tracker Search By Airport");
+        setTitle("Flight Tracker Search By Arrival Airport");
         setSize(SEARCHBYAIRPORT_WIDTH, SEARCHBYAIRPORT_HEIGHT);
         setVisible(true);
-        // Request focus for the frame itself, not the text field
         requestFocusInWindow();
     }
 
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
-        searchField.setColumns(1000000);
-        // Set initial color to gray for placeholder text
         searchField.setForeground(Color.GRAY);
-        // Add FocusListener to manage the placeholder text
         searchField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                // Clear the placeholder when the field is focused
                 if (searchField.getText().equals(placeholderText)) {
                     searchField.setText("");
                     searchField.setForeground(Color.BLACK);
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
-                // Restore placeholder text if the field is empty
                 if (searchField.getText().isEmpty()) {
                     searchField.setText(placeholderText);
                     searchField.setForeground(Color.GRAY);
@@ -78,47 +66,67 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
         searchField.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.PLAIN, 20));
 
         JButton searchButton = new JButton("Search");
+        searchButton.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.PLAIN, 15));
         searchPanel.add(searchButton, "height 40, grow");
         searchButton.addActionListener(event -> {
-            String airportCode = searchField.getText();
-            if (airportCode != null && !airportCode.trim().isEmpty()) {
-                // Assuming the airport is a departure airport (set to true for testing)
-                searchByArrivalAirportController.execute(airportCode.trim());
-            }
+            searchByArrivalAirportController.execute(searchField.getText());
         });
 
         add(searchPanel, BorderLayout.NORTH);
     }
 
-    private void addTable(SearchByArrivalAirportState searchByAirportState) {
-        if (searchByAirportState.getMessage() != null) {
-            resultPanel.add(new JLabel(searchByAirportState.getMessage()), "grow");
+    private void displayResults(SearchByArrivalAirportState state) {
+        resultPanel.removeAll();
+
+        airportNameLabel.setText(state.getAirportName());
+        airportNameLabel.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.BOLD, 24));
+        resultPanel.add(airportNameLabel, BorderLayout.NORTH);
+
+        JPanel flightListPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+        for (String flightNumber : state.getFlightNumbers()) {
+            JButton flightButton = new JButton(flightNumber);
+            flightButton.addActionListener(event -> showFlightDetails(flightNumber));
+            flightListPanel.add(flightButton);
+        }
+
+        scrollPane.setViewportView(flightListPanel);
+        resultPanel.add(scrollPane, BorderLayout.CENTER);
+
+        resultPanel.revalidate();
+        resultPanel.repaint();
+    }
+
+    private void displayError(String errorMessage) {
+        resultPanel.removeAll();
+
+        errorLabel.setText("<html><body style='text-align: center;'>" + errorMessage + "</body></html>");
+        errorLabel.setForeground(Color.RED);
+        errorLabel.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.BOLD, 18));
+        resultPanel.add(errorLabel, BorderLayout.CENTER);
+
+        resultPanel.revalidate();
+        resultPanel.repaint();
+    }
+
+    private void showFlightDetails(String flightNumber) {
+        String flightDetails = searchByArrivalAirportViewModel.getState().getFlightDetailsString(flightNumber);
+        if (flightDetails != null) {
+            new ArrivalAirportFlightDetailsFrame(searchByArrivalAirportViewModel.getState(), flightNumber);
         } else {
-            String[] columnNames = {"Flight Number", "Departure Time", "Arrival Time", "Status"};
-            List<String> flightNumbers = searchByAirportState.getFlightNumbers();
-            List<Flight> flights = searchByAirportState.getFlights();
-
-            // Populate table with flight data
-            Object[][] data = new Object[flights.size()][4];
-            for (int i = 0; i < flights.size(); i++) {
-                Flight flight = flights.get(i);
-                data[i][0] = flightNumbers.get(i);
-                data[i][1] = flight.getScheduledDepartureTime();
-                data[i][2] = flight.getScheduledArrivalTime();
-                data[i][3] = flight.getStatus();
-            }
-
-            DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-            JTable table = new JTable(tableModel);
-            JScrollPane scrollPane = new JScrollPane(table);
-            resultPanel.add(scrollPane, "grow");
+            JOptionPane.showMessageDialog(this, "Flight details not found for: " + flightNumber,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
-        if ("airportSearchResults".equals(event.getPropertyName())) {
-            addTable(searchByArrivalAirportViewModel.getState());
+        SearchByArrivalAirportState state = searchByArrivalAirportViewModel.getState();
+        if ("airportFlights".equals(event.getPropertyName())) {
+            if (state.isSuccessful()) {
+                displayResults(state);
+            } else {
+                displayError(state.getMessage());
+            }
         }
     }
 }

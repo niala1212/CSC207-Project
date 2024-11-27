@@ -20,28 +20,40 @@ public class SearchByArrivalAirportPresenter implements SearchByArrivalAirportOu
 
     @Override
     public void prepareSuccessView(SearchByArrivalAirportOutputData outputData) {
+        SearchByArrivalAirportState state = viewModel.getState();
         List<Flight> arrivalFlights = outputData.getFilteredArrivalFlights();
-        if (arrivalFlights == null || arrivalFlights.isEmpty()) {
+        if (outputData.isUseCaseFailed()) {
             // Case: No flights found
-            viewModel.updateNoFlightsFound("No flights found for the specified airline.");
+            state.setMessage(outputData.getArrivalErrorMessage());
+            viewModel.firePropertyChanged("noFlightsError");
         } else {
             // Case: Flights found
             String airportName = arrivalFlights.get(0).getArrivalAirport();
             List<String> flightNumbers = extractFlightNumbers(arrivalFlights);
 
+            state.setAirportName(airportName);
+            state.setFlightNumbers(flightNumbers);
+            state.setFlights(arrivalFlights);
+
+
             // Update the ViewModel with the full list of flights
-            viewModel.updateFlights(airportName, flightNumbers, arrivalFlights);
+            viewModel.firePropertyChanged("airportFlights");
         }
     }
 
     @Override
     public void prepareFailView(SearchByArrivalAirportOutputData outputData) {
-        String errorMessage = outputData.getArrivalErrorMessage();
-        System.out.println("Error retrieving arrival flights: " + errorMessage);
-        viewModel.updateNoFlightsFound("An error occurred: " + outputData.getArrivalErrorMessage());
+        SearchByArrivalAirportState state = viewModel.getState();
+
+        // Case: error occured
+        state.setMessage(outputData.getArrivalErrorMessage());
+
+        // Update the viewModel with the change property
+        viewModel.firePropertyChanged("noFlightsError");
     }
 
 
+    // Helper method to extract flight numbers
     private List<String> extractFlightNumbers(List<Flight> flights) {
         List<String> flightNumbers = new ArrayList<>();
         for (Flight flight : flights) {
