@@ -11,16 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import adapters.SearchAirportArrivals.SearchAirportArrivalsController;
-import adapters.SearchAirportArrivals.SearchAirportArrivalsViewModel;
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
 import adapters.SearchByAirlineID.SearchByAirlineIDController;
 import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
+import adapters.SearchByArrivalAirport.SearchByArrivalAirportController;
+import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
 import adapters.SearchByFlightNumber.SearchByFlightNumberController;
 import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
 import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
 import net.miginfocom.swing.MigLayout;
 
@@ -43,8 +44,8 @@ public class Menu extends JFrame {
     private final SearchByAirlineIDController searchByAirlineIDController;
     private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel;
     private final SearchByDepartureAirportController searchByDepartureAirportController;
-    private final SearchAirportArrivalsViewModel searchAirportArrivalsViewModel;
-    private final SearchAirportArrivalsController searchAirportArrivalsController;
+    private final SearchByArrivalAirportViewModel searchByArrivalAirportViewModel;
+    private final SearchByArrivalAirportController searchByArrivalAirportController;
     private final SearchAirportLandedViewModel searchAirportLandedViewModel;
     private final SearchAirportLandedController searchAirportLandedController;
 
@@ -52,6 +53,7 @@ public class Menu extends JFrame {
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
     private final JButton searchByAirlineB = new JButton("Search By Airline");
+    private final JButton searchByArrivalAirportB = new JButton("Search By Arrival Airport");
     private final JButton searchByAirportB = new JButton("Search By Airport");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
@@ -65,8 +67,8 @@ public class Menu extends JFrame {
                 SearchByAirlineIDController searchByAirlineIDController,
                 SearchByDepartureAirportViewModel searchByDepartureAirportViewModel,
                 SearchByDepartureAirportController searchByDepartureAirportController,
-                SearchAirportArrivalsViewModel searchAirportArrivalsViewModel,
-                SearchAirportArrivalsController searchAirportArrivalsController,
+                SearchByArrivalAirportViewModel searchByArrivalAirportViewModel,
+                SearchByArrivalAirportController searchByArrivalAirportController,
                 SearchAirportLandedViewModel searchAirportLandedViewModel,
                 SearchAirportLandedController searchAirportLandedController) throws HeadlessException {
         // Initialize controllers and view models
@@ -76,8 +78,8 @@ public class Menu extends JFrame {
         this.searchByAirlineIDController = searchByAirlineIDController;
         this.searchByDepartureAirportViewModel = searchByDepartureAirportViewModel;
         this.searchByDepartureAirportController = searchByDepartureAirportController;
-        this.searchAirportArrivalsViewModel = searchAirportArrivalsViewModel;
-        this.searchAirportArrivalsController = searchAirportArrivalsController;
+        this.searchByArrivalAirportViewModel = searchByArrivalAirportViewModel;
+        this.searchByArrivalAirportController = searchByArrivalAirportController;
         this.searchAirportLandedViewModel = searchAirportLandedViewModel;
         this.searchAirportLandedController = searchAirportLandedController;
 
@@ -126,6 +128,15 @@ public class Menu extends JFrame {
             );
         });
 
+        searchByArrivalAirportB.setFont(buttonFont);
+        panel.add(searchByArrivalAirportB, "span, grow");
+        searchByArrivalAirportB.addActionListener(event -> {
+            // Opens the SearchByAirlineIDFrame to search for flights by airport
+            SearchByArrivalAirportFrame searchByArrivalAirportFrame = new SearchByArrivalAirportFrame(
+                    searchByArrivalAirportController, searchByArrivalAirportViewModel
+            );
+        });
+
         // Setup Search By Airport button and action listener
         searchByAirportB.setFont(buttonFont);
         panel.add(searchByAirportB, "span, grow");
@@ -133,7 +144,6 @@ public class Menu extends JFrame {
             // Opens the SearchByAirlineIDFrame to search for flights by airport
             SearchByAirportFrame searchByAirportFrame = new SearchByAirportFrame(
                     searchByDepartureAirportController, searchByDepartureAirportViewModel,
-                    searchAirportArrivalsController, searchAirportArrivalsViewModel,
                     searchAirportLandedController, searchAirportLandedViewModel
             );
         });

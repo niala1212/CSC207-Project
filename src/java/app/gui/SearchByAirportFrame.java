@@ -1,14 +1,10 @@
 package app.gui;
 
 import adapters.AbstractState;
-import adapters.SearchAirportArrivals.SearchAirportArrivalsController;
-import adapters.SearchAirportArrivals.SearchAirportArrivalsViewModel;
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
-import adapters.SearchByFlightNumber.SearchByFlightNumberState;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -26,8 +22,6 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
 
     private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel;
     private final SearchByDepartureAirportController searchByDepartureAirportController;
-    private final SearchAirportArrivalsViewModel searchAirportArrivalsViewModel;
-    private final SearchAirportArrivalsController searchAirportArrivalsController;
     private final SearchAirportLandedViewModel searchAirportLandedViewModel;
     private final SearchAirportLandedController searchAirportLandedController;
 
@@ -42,14 +36,10 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
 
     public SearchByAirportFrame(SearchByDepartureAirportController searchByDepartureAirportController,
                                 SearchByDepartureAirportViewModel searchByDepartureAirportViewModel,
-                                SearchAirportArrivalsController searchAirportArrivalsController,
-                                SearchAirportArrivalsViewModel searchAirportArrivalsViewModel,
                                 SearchAirportLandedController searchAirportLandedController,
                                 SearchAirportLandedViewModel searchAirportLandedViewModel) throws HeadlessException {
         this.searchByDepartureAirportViewModel = searchByDepartureAirportViewModel;
         this.searchByDepartureAirportController = searchByDepartureAirportController;
-        this.searchAirportArrivalsViewModel = searchAirportArrivalsViewModel;
-        this.searchAirportArrivalsController = searchAirportArrivalsController;
         this.searchAirportLandedViewModel = searchAirportLandedViewModel;
         this.searchAirportLandedController = searchAirportLandedController;
 
@@ -97,7 +87,7 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
 
         // Create a JComboBox (dropdown) with options
         String[] options = {
-            "Search for Departing Flights", "Search for Arriving Flights", "Search for Already Landed Flights"};
+            "Search for Departing Flights", "Search for Already Landed Flights"};
         JComboBox<String> dropdown = new JComboBox<>(options);
         dropdown.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.PLAIN, 20));
         dropdown.setForeground(Color.DARK_GRAY);
@@ -111,9 +101,6 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
             switch (selectedUseCase) {
                 case "Search for Departing Flights":
                     searchByDepartureAirportController.execute(searchField.getText());
-                    break;
-                case "Search for Arriving Flights":
-                    searchAirportArrivalsController.execute(searchField.getText());
                     break;
                 case "Search for Already Landed Flights":
                     searchAirportLandedController.execute(searchField.getText());
@@ -176,12 +163,6 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
         }
         else if ("departureFlightError".equals(event.getPropertyName())) {
             showError(searchByDepartureAirportViewModel.getState().getSearchError());
-        }
-        else if ("arrivalFlightDetails".equals(event.getPropertyName())) {
-            showResult(searchAirportArrivalsViewModel.getState());
-        }
-        else if ("arrivalFlightError".equals(event.getPropertyName())) {
-            showError(searchAirportArrivalsViewModel.getState().getSearchError());
         }
         else if ("landedFlightDetails".equals(event.getPropertyName())) {
             showResult(searchAirportLandedViewModel.getState());
