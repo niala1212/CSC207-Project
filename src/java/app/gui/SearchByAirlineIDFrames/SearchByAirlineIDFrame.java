@@ -1,4 +1,4 @@
-package app.gui;
+package app.gui.SearchByAirlineIDFrames;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -9,7 +9,6 @@ import javax.swing.*;
 import adapters.SearchByAirlineID.SearchByAirlineIDController;
 import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
 import adapters.SearchByAirlineID.SearchByAirlineIDState;
-import entities.Flight;
 import net.miginfocom.swing.MigLayout;
 
 public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeListener {
@@ -20,7 +19,7 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
     private final SearchByAirlineIDViewModel searchByAirlineIDViewModel;
     private final SearchByAirlineIDController searchByAirlineIDController;
 
-    private final String placeholderText = "Enter Airline IATA Code; eg: AA";
+    private final String placeholderText = "Enter Airline IATA Code; eg: 'AC' for Air Canada";
     private final JPanel searchPanel = new JPanel(new MigLayout("insets 10"));
     private final JPanel resultPanel = new JPanel(new MigLayout("insets 10, fill"));
     private final JLabel airlineNameLabel = new JLabel("", SwingConstants.CENTER);
@@ -112,7 +111,7 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
     private void showFlightDetails(String flightNumber) {
         String flightDetails = searchByAirlineIDViewModel.getState().getFlightDetailsString(flightNumber);
         if (flightDetails != null) {
-            new FlightDetailsFrame(searchByAirlineIDViewModel.getState(), flightNumber);
+            new SearchByAirlineIDFlightDetailsFrame(searchByAirlineIDViewModel.getState(), flightNumber);
         } else {
             JOptionPane.showMessageDialog(this, "Flight details not found for: " + flightNumber,
                     "Error", JOptionPane.ERROR_MESSAGE);

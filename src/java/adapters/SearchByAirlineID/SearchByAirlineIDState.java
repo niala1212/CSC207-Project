@@ -8,8 +8,8 @@ import java.util.List;
 public class SearchByAirlineIDState {
 
     private String airlineName = "";
-    private List<String> flightNumbers = new ArrayList<String>();
-    private List<Flight> flights = new ArrayList<Flight>(); // To store the full flight data
+    private List<String> flightNumbers = new ArrayList<>();
+    private List<Flight> flights = new ArrayList<>(); // To store the full flight data
     private String errorMessage = null;
 
     //Getters
