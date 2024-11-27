@@ -121,7 +121,7 @@ public class Menu extends JFrame {
         panel.add(searchByAirlineB, "span, grow");
         searchByAirlineB.addActionListener(event -> {
             // Opens the SearchByAirlineIDFrame for airline search
-            SearchByAirlineIDFrame searchByAirlineFrame = new SearchByAirlineIDFrame(
+            SearchByAirlineIDFrame searchByAirlineIDFrame = new SearchByAirlineIDFrame(
                     searchByAirlineIDController, searchByAirlineIDViewModel
             );
         });
