@@ -1,82 +1,96 @@
 package use_case.SearchByAirlineID;
 
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
+
 import entities.Flight;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
-
-class SearchByAirlineIDInteractorTest {
+public class SearchByAirlineIDInteractorTest {
 
     @Mock
-    private SearchByAirlineIDDataAccessInterface mockDataAccessObject;
+    private SearchByAirlineIDDataAccessInterface mockFlightDataAccessObject;
 
     @Mock
-    private SearchByAirlineIDOutputBoundary mockPresenter;
+    private SearchByAirlineIDOutputBoundary mockSearchByAirlineIDPresenter;
 
     private SearchByAirlineIDInteractor searchByAirlineIDInteractor;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
-        searchByAirlineIDInteractor = new SearchByAirlineIDInteractor(mockDataAccessObject, mockPresenter);
+        searchByAirlineIDInteractor = new SearchByAirlineIDInteractor(mockFlightDataAccessObject, mockSearchByAirlineIDPresenter);
     }
 
     @Test
-    void testExecute_SuccessfulFlightSearch() {
-        String airlineIataCode = "AA";
-        List<Flight> flights = Arrays.asList(new Flight("AA123", "2024-11-25"), new Flight("AA124", "2024-11-25"));
-        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(airlineIataCode);
+    public void testExecute_FlightsFound() {
+        // Arrange
+        String airlineId = "AA";
+        List<Flight> flights = Arrays.asList(new Flight("AB123", "2024-11-26"), new Flight("AB321", "2024-12-27")); // Assuming Flight is a valid entity
+        SearchByAirlineIDInputData inputData = mock(SearchByAirlineIDInputData.class);
+        when(inputData.getAirlineIataCode()).thenReturn(airlineId);
+        when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenReturn(flights);
 
-        when(mockDataAccessObject.getFlightsByAirlineId(airlineIataCode)).thenReturn(flights);
-
+        // Act
         searchByAirlineIDInteractor.execute(inputData);
 
-        // Verify that the success view method is called
-        verify(mockPresenter).prepareSuccessView(any(SearchByAirlineIDOutputData.class));
+        // Assert
+        verify(mockSearchByAirlineIDPresenter).prepareSuccessView(argThat(outputData ->
+                outputData.getFilteredFlights() == flights && outputData.getErrorMessage() == null));
     }
 
     @Test
-    void testExecute_NoFlightsFound() {
-        String airlineIataCode = "AA";
+    public void testExecute_NoFlightsFound() {
+        // Arrange
+        String airlineId = "AA";
         List<Flight> flights = Arrays.asList();
-        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(airlineIataCode);
+        SearchByAirlineIDInputData inputData = mock(SearchByAirlineIDInputData.class);
+        when(inputData.getAirlineIataCode()).thenReturn(airlineId);
+        when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenReturn(flights);
 
-        when(mockDataAccessObject.getFlightsByAirlineId(airlineIataCode)).thenReturn(flights);
-
+        // Act
         searchByAirlineIDInteractor.execute(inputData);
 
-        // Verify that the success view method is called with the appropriate message
-        verify(mockPresenter).prepareSuccessView(argThat(outputData -> outputData.getErrorMessage().equals("No flights found for the specified airline.")));
+        // Assert
+        verify(mockSearchByAirlineIDPresenter).prepareSuccessView(argThat(outputData ->
+                outputData.getFilteredFlights() == null && outputData.getErrorMessage().equals("No flights found for the specified airline.")));
     }
 
     @Test
-    void testExecute_DataAccessError() {
-        String airlineIataCode = "AA";
-        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(airlineIataCode);
+    public void testExecute_FlightDataAccessReturnsNull() {
+        // Arrange
+        String airlineId = "AA";
+        List<Flight> flights = null;
+        SearchByAirlineIDInputData inputData = mock(SearchByAirlineIDInputData.class);
+        when(inputData.getAirlineIataCode()).thenReturn(airlineId);
+        when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenReturn(flights);
 
-        when(mockDataAccessObject.getFlightsByAirlineId(airlineIataCode)).thenReturn(null);
-
+        // Act
         searchByAirlineIDInteractor.execute(inputData);
 
-        // Verify that the fail view method is called with the error message
-        verify(mockPresenter).prepareFailView(argThat(outputData -> outputData.getErrorMessage().equals("Error retrieving flight data. Please try again later.")));
+        // Assert
+        verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
+                outputData.getErrorMessage().equals("Error retrieving flight data for the specified airline. Please try a different iata.")));
     }
 
     @Test
-    void testExecute_UnexpectedError() {
-        String airlineIataCode = "AA";
-        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(airlineIataCode);
+    public void testExecute_ExceptionThrown() {
+        // Arrange
+        String airlineId = "AA";
+        SearchByAirlineIDInputData inputData = mock(SearchByAirlineIDInputData.class);
+        when(inputData.getAirlineIataCode()).thenReturn(airlineId);
+        when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenThrow(new RuntimeException("API Error"));
 
-        when(mockDataAccessObject.getFlightsByAirlineId(airlineIataCode)).thenThrow(new RuntimeException("Unexpected error"));
-
+        // Act
         searchByAirlineIDInteractor.execute(inputData);
 
-        // Verify that the fail view method is called with the appropriate message
-        verify(mockPresenter).prepareFailView(argThat(outputData -> outputData.getErrorMessage().equals("An unexpected error occurred: Unexpected error")));
+        // Assert
+        verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
+                outputData.getErrorMessage().equals("An unexpected error occurred:\nAPI ERROR")));
     }
 }

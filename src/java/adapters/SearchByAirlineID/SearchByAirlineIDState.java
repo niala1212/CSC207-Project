@@ -5,6 +5,9 @@ import entities.Flight;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The state for the Search By Airline ID View Model.
+ */
 public class SearchByAirlineIDState {
 
     private String airlineName = "";

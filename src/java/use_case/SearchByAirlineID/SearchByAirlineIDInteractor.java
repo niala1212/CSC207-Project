@@ -41,7 +41,7 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
         } catch (Exception e) {
             // Unexpected failure: Handle exceptions
             SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
-                    "An unexpected error occurred: " + e.getMessage());
+                    "An unexpected error occurred:\n" + "API ERROR");
             searchByAirlineIDPresenter.prepareFailView(outputData);
         }
     }
