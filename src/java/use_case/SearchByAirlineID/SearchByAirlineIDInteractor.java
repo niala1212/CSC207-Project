@@ -25,11 +25,13 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
             List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirlineId(airlineId);
             if (foundFlights == null) {
                 // Critical failure: API or connection issue
-                SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData("Error retrieving flight data. Please try again later.");
+                SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
+                        "Error retrieving flight data for the specified airline. Please try a different iata.");
                 searchByAirlineIDPresenter.prepareFailView(outputData);
             } else if (foundFlights.isEmpty()) {
                 // No flights found: Valid but empty result
-                SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData("No flights found for the specified airline.");
+                SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
+                        "No flights found for the specified airline.");
                 searchByAirlineIDPresenter.prepareSuccessView(outputData);
             } else {
                 // Flights found: Success
@@ -38,7 +40,8 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
             }
         } catch (Exception e) {
             // Unexpected failure: Handle exceptions
-            SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData("An unexpected error occurred: " + e.getMessage());
+            SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
+                    "An unexpected error occurred: " + e.getMessage());
             searchByAirlineIDPresenter.prepareFailView(outputData);
         }
     }

@@ -22,6 +22,7 @@ import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
 import adapters.SearchByFlightNumber.SearchByFlightNumberController;
 import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
 import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
+import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -122,7 +123,7 @@ public class Menu extends JFrame {
         panel.add(searchByAirlineB, "span, grow");
         searchByAirlineB.addActionListener(event -> {
             // Opens the SearchByAirlineIDFrame for airline search
-            SearchByAirlineIDFrame searchByAirlineFrame = new SearchByAirlineIDFrame(
+            SearchByAirlineIDFrame searchByAirlineIDFrame = new SearchByAirlineIDFrame(
                     searchByAirlineIDController, searchByAirlineIDViewModel
             );
         });

@@ -31,7 +31,7 @@ public class SearchByAirlineIDOutputData {
         return errorMessage;
     }
 
-    public boolean useCaseNotFailed() {
+    public boolean isUseCaseFailed() {
         return errorMessage != null;
     }
 }

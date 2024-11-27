@@ -1,9 +1,7 @@
 package entities;
 
-/**
- * The representation of an airport in our program.
- * Class created in the even we decide to use this instead of a string.
- */
+import java.util.Arrays;
+
 public class Airport {
 
     private String airportCode; // eg: "MNL" for Ninoy Aquino International(the iata code)
@@ -34,7 +32,7 @@ public class Airport {
 
     // Setters
     public void setairportCode(String airportCode) {
-        this.name = airportCode;
+        this.airportCode = airportCode;
     }
 
     public void setName(String name) {
@@ -49,9 +47,9 @@ public class Airport {
     @Override
     public String toString() {
         return "Airport{" +
-                "airportCode='" + airportCode + '\'' +
-                "name='" + name + '\'' +
-                ", location='" + location + '\'' +
+                "Airport Code = '" + airportCode + '\'' +
+                ", Name = '" + name + '\'' +
+                ", Location = " + (location != null ? Arrays.toString(location) : "N/A") +
                 '}';
     }
 }

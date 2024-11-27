@@ -37,7 +37,7 @@ public class Airline {
     @Override
     public String toString() {
         return airlineCode + "{" +
-                ", name='" + name + '\'' +
+                ", Name ='" + name + '\'' +
                 '}';
     }
 }
