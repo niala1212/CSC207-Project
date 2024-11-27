@@ -21,6 +21,7 @@ import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
 import adapters.SearchByFlightNumber.SearchByFlightNumberController;
 import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**

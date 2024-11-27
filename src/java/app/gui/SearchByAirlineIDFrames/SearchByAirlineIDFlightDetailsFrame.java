@@ -1,12 +1,12 @@
-package app.gui;
+package app.gui.SearchByAirlineIDFrames;
 
 import javax.swing.*;
 import java.awt.*;
 import adapters.SearchByAirlineID.SearchByAirlineIDState;
 
-public class FlightDetailsFrame extends JFrame {
+public class SearchByAirlineIDFlightDetailsFrame extends JFrame {
 
-    public FlightDetailsFrame(SearchByAirlineIDState state, String flightNumber) {
+    public SearchByAirlineIDFlightDetailsFrame(SearchByAirlineIDState state, String flightNumber) {
         setTitle("Flight Details - " + flightNumber);
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
