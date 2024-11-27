@@ -28,7 +28,7 @@ public class Flight {
         this.currentLocation = currentLocation;
     }
 
-
+    //Setters
     public void setAirline(String airline) {
         this.airline = airline;
     }
@@ -61,6 +61,7 @@ public class Flight {
         this.estimatedArrivalTime = parse  + " UTC";
     }
 
+    // Getters
     public String getFlightNumber() {
         return flightNumber;
     }

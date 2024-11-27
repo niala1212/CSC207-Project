@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import adapters.SearchByAirlineID.SearchByAirlineIDState;
 
+/**
+ * The window displaying flight details for a selected flight form the Sear By Airline ID window.
+ */
 public class SearchByAirlineIDFlightDetailsFrame extends JFrame {
 
     public SearchByAirlineIDFlightDetailsFrame(SearchByAirlineIDState state, String flightNumber) {
