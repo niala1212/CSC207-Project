@@ -1,8 +1,6 @@
 package adapters.SearchByAirlineID;
 
 import adapters.AbstractViewModel;
-import entities.Flight;
-import java.util.List;
 
 /**
  * The Search By Airline ID View Model.

@@ -17,7 +17,8 @@ public class SearchByAirlineIDOutputDataTest {
     @Before
     public void setUp() {
         // Set up mock data for flights
-        flights = Arrays.asList(new Flight("AB123", "2024-11-26"), new Flight("AB321", "2024-12-27")); // Assuming Flight is a valid entity
+        flights = Arrays.asList(new Flight("AB123", "2024-11-26"),
+                new Flight("AB321", "2024-12-27")); // Assuming Flight is a valid entity
 
         // Create SearchByAirlineIDOutputData instances
         successOutputData = new SearchByAirlineIDOutputData(flights);
@@ -29,7 +30,8 @@ public class SearchByAirlineIDOutputDataTest {
         // Test success constructor (with filtered flights)
         assertNotNull("Filtered flights should not be null", successOutputData.getFilteredFlights());
         assertNull("Error message should be null in success case", successOutputData.getErrorMessage());
-        assertEquals("The filtered flights list should match the input", flights, successOutputData.getFilteredFlights());
+        assertEquals("The filtered flights list should match the input", flights,
+                successOutputData.getFilteredFlights());
     }
 
     @Test
@@ -37,7 +39,8 @@ public class SearchByAirlineIDOutputDataTest {
         // Test failure constructor (with an error message)
         assertNull("Filtered flights should be null in failure case", failureOutputData.getFilteredFlights());
         assertNotNull("Error message should not be null in failure case", failureOutputData.getErrorMessage());
-        assertEquals("The error message should match the input", "No flights found for the specified airline.", failureOutputData.getErrorMessage());
+        assertEquals("The error message should match the input",
+                "No flights found for the specified airline.", failureOutputData.getErrorMessage());
     }
 
     @Test
@@ -67,13 +70,15 @@ public class SearchByAirlineIDOutputDataTest {
     public void testGetFilteredFlightsWhenSuccess() {
         // Verify that getFilteredFlights() returns the correct list in success case
         assertNotNull("Filtered flights should not be null in success case", successOutputData.getFilteredFlights());
-        assertEquals("The filtered flights should match the expected list", flights, successOutputData.getFilteredFlights());
+        assertEquals("The filtered flights should match the expected list", flights,
+                successOutputData.getFilteredFlights());
     }
 
     @Test
     public void testGetErrorMessageWhenFailure() {
         // Verify that getErrorMessage() returns the correct message in failure case
         assertNotNull("Error message should not be null in failure case", failureOutputData.getErrorMessage());
-        assertEquals("The error message should match the input", "No flights found for the specified airline.", failureOutputData.getErrorMessage());
+        assertEquals("The error message should match the input",
+                "No flights found for the specified airline.", failureOutputData.getErrorMessage());
     }
 }

@@ -94,9 +94,7 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
         searchButton.setFont(new Font(SEARCHBYAIRLINEID_FONT, Font.PLAIN, 15));
         searchPanel.add(searchButton, "height 40, grow");
         // Bind button action to the controller's execute method
-        searchButton.addActionListener(event -> {
-            searchByAirlineIDController.execute(searchField.getText());
-        });
+        searchButton.addActionListener(event -> searchByAirlineIDController.execute(searchField.getText()));
 
         add(searchPanel, BorderLayout.NORTH);
     }
