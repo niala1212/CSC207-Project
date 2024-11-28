@@ -4,7 +4,7 @@ import use_case.SeeWorldMap.SeeWorldMapOutputBoundary;
 import use_case.SeeWorldMap.SeeWorldMapOutputData;
 
 /**
- * The Presenter for the Search By Flight Number Use Case.
+ * The Presenter for the SeeWorldMap Use Case.
  */
 public class SeeWorldMapPresenter implements SeeWorldMapOutputBoundary {
 
@@ -18,11 +18,10 @@ public class SeeWorldMapPresenter implements SeeWorldMapOutputBoundary {
     public void prepareSuccessView(SeeWorldMapOutputData response) {
         SeeWorldMapState state = seeWorldMapViewModel.getState();
 
-        // Update the SearchByFlightNumberState with data from the response
-//        state.setFlightNumber(response.getFlightNumber());
-//        state.setDepartureTime(response.getDepartureTime());
-//        state.setArrivalTime(response.getArrivalTime());
-//        state.setStatus(response.getStatus());
+        // Update the SeeWorldMapState with data from the response
+        //TODO
+//        state.
+//        state.
 
         // Notify View to update the flight details
         seeWorldMapViewModel.firePropertyChanged("flightDetails");

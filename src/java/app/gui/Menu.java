@@ -25,6 +25,7 @@ import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
 import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
+import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -160,9 +161,10 @@ public class Menu extends JFrame {
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
-            // Placeholder for world map functionality
-//            SeeWorldMapFrame seeWorldMapFrame = SeeWorldMapFrame(seeWorldMapController,
-//                    seeWorldMapViewModel);
+//             Placeholder for world map functionality
+            SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
+                    seeWorldMapController, seeWorldMapViewModel
+            );
         });
 
         // Add the panel to the center of the frame
