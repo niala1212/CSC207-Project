@@ -11,8 +11,6 @@ public class Map {
     private double[] centreCoordinates;
 
     // Constructor
-    public Map(){}
-
     public Map(int mapID, List<Flight> flightList, int zoomLevel, double[] centreCoordinates) {
         this.mapID = mapID;
         this.flightList = flightList;
