@@ -19,14 +19,16 @@ import use_case.SearchByAirlineID.SearchByAirlineIDDataAccessInterface;
 import use_case.SearchByArrivalAirport.SearchByArrivalAirportDataAccessInterface;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
 import use_case.SearchByFlightNumber.SearchByFlightNumberDataAccessInterface;
+import use_case.SeeWorldMap.SeeWorldMapDataAccessInterface;
 
 public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         SearchByFlightNumberDataAccessInterface, SearchByDepartureAirportDataAccessInterface,
-        SearchByArrivalAirportDataAccessInterface, SearchAirportLandedDataAccessInterface {
+        SearchByArrivalAirportDataAccessInterface, SearchAirportLandedDataAccessInterface,
+        SeeWorldMapDataAccessInterface {
 
 //    private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9"; // Replace with your access key
-//    private static final String ACCESSKEY = "2280451b27dbb820425b4846a03e0bf9"; // Replace with your access key
-    private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
+    private static final String ACCESSKEY = "977c40fee275141530975467ffa33986"; // Replace with your access key
+//    private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
 
     public static JSONArray API_Call(String apiUrl) {
         try {
@@ -84,7 +86,8 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         return getFlightsFromURL(apiUrl);
     }
 
-    public static List<Flight> AIRPORT_IATA_DEPARTURE(String AirportID) {
+//    @Override
+    public List<Flight> AIRPORT_IATA_DEPARTURE(String AirportID) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&dep_iata=" + AirportID;
         return getFlightsFromURL(apiUrl);
     }
@@ -95,12 +98,14 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         return getFlightsFromURL(apiUrl);
     }
 
-    public static List<Flight> RANDOM_FLIGHTS() {
+    @Override
+    public List<Flight> getRandomFlights() {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_status=" + "active";
         return getFlightsFromURL(apiUrl);
     }
 
-    public static List<Flight> Search_By_landed_at_airport(String AirportID) {
+//    @Override
+    public List<Flight> Search_By_landed_at_airport(String AirportID) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&arr_iata=" + AirportID + "&flight_status=landed";
         return getFlightsFromURL(apiUrl);
     }
@@ -186,13 +191,30 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         return source.format(formatter);
     }
 
+    public static Flight IATA_DATE(String flightNumber, String flightDate) {
+        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_iata=" + flightNumber;
+        Flight flight = null;
+        JSONArray data = API_Call(apiUrl);
+        if (data != null && !data.isEmpty()) {
+            JSONObject flightData = getDateJSON(data, flightDate);
+            List<Object> all_info = getFlightString(flightData);
+            List<String> flightInfo = (List<String>) all_info.get(0);
+            double[] coordinates = (double[]) all_info.get(1);
+            flight = FlightFactory.create(flightInfo, coordinates);
+            return flight;
+        }
+        else {
+            return flight;
+        }
+    }
+
     /**
      * The main function here is just made to test if the code works.
      * This imitates the testcase where you give a flight number and date
      */
 
     public static void main(String[] args) {
-//        Flight flight = IATA_DATE("WG7124", "2024-11-18");
+//        Flight flight = IATA_DATE("AC8880", "2024-11-27");
 //        System.out.println("Flight Details:");
 //        System.out.println("Flight Number: " + flight.getFlightNumber());
 //        System.out.println("Airline: " + flight.getAirline());
