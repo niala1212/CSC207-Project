@@ -1,7 +1,11 @@
 package adapters.SeeWorldMap;
 
+import entities.Flight;
 import use_case.SeeWorldMap.SeeWorldMapOutputBoundary;
 import use_case.SeeWorldMap.SeeWorldMapOutputData;
+
+import java.awt.geom.Point2D;
+import java.util.Map;
 
 /**
  * The Presenter for the SeeWorldMap Use Case.
@@ -18,10 +22,12 @@ public class SeeWorldMapPresenter implements SeeWorldMapOutputBoundary {
     public void prepareSuccessView(SeeWorldMapOutputData response) {
         SeeWorldMapState state = seeWorldMapViewModel.getState();
 
-        // Update the SeeWorldMapState with data from the response
-        //TODO
-//        state.
-//        state.
+        state.clearMarkers();
+
+        Map<Point2D.Double, Flight> flightData = response.getFlightMarkers();
+        for (Map.Entry<Point2D.Double, Flight> entry : flightData.entrySet()) {
+            state.addMarker(entry.getKey(), entry.getValue());
+        }
 
         // Notify View to update the flight details
         seeWorldMapViewModel.firePropertyChanged("flightDetails");

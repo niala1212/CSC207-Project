@@ -16,7 +16,7 @@ public class SeeWorldMapController {
      */
 //    MAKE SURE TO FIX THE NULL THING
     public void execute() {
-        final SeeWorldMapInputData inputData = new SeeWorldMapInputData(null);
+        final SeeWorldMapInputData inputData = new SeeWorldMapInputData("");
         this.seeWorldMapInteractor.execute(inputData);
     }
 }

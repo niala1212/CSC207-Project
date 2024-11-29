@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import entities.Flight;
 import entities.FlightFactory;
@@ -100,7 +101,8 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
 
     @Override
     public List<Flight> getRandomFlights() {
-        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_status=" + "active";
+        Random rand = new Random();
+        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_status=" + "active" + "&offset=" + rand.nextInt(14000);
         return getFlightsFromURL(apiUrl);
     }
 
@@ -116,11 +118,17 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         if (data != null && !data.isEmpty()) {
             List<JSONObject> all_flights = getAirline_flights(data);
             for (JSONObject flightData : all_flights) {
-                List<Object> all_info = getFlightString(flightData);
-                List<String> flightInfo = (List<String>) all_info.get(0);
-                double[] coordinates = (double[]) all_info.get(1);
-                Flight flight = FlightFactory.create(flightInfo, coordinates);
-                Flights.add(flight);
+                if (!flightData.getJSONObject("flight").isNull("iata") &&
+                        !flightData.isNull("airline") &&
+                        !flightData.getJSONObject("airline").isNull("name") &&
+                        !flightData.getJSONObject("arrival").isNull("airport") &&
+                        !flightData.getJSONObject("departure").isNull("airport")) {
+                    List<Object> all_info = getFlightString(flightData);
+                    List<String> flightInfo = (List<String>) all_info.get(0);
+                    double[] coordinates = (double[]) all_info.get(1);
+                    Flight flight = FlightFactory.create(flightInfo, coordinates);
+                    Flights.add(flight);
+                }
             }
             return Flights;
         }
@@ -214,6 +222,8 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
      */
 
     public static void main(String[] args) {
+//        List<Flight> randoFLightTest = getRandomFlights();
+        getFlightsFromURL("https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_status=" + "active");
 //        Flight flight = IATA_DATE("AC8880", "2024-11-27");
 //        System.out.println("Flight Details:");
 //        System.out.println("Flight Number: " + flight.getFlightNumber());
