@@ -1,4 +1,5 @@
 package entities;
+
 import java.util.List;
 
 /**
@@ -13,20 +14,20 @@ public class Map {
     }
 
     // Getters
-    public List<Flight> getFlightList() {
+    public final List<Flight> getFlightList() {
         return flightList;
     }
 
     // Setters
-//    public void addFlight(Flight flight) {
-//        if (flightList != null && flight != null) {
-//            for (Flight existingFlight : flightList) {
-//                if (existingFlight.getFlightNumber().equalsIgnoreCase(flight.getFlightNumber())) {
-//                    return; // Flight is already in the list, so we skip adding
-//                }
-//            }
-//            flightList.add(flight); // No duplicate found, so add the flight
-//        }
-//    }
+    //    public void addFlight(Flight flight) {
+    //        if (flightList != null && flight != null) {
+    //            for (Flight existingFlight : flightList) {
+    //                if (existingFlight.getFlightNumber().equalsIgnoreCase(flight.getFlightNumber())) {
+    //                    return; // Flight is already in the list, so we skip adding
+    //                }
+    //            }
+    //            flightList.add(flight); // No duplicate found, so add the flight
+    //        }
+    //    }
 
 }
