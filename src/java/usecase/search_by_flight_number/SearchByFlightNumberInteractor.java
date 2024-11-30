@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import entities.Flight;
 
 /**
- * The search_by_flight_number Interactor.
+ * The SearchByFlightNumber Interactor.
  */
 public class SearchByFlightNumberInteractor implements SearchByFlightNumberInputBoundary {
 
@@ -13,7 +13,7 @@ public class SearchByFlightNumberInteractor implements SearchByFlightNumberInput
     private final SearchByFlightNumberOutputBoundary searchByFlightNumberPresenter;
 
     public SearchByFlightNumberInteractor(SearchByFlightNumberDataAccessInterface flightDataAccessObject,
-                                       SearchByFlightNumberOutputBoundary searchByFlightNumberPresenter) {
+                                          SearchByFlightNumberOutputBoundary searchByFlightNumberPresenter) {
         this.flightDataAccessObject = flightDataAccessObject;
         this.searchByFlightNumberPresenter = searchByFlightNumberPresenter;
     }

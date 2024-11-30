@@ -3,7 +3,7 @@ package usecase.search_by_flight_number;
 import entities.Flight;
 
 /**
- * Output Data for the SearchByAirline Use Case.
+ * Output Data for the SearchByFlightNumber Use Case.
  */
 public class SearchByFlightNumberOutputData {
 
@@ -26,19 +26,20 @@ public class SearchByFlightNumberOutputData {
         return errorMessage;
     }
 
+    // Getters with null checks
     public final String getFlightNumber() {
-        return filteredFlight.getFlightNumber();
+        return (filteredFlight != null) ? filteredFlight.getFlightNumber() : null;
     }
 
     public final String getDepartureTime() {
-        return filteredFlight.getScheduledDepartureTime();
+        return (filteredFlight != null) ? filteredFlight.getScheduledDepartureTime() : null;
     }
 
     public final String getArrivalTime() {
-        return filteredFlight.getScheduledArrivalTime();
+        return (filteredFlight != null) ? filteredFlight.getScheduledArrivalTime() : null;
     }
 
     public final String getStatus() {
-        return filteredFlight.getStatus();
+        return (filteredFlight != null) ? filteredFlight.getStatus() : null;
     }
 }
