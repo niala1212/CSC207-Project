@@ -9,9 +9,9 @@ import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import adapters.SearchByFlightNumber.SearchByFlightNumberController;
-import adapters.SearchByFlightNumber.SearchByFlightNumberState;
-import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+import adapters.search_by_flight_number.SearchByFlightNumberController;
+import adapters.search_by_flight_number.SearchByFlightNumberState;
+import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**

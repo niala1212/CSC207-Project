@@ -2,7 +2,7 @@ package app.gui.SearchByArrivalAirportFrames;
 
 import javax.swing.*;
 import java.awt.*;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportState;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportState;
 
 public class ArrivalAirportFlightDetailsFrame extends JFrame {
 

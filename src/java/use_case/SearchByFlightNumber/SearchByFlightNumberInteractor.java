@@ -4,7 +4,7 @@ import entities.Flight;
 import java.time.LocalDate;
 
 /**
- * The SearchByFlightNumber Interactor.
+ * The search_by_flight_number Interactor.
  */
 public class SearchByFlightNumberInteractor implements SearchByFlightNumberInputBoundary {
 

@@ -3,7 +3,7 @@ package use_case.SearchByFlightNumber;
 import entities.Flight;
 
 /**
- * The interface of the DAO for the SearchByFlightNumber Use Case.
+ * The interface of the DAO for the search_by_flight_number Use Case.
  */
 public interface SearchByFlightNumberDataAccessInterface {
 

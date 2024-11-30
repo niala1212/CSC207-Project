@@ -1,8 +1,8 @@
 package app.gui;
 
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportController;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportPresenter;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportPresenter;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedPresenter;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
@@ -12,9 +12,9 @@ import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportPresenter;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
-import adapters.SearchByFlightNumber.SearchByFlightNumberController;
-import adapters.SearchByFlightNumber.SearchByFlightNumberPresenter;
-import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+import adapters.search_by_flight_number.SearchByFlightNumberController;
+import adapters.search_by_flight_number.SearchByFlightNumberPresenter;
+import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapPresenter;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;

@@ -1,14 +1,14 @@
-package adapters.SearchByArrivalAirport;
-
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputBoundary;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputData;
-import entities.Flight;
+package adapters.search_by_arrival_airport;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.Flight;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputBoundary;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputData;
+
 /**
- * Presenter for the Search By Airport Use Case.
+ * Presenter for the Search By Arrival Airport Use Case.
  */
 public class SearchByArrivalAirportPresenter implements SearchByArrivalAirportOutputBoundary {
 
@@ -20,14 +20,18 @@ public class SearchByArrivalAirportPresenter implements SearchByArrivalAirportOu
 
     @Override
     public void prepareSuccessView(SearchByArrivalAirportOutputData outputData) {
+        // Making the state from the viewModel
         SearchByArrivalAirportState state = viewModel.getState();
         List<Flight> arrivalFlights = outputData.getFilteredArrivalFlights();
         if (outputData.isUseCaseFailed()) {
-            // Case: No flights found
+            // Case: No flights found when Use Case fails
+            // Sets the state to an arrival error message and fires a property change
             state.setMessage(outputData.getArrivalErrorMessage());
             viewModel.firePropertyChanged("noFlightsError");
-        } else {
+        }
+        else {
             // Case: Flights found
+            // Preparing the success view by setting the state with the arrival flights
             String airportName = arrivalFlights.get(0).getArrivalAirport();
             List<String> flightNumbers = extractFlightNumbers(arrivalFlights);
 
@@ -35,8 +39,7 @@ public class SearchByArrivalAirportPresenter implements SearchByArrivalAirportOu
             state.setFlightNumbers(flightNumbers);
             state.setFlights(arrivalFlights);
 
-
-            // Update the ViewModel with the full list of flights
+            // Update the ViewModel with the full list of arrival flights by firing property change
             viewModel.firePropertyChanged("airportFlights");
         }
     }
@@ -48,12 +51,11 @@ public class SearchByArrivalAirportPresenter implements SearchByArrivalAirportOu
         // Case: error occured
         state.setMessage(outputData.getArrivalErrorMessage());
 
-        // Update the viewModel with the change property
+        // Update the viewModel with the property change
         viewModel.firePropertyChanged("noFlightsError");
     }
 
-
-    // Helper method to extract flight numbers
+    // Helper method to extract flight numbers in the list of flights
     private List<String> extractFlightNumbers(List<Flight> flights) {
         List<String> flightNumbers = new ArrayList<>();
         for (Flight flight : flights) {

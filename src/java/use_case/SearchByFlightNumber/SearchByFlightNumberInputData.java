@@ -1,7 +1,7 @@
 package use_case.SearchByFlightNumber;
 
 /**
- * The input data for the SearchByFlightNumber Use Case.
+ * The input data for the search_by_flight_number Use Case.
  */
 public class SearchByFlightNumberInputData {
     private final String flightNumber;  // (e.g., "187")

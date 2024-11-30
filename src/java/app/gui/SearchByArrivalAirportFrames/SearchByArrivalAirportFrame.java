@@ -6,9 +6,9 @@ import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportController;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportState;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportState;
 import net.miginfocom.swing.MigLayout;
 
 public class SearchByArrivalAirportFrame extends JFrame implements PropertyChangeListener {

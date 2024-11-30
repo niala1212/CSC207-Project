@@ -6,7 +6,7 @@ package use_case.SearchByFlightNumber;
 public interface SearchByFlightNumberInputBoundary {
 
     /**
-     * Execute the SearchByFlightNumber Use Case.
+     * Execute the search_by_flight_number Use Case.
      * @param SearchByFlightNumberInputData the input data for this use case
      */
     void execute(SearchByFlightNumberInputData SearchByFlightNumberInputData);

@@ -1,4 +1,4 @@
-package adapters.SearchByFlightNumber;
+package adapters.search_by_flight_number;
 
 import use_case.SearchByFlightNumber.SearchByFlightNumberOutputBoundary;
 import use_case.SearchByFlightNumber.SearchByFlightNumberOutputData;
@@ -16,6 +16,7 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
 
     @Override
     public void prepareSuccessView(SearchByFlightNumberOutputData response) {
+        // Making the state from the viewModel
         SearchByFlightNumberState state = searchByFlightNumberViewModel.getState();
 
         // Update the SearchByFlightNumberState with data from the response
@@ -24,16 +25,17 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
         state.setArrivalTime(response.getArrivalTime());
         state.setStatus(response.getStatus());
 
-        // Notify View to update the flight details
+        // Notify ViewModel to update the flight details by firing property change
         searchByFlightNumberViewModel.firePropertyChanged("flightDetails");
     }
 
     @Override
     public void prepareFailView(SearchByFlightNumberOutputData error) {
-        // Update the SearchViewModel to show the error message
+        // Update the SearchViewModel to show error message if failure
         SearchByFlightNumberState state = searchByFlightNumberViewModel.getState();
         state.setSearchError(error.getErrorMessage());
-        // Notify View to update the error message
+
+        // Notify ViewModel to update the error message
         searchByFlightNumberViewModel.firePropertyChanged("error");
     }
 }
