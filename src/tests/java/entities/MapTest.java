@@ -15,11 +15,12 @@ class MapTest {
         // Creating a Map object using the default constructor
         Map map = new Map();
 
+        // Assert that the flight list is initialized as an empty list
+        assertNotNull(map.getFlightList()); // flightList should no longer be null
+        assertTrue(map.getFlightList().isEmpty()); // it should be an empty list
+
         // Assert that the default Map ID is 0
         assertEquals(0, map.getMapID());
-
-        // Assert that the default flight list is null
-        assertNull(map.getFlightList());
 
         // Assert that the default zoom level is 0
         assertEquals(0, map.getZoomLevel());
@@ -79,16 +80,16 @@ class MapTest {
         assertTrue(map.getFlightList().contains(flight2));
     }
 
-    // Test case for adding a flight when the flight list is null
+    // Test case for adding a null flight to the map's flight list
     @Test
-    void testAddFlightWithNullFlightList() {
-        // Creating a Map object with a null flight list
-        Map map = new Map();
-        Flight flight = new Flight("AB123", "2024-11-26");
+    void testAddFlightWithNullFlight() {
+        // Creating a Map object with an empty flight list
+        List<Flight> flights = new ArrayList<>();
+        Map map = new Map(1, flights, 5, new double[]{40.7128, -74.0060});
 
-        // No exception should be thrown, but flight list should still be null
-        map.addFlight(flight);
-        assertNull(map.getFlightList());
+        // Adding a null flight should not increase the flight list size
+        map.addFlight(null);
+        assertEquals(0, map.getFlightList().size()); // flight list should still be empty
     }
 
     // Test case for updating the centre coordinates of the map
@@ -131,17 +132,5 @@ class MapTest {
 
         // Assert that the centre coordinates are set to null
         assertNull(map.getCentreCoordinates());
-    }
-
-    // Test case for adding a null flight to the map's flight list
-    @Test
-    void testAddFlightWithNullFlight() {
-        // Creating a Map object with an empty flight list
-        List<Flight> flights = new ArrayList<>();
-        Map map = new Map(1, flights, 5, new double[]{40.7128, -74.0060});
-
-        // Adding a null flight should not increase the flight list size
-        map.addFlight(null);
-        assertEquals(0, map.getFlightList().size());
     }
 }
