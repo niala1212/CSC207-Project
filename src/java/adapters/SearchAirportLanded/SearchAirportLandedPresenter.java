@@ -1,7 +1,7 @@
 package adapters.SearchAirportLanded;
 
-import use_case.SearchAirportLanded.SearchAirportLandedOutputBoundary;
-import use_case.SearchAirportLanded.SearchAirportLandedOutputData;
+import usecase.SearchAirportLanded.SearchAirportLandedOutputBoundary;
+import usecase.SearchAirportLanded.SearchAirportLandedOutputData;
 
 public class SearchAirportLandedPresenter implements SearchAirportLandedOutputBoundary {
     public SearchAirportLandedPresenter(SearchAirportLandedViewModel searchAirportLandedViewModel) {

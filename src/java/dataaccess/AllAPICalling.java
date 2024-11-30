@@ -16,12 +16,12 @@ import org.json.JSONObject;
 
 import entities.Flight;
 import entities.FlightFactory;
-import use_case.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
-import use_case.SearchByAirlineID.SearchByAirlineIDDataAccessInterface;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportDataAccessInterface;
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
-import use_case.SearchByFlightNumber.SearchByFlightNumberDataAccessInterface;
-import use_case.SeeWorldMap.SeeWorldMapDataAccessInterface;
+import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
+import usecase.search_by_airlineid.SearchByAirlineIDDataAccessInterface;
+import usecase.search_by_arrival_airport.SearchByArrivalAirportDataAccessInterface;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
+import usecase.search_by_flight_number.SearchByFlightNumberDataAccessInterface;
+import usecase.SeeWorldMap.SeeWorldMapDataAccessInterface;
 
 /**
  * This class implements various interfaces for searching flight data

@@ -1,7 +1,7 @@
 package adapters.search_by_flight_number;
 
-import use_case.SearchByFlightNumber.SearchByFlightNumberOutputBoundary;
-import use_case.SearchByFlightNumber.SearchByFlightNumberOutputData;
+import usecase.search_by_flight_number.SearchByFlightNumberOutputBoundary;
+import usecase.search_by_flight_number.SearchByFlightNumberOutputData;
 
 /**
  * The Presenter for the Search By Flight Number Use Case.

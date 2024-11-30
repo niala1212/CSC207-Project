@@ -1,7 +1,7 @@
 package adapters.search_by_airlineid;
 
-import use_case.SearchByAirlineID.SearchByAirlineIDInputBoundary;
-import use_case.SearchByAirlineID.SearchByAirlineIDInputData;
+import usecase.search_by_airlineid.SearchByAirlineIDInputBoundary;
+import usecase.search_by_airlineid.SearchByAirlineIDInputData;
 
 /**
  * The controller for the Search By Airline ID Use Case.

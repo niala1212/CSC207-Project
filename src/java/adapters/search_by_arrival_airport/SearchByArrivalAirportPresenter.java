@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Flight;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputBoundary;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputData;
+import usecase.search_by_arrival_airport.SearchByArrivalAirportOutputBoundary;
+import usecase.search_by_arrival_airport.SearchByArrivalAirportOutputData;
 
 /**
  * Presenter for the Search By Arrival Airport Use Case.

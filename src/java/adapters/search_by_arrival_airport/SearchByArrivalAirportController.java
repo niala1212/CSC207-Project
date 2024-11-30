@@ -1,7 +1,7 @@
 package adapters.search_by_arrival_airport;
 
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportInputBoundary;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportInputData;
+import usecase.search_by_arrival_airport.SearchByArrivalAirportInputBoundary;
+import usecase.search_by_arrival_airport.SearchByArrivalAirportInputData;
 
 /**
  * The controller for the Search By Arrival Airport Use Case.

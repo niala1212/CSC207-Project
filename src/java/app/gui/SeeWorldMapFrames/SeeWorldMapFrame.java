@@ -4,9 +4,7 @@ import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapState;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import entities.Flight;
-import entities.FlightFactory;
 import net.miginfocom.swing.MigLayout;
-import use_case.SeeWorldMap.SeeWorldMapOutputData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,9 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.lang.Math.*;
 import static java.lang.Math.PI;

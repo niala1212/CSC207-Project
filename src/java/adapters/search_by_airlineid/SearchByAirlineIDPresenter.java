@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Flight;
-import use_case.SearchByAirlineID.SearchByAirlineIDOutputBoundary;
-import use_case.SearchByAirlineID.SearchByAirlineIDOutputData;
+import usecase.search_by_airlineid.SearchByAirlineIDOutputBoundary;
+import usecase.search_by_airlineid.SearchByAirlineIDOutputData;
 
 /**
  * The Presenter for the Search By Airline ID Use Case.
