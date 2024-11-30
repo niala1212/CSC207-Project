@@ -1,20 +1,31 @@
-package app.gui.SearchByArrivalAirportFrames;
+package app.gui.search_by_arrival_airport_frames;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+
 import adapters.search_by_arrival_airport.SearchByArrivalAirportState;
 
+/**
+ * The window displaying flight details for a selected flight form the Search By Arrival Airport window.
+ */
 public class ArrivalAirportFlightDetailsFrame extends JFrame {
+    private static final int FRAME_WIDTH = 400;
+    private static final int FRAME_HEIGHT = 300;
 
     public ArrivalAirportFlightDetailsFrame(SearchByArrivalAirportState state, String flightNumber) {
         setTitle("Flight Details - " + flightNumber);
-        setSize(400, 300);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
         String flightDetails = state.getFlightDetailsString(flightNumber);
-        JLabel flightDetailsLabel = new JLabel("<html><body style='text-align: center;'>" +
-                flightDetails.replace("\n", "<br>") + "</body></html>");
+        JLabel flightDetailsLabel = new JLabel("<html><body style='text-align: center;'>"
+                + flightDetails.replace("\n", "<br>") + "</body></html>");
         flightDetailsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         flightDetailsLabel.setVerticalAlignment(SwingConstants.CENTER);
 

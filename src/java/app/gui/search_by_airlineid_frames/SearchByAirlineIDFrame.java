@@ -1,24 +1,46 @@
-package app.gui.SearchByAirlineIDFrames;
+package app.gui.search_by_airlineid_frames;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import adapters.search_by_airlineid.SearchByAirlineIDController;
-import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDState;
+import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**
  * The search box and result display for searching for flights by Airline IATA code.
  */
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeListener {
     // Constants for frame dimensions and font settings
-    static final int SEARCHBYAIRLINEID_WIDTH = 600;
-    static final int SEARCHBYAIRLINEID_HEIGHT = 600;
-    static final String SEARCHBYAIRLINEID_FONT = "Arial";
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 600;
+    private static final String FONT_NAME = "Arial";
+    private static final int FONT_SIZE_SEARCH = 20;
+    private static final int FONT_SIZE_BUTTON = 15;
+    private static final int FONT_SIZE_AIRLINE_NAME = 24;
+    private static final int FONT_SIZE_ERROR = 18;
+
+    private static final int GRID_LAYOUT_ROWS = 0;
+    private static final int GRID_LAYOUT_COLS = 2;
+    private static final int GRID_LAYOUT_HGAP = 10;
+    private static final int GRID_LAYOUT_VGAP = 10;
 
     // ViewModel to observe and reflect UI changes
     private final SearchByAirlineIDViewModel searchByAirlineIDViewModel;
@@ -39,6 +61,8 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
 
     /**
      * Constructor for the frame. Sets up the UI and binds listeners to the ViewModel.
+     * @param searchByAirlineIDController controller for Airline ID
+     * @param searchByAirlineIDViewModel viewModel for Airline ID
      */
     public SearchByAirlineIDFrame(SearchByAirlineIDController searchByAirlineIDController,
                                   SearchByAirlineIDViewModel searchByAirlineIDViewModel) {
@@ -54,7 +78,7 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
 
         // Configure frame settings
         setTitle("Flight Tracker Search By Airline ID");
-        setSize(SEARCHBYAIRLINEID_WIDTH, SEARCHBYAIRLINEID_HEIGHT);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setVisible(true);
         requestFocusInWindow();
     }
@@ -65,6 +89,8 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
         searchField.setForeground(Color.GRAY);
+        searchField.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE_SEARCH));
+
         // Add focus listeners for placeholder behavior
         searchField.addFocusListener(new FocusListener() {
             @Override
@@ -85,13 +111,12 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
                 }
             }
         });
-        // Configure and add the search field to the panel
+
         searchPanel.add(searchField, "height 40, grow");
-        searchField.setFont(new Font(SEARCHBYAIRLINEID_FONT, Font.PLAIN, 20));
 
         // Create and add a search button
         JButton searchButton = new JButton("Search");
-        searchButton.setFont(new Font(SEARCHBYAIRLINEID_FONT, Font.PLAIN, 15));
+        searchButton.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE_BUTTON));
         searchPanel.add(searchButton, "height 40, grow");
         // Bind button action to the controller's execute method
         searchButton.addActionListener(event -> searchByAirlineIDController.execute(searchField.getText()));
@@ -101,21 +126,25 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
 
     /**
      * Displays the results when a successful search occurs.
+     * @param state state for the AirlineID
      */
     private void displayResults(SearchByAirlineIDState state) {
-        resultPanel.removeAll(); // Clear any previous results
+        // Clears any previous results
+        resultPanel.removeAll();
 
         // Display the airline name
         airlineNameLabel.setText(state.getAirlineName());
-        airlineNameLabel.setFont(new Font(SEARCHBYAIRLINEID_FONT, Font.BOLD, 24));
+        airlineNameLabel.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE_AIRLINE_NAME));
         resultPanel.add(airlineNameLabel, BorderLayout.NORTH);
 
         // Panel for flight numbers in a grid
-        JPanel flightListPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+        JPanel flightListPanel = new JPanel(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS,
+                GRID_LAYOUT_HGAP, GRID_LAYOUT_VGAP));
         for (String flightNumber : state.getFlightNumbers()) {
             // Create a button for each flight number
             JButton flightButton = new JButton(flightNumber);
-            flightButton.addActionListener(event -> showFlightDetails(flightNumber)); // Open details on click
+            // Open details on click
+            flightButton.addActionListener(event -> showFlightDetails(flightNumber));
             flightListPanel.add(flightButton);
         }
 
@@ -130,14 +159,16 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
 
     /**
      * Displays an error message when the search fails.
+     * @param errorMessage error message for when search fails
      */
     private void displayError(String errorMessage) {
-        resultPanel.removeAll(); // Clear any previous results or errors
+        // Clears any previous results or errors
+        resultPanel.removeAll();
 
         // Configure and display the error message
         errorLabel.setText("<html><body style='text-align: center;'>" + errorMessage + "</body></html>");
         errorLabel.setForeground(Color.RED);
-        errorLabel.setFont(new Font(SEARCHBYAIRLINEID_FONT, Font.BOLD, 18));
+        errorLabel.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE_ERROR));
         resultPanel.add(errorLabel, BorderLayout.CENTER);
 
         // Refresh the result panel
@@ -147,13 +178,15 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
 
     /**
      * Opens a new frame to show details of a specific flight.
+     * @param flightNumber gives the flight number for a specific flight
      */
     private void showFlightDetails(String flightNumber) {
         String flightDetails = searchByAirlineIDViewModel.getState().getFlightDetailsString(flightNumber);
         if (flightDetails != null) {
             // Open the flight details frame if details are available
             new SearchByAirlineIDFlightDetailsFrame(searchByAirlineIDViewModel.getState(), flightNumber);
-        } else {
+        }
+        else {
             // Show an error dialog if details are not found
             JOptionPane.showMessageDialog(this, "Flight details not found for: " + flightNumber,
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -167,10 +200,11 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
     public void propertyChange(PropertyChangeEvent event) {
         SearchByAirlineIDState state = searchByAirlineIDViewModel.getState();
         if ("airlineFlights".equals(event.getPropertyName())) {
-            // Check if the operation was successful or resulted in an error
+            // Checks if the operation was successful or resulted in an error
             if (state.isSuccessful()) {
                 displayResults(state);
-            } else {
+            }
+            else {
                 displayError(state.getErrorMessage());
             }
         }

@@ -1,20 +1,45 @@
-package app.gui.SearchByArrivalAirportFrames;
+package app.gui.search_by_arrival_airport_frames;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
-import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportState;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * The search box and result display for searching for flights by Arrival Airport.
+ */
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class SearchByArrivalAirportFrame extends JFrame implements PropertyChangeListener {
-    static final int SEARCHBYAIRPORT_WIDTH = 600;
-    static final int SEARCHBYAIRPORT_HEIGHT = 600;
-    static final String SEARCHBYAIRPORT_FONT = "Arial";
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 600;
+    private static final String FONT_NAME = "Arial";
+    private static final int FONT_SIZE_SEARCH = 20;
+    private static final int FONT_SIZE_BUTTON = 15;
+    private static final int FONT_SIZE_AIRPORT_NAME = 24;
+    private static final int FONT_SIZE_ERROR = 18;
+
+    private static final int GRID_LAYOUT_ROWS = 0;
+    private static final int GRID_LAYOUT_COLS = 2;
+    private static final int GRID_LAYOUT_HGAP = 10;
+    private static final int GRID_LAYOUT_VGAP = 10;
 
     private final SearchByArrivalAirportViewModel searchByArrivalAirportViewModel;
     private final SearchByArrivalAirportController searchByArrivalAirportController;
@@ -37,7 +62,7 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
         add(resultPanel, BorderLayout.CENTER);
 
         setTitle("Flight Tracker Search By Arrival Airport");
-        setSize(SEARCHBYAIRPORT_WIDTH, SEARCHBYAIRPORT_HEIGHT);
+        setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setVisible(true);
         requestFocusInWindow();
     }
@@ -63,10 +88,10 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
             }
         });
         searchPanel.add(searchField, "height 40, grow");
-        searchField.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.PLAIN, 20));
+        searchField.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE_SEARCH));
 
         JButton searchButton = new JButton("Search");
-        searchButton.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.PLAIN, 15));
+        searchButton.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE_BUTTON));
         searchPanel.add(searchButton, "height 40, grow");
         searchButton.addActionListener(event -> {
             searchByArrivalAirportController.execute(searchField.getText());
@@ -79,10 +104,11 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
         resultPanel.removeAll();
 
         airportNameLabel.setText(state.getAirportName());
-        airportNameLabel.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.BOLD, 24));
+        airportNameLabel.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE_AIRPORT_NAME));
         resultPanel.add(airportNameLabel, BorderLayout.NORTH);
 
-        JPanel flightListPanel = new JPanel(new GridLayout(0, 2, 10, 10));
+        JPanel flightListPanel = new JPanel(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS,
+                GRID_LAYOUT_HGAP, GRID_LAYOUT_VGAP));
         for (String flightNumber : state.getFlightNumbers()) {
             JButton flightButton = new JButton(flightNumber);
             flightButton.addActionListener(event -> showFlightDetails(flightNumber));
@@ -101,7 +127,7 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
 
         errorLabel.setText("<html><body style='text-align: center;'>" + errorMessage + "</body></html>");
         errorLabel.setForeground(Color.RED);
-        errorLabel.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.BOLD, 18));
+        errorLabel.setFont(new Font(FONT_NAME, Font.BOLD, FONT_SIZE_ERROR));
         resultPanel.add(errorLabel, BorderLayout.CENTER);
 
         resultPanel.revalidate();
@@ -112,7 +138,8 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
         String flightDetails = searchByArrivalAirportViewModel.getState().getFlightDetailsString(flightNumber);
         if (flightDetails != null) {
             new ArrivalAirportFlightDetailsFrame(searchByArrivalAirportViewModel.getState(), flightNumber);
-        } else {
+        }
+        else {
             JOptionPane.showMessageDialog(this, "Flight details not found for: " + flightNumber,
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -124,7 +151,8 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
         if ("airportFlights".equals(event.getPropertyName())) {
             if (state.isSuccessful()) {
                 displayResults(state);
-            } else {
+            }
+            else {
                 displayError(state.getMessage());
             }
         }

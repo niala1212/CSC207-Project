@@ -13,8 +13,8 @@ import javax.swing.SwingConstants;
 
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SearchByAirlineID.SearchByAirlineIDController;
-import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
+import adapters.search_by_airlineid.SearchByAirlineIDController;
+import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
@@ -23,8 +23,8 @@ import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
-import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
-import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
+import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;
+import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
 import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import net.miginfocom.swing.MigLayout;
 
