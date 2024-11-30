@@ -17,7 +17,7 @@ public class Flight {
     private String estimatedArrivalTime;
     private String estimatedDepartureTime;
     //    ALL TIMES ARE GIVEN IN UTC
-    private double[] currentLocation;
+    private double[] currentLocation = null;
 
     public Flight(String flightNUmber, String flightDate) {
         this.flightNumber = flightNUmber;
@@ -98,8 +98,8 @@ public class Flight {
         return estimatedArrivalTime;
     }
 
-    public String getCoordinates() {
-        return currentLocation == null ? null : Arrays.toString(currentLocation);
+    public double[] getCoordinates() {
+        return currentLocation;
     }
 
     public String getFlightDate() {
