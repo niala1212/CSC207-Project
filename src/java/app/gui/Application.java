@@ -1,28 +1,26 @@
 package app.gui;
 
-import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
-import adapters.search_by_arrival_airport.SearchByArrivalAirportPresenter;
-import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
+import javax.swing.JFrame;
+
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedPresenter;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.search_by_airlineid.SearchByAirlineIDController;
-import adapters.search_by_airlineid.SearchByAirlineIDPresenter;
-import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportPresenter;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
-import adapters.search_by_flight_number.SearchByFlightNumberController;
-import adapters.search_by_flight_number.SearchByFlightNumberPresenter;
-import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapPresenter;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
-import data_access.All_API_Calling;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportDataAccessInterface;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportInputBoundary;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportInteractor;
-import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputBoundary;
+import adapters.search_by_airlineid.SearchByAirlineIDController;
+import adapters.search_by_airlineid.SearchByAirlineIDPresenter;
+import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportPresenter;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
+import adapters.search_by_flight_number.SearchByFlightNumberController;
+import adapters.search_by_flight_number.SearchByFlightNumberPresenter;
+import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
+import dataaccess.AllAPICalling;
 import use_case.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
 import use_case.SearchAirportLanded.SearchAirportLandedInputBoundary;
 import use_case.SearchAirportLanded.SearchAirportLandedInteractor;
@@ -31,6 +29,10 @@ import use_case.SearchByAirlineID.SearchByAirlineIDDataAccessInterface;
 import use_case.SearchByAirlineID.SearchByAirlineIDInputBoundary;
 import use_case.SearchByAirlineID.SearchByAirlineIDInteractor;
 import use_case.SearchByAirlineID.SearchByAirlineIDOutputBoundary;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportDataAccessInterface;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportInputBoundary;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportInteractor;
+import use_case.SearchByArrivalAirport.SearchByArrivalAirportOutputBoundary;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportInputBoundary;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportInteractor;
@@ -44,13 +46,20 @@ import use_case.SeeWorldMap.SeeWorldMapInputBoundary;
 import use_case.SeeWorldMap.SeeWorldMapInteractor;
 import use_case.SeeWorldMap.SeeWorldMapOutputBoundary;
 
-import javax.swing.*;
-
+/**
+ * The Application class is responsible for initializing the different use cases and presenting the GUI.
+ * It creates instances of various controllers, presenters, and view models and sets up the main menu UI.
+ * Connects the use cases with their respective UI components
+ */
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings",
+    "checkstyle:ClassFanOutComplexity"})
 public class Application {
     private final SearchByFlightNumberViewModel searchByFlightNumberViewModel = new SearchByFlightNumberViewModel();
     private final SearchByAirlineIDViewModel searchByAirlineIDViewModel = new SearchByAirlineIDViewModel();
-    private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel = new SearchByDepartureAirportViewModel();
-    private final SearchByArrivalAirportViewModel searchByArrivalAirportViewModel = new SearchByArrivalAirportViewModel();
+    private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel =
+            new SearchByDepartureAirportViewModel();
+    private final SearchByArrivalAirportViewModel searchByArrivalAirportViewModel =
+            new SearchByArrivalAirportViewModel();
     private final SearchAirportLandedViewModel searchAirportLandedViewModel = new SearchAirportLandedViewModel();
     private final SeeWorldMapViewModel seeWorldMapViewModel = new SeeWorldMapViewModel();
 
@@ -81,43 +90,47 @@ public class Application {
     }
 
     private SearchByFlightNumberController createSearchByFlightNumberUseCase() {
-        SearchByFlightNumberOutputBoundary outputBoundary = new SearchByFlightNumberPresenter(searchByFlightNumberViewModel);
-        SearchByFlightNumberDataAccessInterface dao = new All_API_Calling(); // DAO
+        SearchByFlightNumberOutputBoundary outputBoundary =
+                new SearchByFlightNumberPresenter(searchByFlightNumberViewModel);
+        SearchByFlightNumberDataAccessInterface dao = new AllAPICalling();
         SearchByFlightNumberInputBoundary interactor = new SearchByFlightNumberInteractor(dao, outputBoundary);
         return new SearchByFlightNumberController(interactor);
     }
 
     private SearchByAirlineIDController createSearchByAirlineIDUseCase() {
         SearchByAirlineIDOutputBoundary outputBoundary = new SearchByAirlineIDPresenter(searchByAirlineIDViewModel);
-        SearchByAirlineIDDataAccessInterface dao = new All_API_Calling(); // DAO
-        SearchByAirlineIDInputBoundary interactor = new SearchByAirlineIDInteractor(dao, outputBoundary); // Takes both
+        SearchByAirlineIDDataAccessInterface dao = new AllAPICalling();
+        SearchByAirlineIDInputBoundary interactor = new SearchByAirlineIDInteractor(dao, outputBoundary);
         return new SearchByAirlineIDController(interactor);
     }
 
     private SearchByDepartureAirportController createSearchByDepartureUseCase() {
-        SearchByDepartureAirportOutputBoundary outputBoundary = new SearchByDepartureAirportPresenter(searchByDepartureAirportViewModel);
-        SearchByDepartureAirportDataAccessInterface dao = new All_API_Calling(); // DAO
+        SearchByDepartureAirportOutputBoundary outputBoundary =
+                new SearchByDepartureAirportPresenter(searchByDepartureAirportViewModel);
+        SearchByDepartureAirportDataAccessInterface dao = new AllAPICalling();
         SearchByDepartureAirportInputBoundary interactor = new SearchByDepartureAirportInteractor(dao, outputBoundary);
         return new SearchByDepartureAirportController(interactor);
     }
 
     private SearchByArrivalAirportController createSearchByArrivalAirportUseCase() {
-        SearchByArrivalAirportOutputBoundary outputBoundary = new SearchByArrivalAirportPresenter(searchByArrivalAirportViewModel);
-        SearchByArrivalAirportDataAccessInterface dao = new All_API_Calling(); // DAO
+        SearchByArrivalAirportOutputBoundary outputBoundary =
+                new SearchByArrivalAirportPresenter(searchByArrivalAirportViewModel);
+        SearchByArrivalAirportDataAccessInterface dao = new AllAPICalling();
         SearchByArrivalAirportInputBoundary interactor = new SearchByArrivalAirportInteractor(dao, outputBoundary);
         return new SearchByArrivalAirportController(interactor);
     }
 
     private SearchAirportLandedController createSearchAirportLandedUseCase() {
-        SearchAirportLandedOutputBoundary outputBoundary = new SearchAirportLandedPresenter(searchAirportLandedViewModel);
-        SearchAirportLandedDataAccessInterface dao = new All_API_Calling(); // DAO
+        SearchAirportLandedOutputBoundary outputBoundary =
+                new SearchAirportLandedPresenter(searchAirportLandedViewModel);
+        SearchAirportLandedDataAccessInterface dao = new AllAPICalling();
         SearchAirportLandedInputBoundary interactor = new SearchAirportLandedInteractor(dao, outputBoundary);
         return new SearchAirportLandedController(interactor);
     }
 
     private SeeWorldMapController createSeeWorldMapUseCase() {
         SeeWorldMapOutputBoundary outputBoundary = new SeeWorldMapPresenter(seeWorldMapViewModel);
-        SeeWorldMapDataAccessInterface dao = new All_API_Calling();
+        SeeWorldMapDataAccessInterface dao = new AllAPICalling();
         SeeWorldMapInputBoundary interactor = new SeeWorldMapInteractor(dao, outputBoundary);
         return new SeeWorldMapController(interactor);
     }
