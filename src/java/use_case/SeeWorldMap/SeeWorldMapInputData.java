@@ -8,7 +8,7 @@ public class SeeWorldMapInputData {
     private final String reset;
 
     public SeeWorldMapInputData(String reset) {
-        this.reset = reset;
+        this.reset = reset != null ? reset : "";  // Default to empty string if null
     }
 
     public String getReset() {

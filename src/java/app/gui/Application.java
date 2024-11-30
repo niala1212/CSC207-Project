@@ -15,6 +15,9 @@ import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
 import adapters.SearchByFlightNumber.SearchByFlightNumberController;
 import adapters.SearchByFlightNumber.SearchByFlightNumberPresenter;
 import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+import adapters.SeeWorldMap.SeeWorldMapController;
+import adapters.SeeWorldMap.SeeWorldMapPresenter;
+import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import data_access.All_API_Calling;
 import use_case.SearchByArrivalAirport.SearchByArrivalAirportDataAccessInterface;
 import use_case.SearchByArrivalAirport.SearchByArrivalAirportInputBoundary;
@@ -36,6 +39,10 @@ import use_case.SearchByFlightNumber.SearchByFlightNumberDataAccessInterface;
 import use_case.SearchByFlightNumber.SearchByFlightNumberInputBoundary;
 import use_case.SearchByFlightNumber.SearchByFlightNumberInteractor;
 import use_case.SearchByFlightNumber.SearchByFlightNumberOutputBoundary;
+import use_case.SeeWorldMap.SeeWorldMapDataAccessInterface;
+import use_case.SeeWorldMap.SeeWorldMapInputBoundary;
+import use_case.SeeWorldMap.SeeWorldMapInteractor;
+import use_case.SeeWorldMap.SeeWorldMapOutputBoundary;
 
 import javax.swing.*;
 
@@ -45,6 +52,7 @@ public class Application {
     private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel = new SearchByDepartureAirportViewModel();
     private final SearchByArrivalAirportViewModel searchByArrivalAirportViewModel = new SearchByArrivalAirportViewModel();
     private final SearchAirportLandedViewModel searchAirportLandedViewModel = new SearchAirportLandedViewModel();
+    private final SeeWorldMapViewModel seeWorldMapViewModel = new SeeWorldMapViewModel();
 
     public Application() {
         // Create use cases
@@ -53,6 +61,7 @@ public class Application {
         final SearchByDepartureAirportController searchByDepartureAirportController = createSearchByDepartureUseCase();
         final SearchByArrivalAirportController searchByArrivalAirportController = createSearchByArrivalAirportUseCase();
         final SearchAirportLandedController searchAirportLandedController = createSearchAirportLandedUseCase();
+        final SeeWorldMapController seeWorldMapController = createSeeWorldMapUseCase();
 
         // Initialize menu
         JFrame menu = new Menu(
@@ -65,7 +74,9 @@ public class Application {
                 searchByArrivalAirportViewModel,
                 searchByArrivalAirportController,
                 searchAirportLandedViewModel,
-                searchAirportLandedController
+                searchAirportLandedController,
+                seeWorldMapViewModel,
+                seeWorldMapController
         );
     }
 
@@ -95,7 +106,6 @@ public class Application {
         SearchByArrivalAirportDataAccessInterface dao = new All_API_Calling(); // DAO
         SearchByArrivalAirportInputBoundary interactor = new SearchByArrivalAirportInteractor(dao, outputBoundary);
         return new SearchByArrivalAirportController(interactor);
-
     }
 
     private SearchAirportLandedController createSearchAirportLandedUseCase() {
@@ -103,6 +113,12 @@ public class Application {
         SearchAirportLandedDataAccessInterface dao = new All_API_Calling(); // DAO
         SearchAirportLandedInputBoundary interactor = new SearchAirportLandedInteractor(dao, outputBoundary);
         return new SearchAirportLandedController(interactor);
+    }
 
+    private SeeWorldMapController createSeeWorldMapUseCase() {
+        SeeWorldMapOutputBoundary outputBoundary = new SeeWorldMapPresenter(seeWorldMapViewModel);
+        SeeWorldMapDataAccessInterface dao = new All_API_Calling();
+        SeeWorldMapInputBoundary interactor = new SeeWorldMapInteractor(dao, outputBoundary);
+        return new SeeWorldMapController(interactor);
     }
 }
