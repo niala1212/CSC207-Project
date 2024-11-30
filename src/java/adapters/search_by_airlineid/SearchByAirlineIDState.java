@@ -1,4 +1,4 @@
-package adapters.search_by_arrival_airport;
+package adapters.search_by_airlineid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,20 +6,20 @@ import java.util.List;
 import entities.Flight;
 
 /**
- * State for the Search By Arrival Airport Use Case.
+ * The state for the Search By Airline ID View Model.
  */
-public class SearchByArrivalAirportState {
+public class SearchByAirlineIDState {
 
-    private String airportName = "";
+    private String airlineName = "";
     private List<String> flightNumbers = new ArrayList<>();
 
     // Full flight data
     private List<Flight> flights = new ArrayList<>();
-    private String message;
+    private String errorMessage;
 
     // Getters for UI access
-    public final String getAirportName() {
-        return airportName;
+    public final String getAirlineName() {
+        return airlineName;
     }
 
     public final List<String> getFlightNumbers() {
@@ -30,12 +30,13 @@ public class SearchByArrivalAirportState {
         return flights;
     }
 
-    public final String getMessage() {
-        return message;
+    public final String getErrorMessage() {
+        return errorMessage;
     }
 
-    public final void setAirportName(String airportName) {
-        this.airportName = airportName;
+    // Setters
+    public final void setAirlineName(String airlineName) {
+        this.airlineName = airlineName;
     }
 
     public final void setFlightNumbers(List<String> flightNumbers) {
@@ -46,8 +47,8 @@ public class SearchByArrivalAirportState {
         this.flights = flights;
     }
 
-    public final void setMessage(String message) {
-        this.message = message;
+    public final void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -62,13 +63,13 @@ public class SearchByArrivalAirportState {
                 return flight.toString();
             }
         }
+
         // Returns null if no flight is found
         return null;
     }
 
-    // Success checker
+    // Success Checker
     public final boolean isSuccessful() {
-        return message == null;
+        return errorMessage == null;
     }
-
 }

@@ -8,10 +8,10 @@ import adapters.AbstractViewModel;
 public class SearchByArrivalAirportViewModel extends AbstractViewModel<SearchByArrivalAirportState> {
 
     public SearchByArrivalAirportViewModel() {
-        // This is the nitial state when searching by arrival airport
+        // This is the initial state when searching by arrival airport
         super(ViewState.SEARCHBYAIRPORTID);
 
-        // Seting the initial state
+        // Seting the initial data state
         setState(new SearchByArrivalAirportState());
     }
 }

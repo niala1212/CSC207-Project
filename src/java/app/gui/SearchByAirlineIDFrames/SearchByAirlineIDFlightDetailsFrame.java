@@ -2,7 +2,7 @@ package app.gui.SearchByAirlineIDFrames;
 
 import javax.swing.*;
 import java.awt.*;
-import adapters.SearchByAirlineID.SearchByAirlineIDState;
+import adapters.search_by_airlineid.SearchByAirlineIDState;
 
 /**
  * The window displaying flight details for a selected flight form the Sear By Airline ID window.

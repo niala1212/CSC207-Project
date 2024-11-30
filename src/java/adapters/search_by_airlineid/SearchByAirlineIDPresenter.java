@@ -1,11 +1,11 @@
-package adapters.SearchByAirlineID;
-
-import use_case.SearchByAirlineID.SearchByAirlineIDOutputBoundary;
-import use_case.SearchByAirlineID.SearchByAirlineIDOutputData;
-import entities.Flight;
+package adapters.search_by_airlineid;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.Flight;
+import use_case.SearchByAirlineID.SearchByAirlineIDOutputBoundary;
+import use_case.SearchByAirlineID.SearchByAirlineIDOutputData;
 
 /**
  * The Presenter for the Search By Airline ID Use Case.
@@ -28,12 +28,14 @@ public class SearchByAirlineIDPresenter implements SearchByAirlineIDOutputBounda
 
             // Update the ViewModel with the changed property
             searchByAirlineIDViewModel.firePropertyChanged("noFlightsError");
-        } else {
+        }
+        else {
             // Case: Flights found
-            String airlineName = flights.get(0).getAirline(); // Example: Use the departure airport as airport name
+            // Example: Use the departure airport as airport name
+            String airlineName = flights.get(0).getAirline();
             List<String> flightNumbers = extractFlightNumbers(flights);
 
-            //Update the state
+            // Update the state
             state.setAirlineName(airlineName);
             state.setFlightNumbers(flightNumbers);
             state.setFlights(flights);

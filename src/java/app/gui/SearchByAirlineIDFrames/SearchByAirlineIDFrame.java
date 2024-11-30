@@ -6,9 +6,9 @@ import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
-import adapters.SearchByAirlineID.SearchByAirlineIDController;
-import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
-import adapters.SearchByAirlineID.SearchByAirlineIDState;
+import adapters.search_by_airlineid.SearchByAirlineIDController;
+import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
+import adapters.search_by_airlineid.SearchByAirlineIDState;
 import net.miginfocom.swing.MigLayout;
 
 /**
