@@ -1,4 +1,4 @@
-package app.gui.SearchByDepartureAirportFrames;
+package app.gui.search_by_departure_airport_frames;
 
 import java.awt.BorderLayout;
 
@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportState;
+import adapters.search_by_departure_airport.SearchByDepartureAirportState;
 
 /**
  * The frame for displaying the flight information for a specific flight in the departures view.

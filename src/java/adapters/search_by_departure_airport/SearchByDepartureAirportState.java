@@ -1,4 +1,4 @@
-package adapters.SearchByDepartureAirport;
+package adapters.search_by_departure_airport;
 
 import java.util.ArrayList;
 import java.util.List;

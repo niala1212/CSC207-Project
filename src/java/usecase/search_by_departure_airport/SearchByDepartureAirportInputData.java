@@ -1,4 +1,4 @@
-package usecase.SearchByDepartureAirport;
+package usecase.search_by_departure_airport;
 
 /**
  * Input Data for the Search Departures By Airport Use Case.
