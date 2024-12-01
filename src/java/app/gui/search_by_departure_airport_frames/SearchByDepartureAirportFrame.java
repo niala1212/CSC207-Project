@@ -36,6 +36,8 @@ public class SearchByDepartureAirportFrame extends JFrame implements PropertyCha
     private static final int FONT_SIZE_BUTTON = 15;
     private static final int FONT_SIZE_AIRPORT_NAME = 24;
     private static final int FONT_SIZE_ERROR = 18;
+    private static final int SEARCH_WINDOW_WIDTH = 400;
+    private static final int SEARCH_WINDOW_HEIGHT = 40;
 
     private static final int GRID_LAYOUT_ROWS = 0;
     private static final int GRID_LAYOUT_COLS = 2;
@@ -72,6 +74,8 @@ public class SearchByDepartureAirportFrame extends JFrame implements PropertyCha
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
         searchField.setForeground(Color.GRAY);
+        searchField.setFont(new Font(FONT_NAME, Font.PLAIN, FONT_SIZE_SEARCH));
+        searchField.setPreferredSize(new java.awt.Dimension(SEARCH_WINDOW_WIDTH, SEARCH_WINDOW_HEIGHT));
         searchField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
