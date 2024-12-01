@@ -1,7 +1,8 @@
 package usecase.SearchByDepartureAirport;
 
-import entities.Flight;
 import java.util.List;
+
+import entities.Flight;
 
 /**
  * Data Access Interface for the Search Departures By Airport Use Case.
