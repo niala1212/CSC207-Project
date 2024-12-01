@@ -17,11 +17,11 @@ import org.json.JSONObject;
 import entities.Flight;
 import entities.FlightFactory;
 import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
+import usecase.SeeWorldMap.SeeWorldMapDataAccessInterface;
 import usecase.search_by_airlineid.SearchByAirlineIDDataAccessInterface;
 import usecase.search_by_arrival_airport.SearchByArrivalAirportDataAccessInterface;
-import usecase.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
 import usecase.search_by_flight_number.SearchByFlightNumberDataAccessInterface;
-import usecase.SeeWorldMap.SeeWorldMapDataAccessInterface;
 
 /**
  * This class implements various interfaces for searching flight data
@@ -33,8 +33,9 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
         SeeWorldMapDataAccessInterface {
 
     // private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9";
-    private static final String ACCESSKEY = "977c40fee275141530975467ffa33986";
+    // private static final String ACCESSKEY = "977c40fee275141530975467ffa33986";
     // private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
+    private static final String ACCESSKEY = "10f6eb4582080b68c57443f13f40d279";
 
     /**
      * Makes an HTTP GET request to the given API URL and returns the data as a JSON array.
@@ -43,7 +44,7 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
      * @return A JSONArray containing the API response data.
      */
     @SuppressWarnings({"checkstyle:ReturnCount", "checkstyle:SuppressWarnings",
-        "checkstyle:CatchParameterName", "checkstyle:IllegalCatch"})
+            "checkstyle:CatchParameterName", "checkstyle:IllegalCatch"})
     public static JSONArray callAPI(String apiUrl) {
         try {
             URL url = new URL(apiUrl);
@@ -77,7 +78,7 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
     }
 
     @SuppressWarnings({"checkstyle:MultipleStringLiterals", "checkstyle:SuppressWarnings",
-        "checkstyle:LocalVariableName"})
+            "checkstyle:LocalVariableName"})
     @Override
     public Flight getFlightByFlightNumber(String flightNumber, String flightDate) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_iata="
@@ -106,10 +107,11 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
 
     /**
      * Retrieves all flights departing from a specific airport.
+     *
      * @param AirportID The IATA code for the arrival airport.
      * @return A list of landed flights at the specified airport.
      */
-    public List<Flight> getDepartureFlights(String AirportID) {
+    public List<Flight> getDepartureFlightsByAirport(String AirportID) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&dep_iata=" + AirportID;
         return getFlightsFromUrl(apiUrl);
     }
@@ -238,9 +240,9 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
      * a `Flight` object is created using the retrieved details.
      *
      * @param flightNumber the IATA code of the flight (e.g., "AC8880")
-     * @param flightDate the date of the flight in the format "yyyy-MM-dd" (e.g., "2024-11-27")
+     * @param flightDate   the date of the flight in the format "yyyy-MM-dd" (e.g., "2024-11-27")
      * @return a `Flight` object containing the flight details such as flight number, airline, departure,
-     *         and arrival information, or `null` if no matching flight data is found.
+     * and arrival information, or `null` if no matching flight data is found.
      */
     public static Flight iatadate(String flightNumber, String flightDate) {
         String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&flight_iata=" + flightNumber;
@@ -262,6 +264,7 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
     /**
      * The main function here is just made to test if the code works.
      * This imitates the testcase where you give a flight number and date
+     *
      * @param args for getFlightsFromURL
      */
 
@@ -280,17 +283,6 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
 
     @Override
     public List<Flight> getLandedFlightsByAirport(String airportCode) {
-        return List.of();
-    }
-
-    /**
-     * Retrieves all flights departing at the given airport code.
-     *
-     * @param airportCode the IATA code of the airport
-     * @return a list of flights for the given airport
-     */
-    @Override
-    public List<Flight> getDepartureFlightsByAirport(String airportCode) {
         return List.of();
     }
 }

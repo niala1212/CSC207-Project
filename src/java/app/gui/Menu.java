@@ -23,6 +23,7 @@ import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
 import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
+import app.gui.SearchByDepartureAirportFrames.SearchByDepartureAirportFrame;
 import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
 import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;
@@ -60,6 +61,7 @@ public class Menu extends JFrame {
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
     private final JButton searchByAirlineB = new JButton("Search By Airline");
     private final JButton searchByArrivalAirportB = new JButton("Search By Arrival Airport");
+    private final JButton searchByDepartureAirportB = new JButton("Search By Departure Airport");
     private final JButton searchByAirportB = new JButton("Search By Airport");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
@@ -146,6 +148,14 @@ public class Menu extends JFrame {
             // Opens the SearchByAirlineIDFrame to search for flights by airport
             SearchByArrivalAirportFrame searchByArrivalAirportFrame = new SearchByArrivalAirportFrame(
                     searchByArrivalAirportController, searchByArrivalAirportViewModel
+            );
+        });
+
+        searchByDepartureAirportB.setFont(buttonFont);
+        panel.add(searchByDepartureAirportB, "span, grow");
+        searchByDepartureAirportB.addActionListener(event -> {
+            SearchByDepartureAirportFrame searchByDepartureAirportFrame = new SearchByDepartureAirportFrame(
+                    searchByDepartureAirportViewModel, searchByDepartureAirportController
             );
         });
 
