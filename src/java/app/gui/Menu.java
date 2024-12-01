@@ -13,20 +13,20 @@ import javax.swing.SwingConstants;
 
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDController;
 import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
+import adapters.search_by_departure_airport.SearchByDepartureAirportController;
+import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
 import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
-import app.gui.SearchByDepartureAirportFrames.SearchByDepartureAirportFrame;
 import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
 import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;
+import app.gui.search_by_departure_airport_frames.SearchByDepartureAirportFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**

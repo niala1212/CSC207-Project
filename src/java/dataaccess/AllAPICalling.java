@@ -17,10 +17,10 @@ import org.json.JSONObject;
 import entities.Flight;
 import entities.FlightFactory;
 import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
-import usecase.SearchByDepartureAirport.SearchByDepartureAirportDataAccessInterface;
 import usecase.SeeWorldMap.SeeWorldMapDataAccessInterface;
 import usecase.search_by_airlineid.SearchByAirlineIDDataAccessInterface;
 import usecase.search_by_arrival_airport.SearchByArrivalAirportDataAccessInterface;
+import usecase.search_by_departure_airport.SearchByDepartureAirportDataAccessInterface;
 import usecase.search_by_flight_number.SearchByFlightNumberDataAccessInterface;
 
 /**

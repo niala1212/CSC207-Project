@@ -3,8 +3,8 @@ package app.gui;
 import adapters.AbstractState;
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
+import adapters.search_by_departure_airport.SearchByDepartureAirportController;
+import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

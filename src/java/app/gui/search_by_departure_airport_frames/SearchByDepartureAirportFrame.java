@@ -1,4 +1,4 @@
-package app.gui.SearchByDepartureAirportFrames;
+package app.gui.search_by_departure_airport_frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,9 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportState;
-import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
+import adapters.search_by_departure_airport.SearchByDepartureAirportController;
+import adapters.search_by_departure_airport.SearchByDepartureAirportState;
+import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
 import net.miginfocom.swing.MigLayout;
 
 /**

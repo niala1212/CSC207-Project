@@ -1,11 +1,11 @@
-package adapters.SearchByDepartureAirport;
+package adapters.search_by_departure_airport;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import entities.Flight;
-import usecase.SearchByDepartureAirport.SearchByDepartureAirportOutputBoundary;
-import usecase.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
+import usecase.search_by_departure_airport.SearchByDepartureAirportOutputBoundary;
+import usecase.search_by_departure_airport.SearchByDepartureAirportOutputData;
 
 /**
  * Presenter for the Departures by Airport use case.
