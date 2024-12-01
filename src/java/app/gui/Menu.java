@@ -21,8 +21,11 @@ import adapters.SearchByArrivalAirport.SearchByArrivalAirportController;
 import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
 import adapters.SearchByFlightNumber.SearchByFlightNumberController;
 import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
+import adapters.SeeWorldMap.SeeWorldMapController;
+import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
 import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
+import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -48,6 +51,8 @@ public class Menu extends JFrame {
     private final SearchByArrivalAirportController searchByArrivalAirportController;
     private final SearchAirportLandedViewModel searchAirportLandedViewModel;
     private final SearchAirportLandedController searchAirportLandedController;
+    private final SeeWorldMapViewModel seeWorldMapViewModel;
+    private final SeeWorldMapController seeWorldMapController;
 
     // UI Components
     private final JLabel title = new JLabel("Welcome to the Flight Tracker!");
@@ -70,7 +75,9 @@ public class Menu extends JFrame {
                 SearchByArrivalAirportViewModel searchByArrivalAirportViewModel,
                 SearchByArrivalAirportController searchByArrivalAirportController,
                 SearchAirportLandedViewModel searchAirportLandedViewModel,
-                SearchAirportLandedController searchAirportLandedController) throws HeadlessException {
+                SearchAirportLandedController searchAirportLandedController,
+                SeeWorldMapViewModel seeWorldMapViewModel,
+                SeeWorldMapController seeWorldMapController) throws HeadlessException {
         // Initialize controllers and view models
         this.searchByFlightNumberViewModel = searchByFlightNumberViewModel;
         this.searchByFlightNumberController = searchByFlightNumberController;
@@ -82,6 +89,8 @@ public class Menu extends JFrame {
         this.searchByArrivalAirportController = searchByArrivalAirportController;
         this.searchAirportLandedViewModel = searchAirportLandedViewModel;
         this.searchAirportLandedController = searchAirportLandedController;
+        this.seeWorldMapViewModel = seeWorldMapViewModel;
+        this.seeWorldMapController = seeWorldMapController;
 
         // Set the window title and size
         setTitle("Flight Tracker Application");
@@ -152,7 +161,10 @@ public class Menu extends JFrame {
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
-            // Placeholder for world map functionality
+//             Placeholder for world map functionality
+            SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
+                    seeWorldMapController, seeWorldMapViewModel
+            );
         });
 
         // Add the panel to the center of the frame

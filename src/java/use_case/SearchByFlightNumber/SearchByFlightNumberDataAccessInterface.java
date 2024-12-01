@@ -10,7 +10,7 @@ public interface SearchByFlightNumberDataAccessInterface {
     /**
      * Retrieves the flight from the system given the IATA flight number.
      * @param flightNumber the IATA flight number
-     * @return a list of flights
+     * @return a flight
      */
     Flight getFlightByFlightNumber(String flightNumber, String flightDate);
 }
