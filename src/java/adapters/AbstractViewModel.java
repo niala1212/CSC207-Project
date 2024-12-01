@@ -6,15 +6,28 @@ import java.beans.PropertyChangeSupport;
 /**
  * The ViewModel class that holds the data and provides the functionality to fire property changes.
  * The class is generic to support different types of state for different views.
+ * @param <T> holds the data state
  */
 public abstract class AbstractViewModel<T> {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    private T state; // This will hold the data state, such as SearchByFlightNumberState
+    // Holds the data state, such as SearchByFlightNumberState
+    private T state;
 
-    private ViewState viewState; // Enum representing the current view state (e.g., SEARCHBYFLIGHT)
+    // Enum representing the current view state (e.g., SEARCHBYFLIGHT)
+    private ViewState viewState;
 
+    /**
+     * Enum representing the different states of the application's view.
+     * <ul>
+     *     <li>{@link #SEARCHBYFLIGHT} - Search by flight number.</li>
+     *     <li>{@link #SEARCHBYAIRPORTID} - Search by airport ID.</li>
+     *     <li>{@link #SEARCHBYAIRLINEID} - Search by airline ID.</li>
+     *     <li>{@link #WORLDMAP} - Display world map.</li>
+     *     <li>{@link #MENU} - Show the main menu.</li>
+     * </ul>
+     */
     public enum ViewState {
         SEARCHBYFLIGHT,
         SEARCHBYAIRPORTID,
@@ -52,7 +65,7 @@ public abstract class AbstractViewModel<T> {
 
     /**
      * Returns the current view state (the enum representing the view).
-     * @return the current view state
+     * @return current view state
      */
     public ViewState getViewState() {
         return this.viewState;
@@ -60,8 +73,8 @@ public abstract class AbstractViewModel<T> {
 
     /**
      * Sets the current view state.
-     * Fires a property change event to notify listeners.
-     * @param newViewState the new view state to set
+     * Fires a property change event to notify listeners of change.
+     * @param newViewState the new view state
      */
     public void setViewState(ViewState newViewState) {
         ViewState oldViewState = this.viewState;
@@ -79,7 +92,7 @@ public abstract class AbstractViewModel<T> {
 
     /**
      * Adds a PropertyChangeListener to this ViewModel.
-     * @param listener the PropertyChangeListener to add
+     * @param listener to add the PropertyChangeListener
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.support.addPropertyChangeListener(listener);
@@ -87,7 +100,7 @@ public abstract class AbstractViewModel<T> {
 
     /**
      * Removes a PropertyChangeListener from this ViewModel.
-     * @param listener the PropertyChangeListener to remove
+     * @param listener to remove the PropertyChangeListener
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         this.support.removePropertyChangeListener(listener);

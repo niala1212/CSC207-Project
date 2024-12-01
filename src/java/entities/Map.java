@@ -1,4 +1,5 @@
 package entities;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Map {
     }
 
     // Getters
+
     public int getMapID() {
         return mapID;
     }
@@ -43,6 +45,7 @@ public class Map {
     }
 
     // Setters
+
     public void addFlight(Flight flight) {
         if (flightList != null && flight != null) {
             for (Flight existingFlight : flightList) {

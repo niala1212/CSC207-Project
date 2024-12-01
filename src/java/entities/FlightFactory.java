@@ -18,6 +18,7 @@ public class FlightFactory {
      * @return Populated flight class
      */
 
+    @SuppressWarnings({"checkstyle:MagicNumber", "checkstyle:SuppressWarnings"})
     public static Flight create(List<String> flightInfo, double[] coordinates) {
         Flight flight = new Flight(flightInfo.get(0), flightInfo.get(1));
 

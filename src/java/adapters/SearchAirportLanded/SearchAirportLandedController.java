@@ -1,7 +1,7 @@
 package adapters.SearchAirportLanded;
 
-import use_case.SearchAirportLanded.SearchAirportLandedInputBoundary;
-import use_case.SearchAirportLanded.SearchAirportLandedInputData;
+import usecase.SearchAirportLanded.SearchAirportLandedInputBoundary;
+import usecase.SearchAirportLanded.SearchAirportLandedInputData;
 
 
 public class SearchAirportLandedController {

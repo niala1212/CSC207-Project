@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.Arrays;
-
 /**
  * The representation of a flight in our program.
  */
@@ -17,110 +15,113 @@ public class Flight {
     private String estimatedArrivalTime;
     private String estimatedDepartureTime;
     //    ALL TIMES ARE GIVEN IN UTC
-    private double[] currentLocation = null;
+    private double[] currentLocation;
 
-    public Flight(String flightNUmber, String flightDate) {
-        this.flightNumber = flightNUmber;
+    public Flight(String flightNumber, String flightDate) {
+        this.flightNumber = flightNumber;
         this.flightDate = flightDate;
     }
 
-    public void setCurrentLocation(double[] currentLocation) {
+    public final void setCurrentLocation(double[] currentLocation) {
         this.currentLocation = currentLocation;
     }
 
-    //Setters
-    public void setAirline(String airline) {
+    // Setters
+    public final void setAirline(String airline) {
         this.airline = airline;
     }
 
-    public void setDepartureAirport(String string) {
+    public final void setDepartureAirport(String string) {
         this.departureAirport = string;
     }
 
-    public void setArrivalAirport(String string) {
+    public final void setArrivalAirport(String string) {
         this.arrivalAirport = string;
     }
 
-    public void setStatus(String flightStatus) {
+    public final void setStatus(String flightStatus) {
         this.status = flightStatus;
     }
 
-    public void setScheduledDepartureTime(String parse) {
-        this.scheduledDepartureTime = parse  + " UTC";
+    @SuppressWarnings({"checkstyle:MultipleStringLiterals", "checkstyle:SuppressWarnings"})
+    public final void setScheduledDepartureTime(String parse) {
+        this.scheduledDepartureTime = parse + "UTC";
     }
 
-    public void setEstimatedDepartureTime(String parse) {
-        this.estimatedDepartureTime = parse  + " UTC";
+    public final void setEstimatedDepartureTime(String parse) {
+        this.estimatedDepartureTime = parse + "UTC";
     }
 
-    public void setScheduledArrivalTime(String parse) {
-        this.scheduledArrivalTime = parse  + " UTC";
+    public final void setScheduledArrivalTime(String parse) {
+        this.scheduledArrivalTime = parse + "UTC";
     }
 
-    public void setEstimatedArrivalTime(String parse) {
-        this.estimatedArrivalTime = parse  + " UTC";
+    public final void setEstimatedArrivalTime(String parse) {
+        this.estimatedArrivalTime = parse + " UTC";
     }
 
     // Getters
-    public String getFlightNumber() {
+    public final String getFlightNumber() {
         return flightNumber;
     }
 
-    public String getAirline() {
+    public final String getAirline() {
         return airline;
     }
 
-    public String getDepartureAirport() {
+    public final String getDepartureAirport() {
         return departureAirport;
     }
 
-    public String getArrivalAirport() {
+    public final String getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public String getStatus() {
+    public final String getStatus() {
         return status;
     }
 
-    public String getScheduledDepartureTime() {
+    public final String getScheduledDepartureTime() {
         return scheduledDepartureTime;
     }
 
-    public String getEstimatedDepartureTime() {
+    public final String getEstimatedDepartureTime() {
         return estimatedDepartureTime;
     }
 
-    public String getScheduledArrivalTime() {
+    public final String getScheduledArrivalTime() {
         return scheduledArrivalTime;
     }
 
-    public String getEstimatedArrivalTime() {
+    public final String getEstimatedArrivalTime() {
         return estimatedArrivalTime;
     }
 
-    public double[] getCoordinates() {
+    public final double[] getCoordinates() {
         return currentLocation;
     }
 
-    public String getFlightDate() {
+    public final String getFlightDate() {
         return flightDate;
     }
 
     // string method
+    @SuppressWarnings({"checkstyle:AvoidInlineConditionals", "checkstyle:SuppressWarnings",
+        "checkstyle:MultipleStringLiterals"})
     @Override
     public String toString() {
-        return "Flight Information:\n\n" +
-                "  Flight Number = '" + flightNumber + "',\n" +
-                "  Flight Date = '" + flightDate + "',\n" +
-                "  Airline = " + (airline != null ? airline : "N/A") + ",\n" +
-                "  Departure Airport = " + (departureAirport != null ? departureAirport : "N/A") + ",\n" +
-                "  Arrival Airport = " + (arrivalAirport != null ? arrivalAirport : "N/A") + ",\n" +
-                "  Status = '" + status + "',\n" +
-                "  Scheduled DepartureTime = '" + scheduledDepartureTime + "',\n" +
-                "  Scheduled ArrivalTime = '" + scheduledArrivalTime + "',\n" +
-                "  Estimated Departure Time = '" + estimatedDepartureTime + "',\n" +
-                "  Estimated Arrival Time = '" + estimatedArrivalTime + "',\n" +
-                "  Current Location = " + (currentLocation != null && currentLocation.length >= 2
+        return "Flight Information:\n\n"
+                + "  Flight Number = '" + flightNumber + "',\n"
+                + "  Flight Date = '" + flightDate + "',\n"
+                + "  Airline = " + (airline != null ? airline : "N/A") + ",\n"
+                + "  Departure Airport = " + (departureAirport != null ? departureAirport : "N/A") + ",\n"
+                + "  Arrival Airport = " + (arrivalAirport != null ? arrivalAirport : "N/A") + ",\n"
+                + "  Status = '" + status + "',\n"
+                + "  Scheduled DepartureTime = '" + scheduledDepartureTime + "',\n"
+                + "  Scheduled ArrivalTime = '" + scheduledArrivalTime + "',\n"
+                + "  Estimated Departure Time = '" + estimatedDepartureTime + "',\n"
+                + "  Estimated Arrival Time = '" + estimatedArrivalTime + "',\n"
+                + "  Current Location = " + (currentLocation != null && currentLocation.length >= 2
                 ? "[" + currentLocation[0] + ", " + currentLocation[1] + "]"
                 : "N/A") + "\n";
     }
