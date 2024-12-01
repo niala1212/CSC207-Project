@@ -207,6 +207,9 @@ public class SearchByAirlineIDFrame extends JFrame implements PropertyChangeList
             else {
                 displayError(state.getErrorMessage());
             }
+        } else if ("noFlightsError".equals(event.getPropertyName())) {
+            // Handle errors that come from failure (e.g., API errors, invalid IATA codes)
+            displayError(state.getErrorMessage());
         }
     }
 }
