@@ -9,17 +9,19 @@ Daniel Benjamin Rogojanski - Daniel-Rogo
 Niala Mikalya Samlalsingh - Niala1212
 
 ## Project Purpose:
-The domain for the project is air travel, and we will focus on real-time flight tracking by pulling data from a related
+- This project was created as a demonstration of our teams understanding of the content covered in the University of
+Toronto's CSC207 course.
+- The domain for the project is air travel, and we will focus on real-time flight tracking by pulling data from a related
 API. This proposed software will be able to search for flight, airline, and airport information and visualize flight
 data on maps.
 
 ## Contents:
-#### + _User Stories_
-###### - _Main Features_
-#### + _Installation Instructions_
-###### - _Usage_
-#### + _License_
-#### + _Feedback & Contributors_
+#### + [_User Stories_](#User-Stories)
+###### - [_Main Features_](#Main-Features)
+#### + [_Installation Instructions_](#Installation-Instructions)
+###### - [_Usage_](#Usage)
+#### + [_License_](#License)
+#### + [_Feedback & Contributors_](#Feedback--Contributors)
 
 ## User Stories:
 Team Usecase: search by flight number
