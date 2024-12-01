@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Flight;
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputBoundary;
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportOutputBoundary;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
 
 /**
  * Presenter for the Departures by Airport use case.
@@ -25,14 +25,12 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
      */
     public void clearView(SearchByDepartureAirportOutputData outputData) {
         SearchByDepartureAirportState state = viewModel.getState();
-        state.clearPreviousResults();
         state.setMessage(outputData.getDepartureErrorMessage());
         viewModel.firePropertyChanged(errorPropertyName);
     }
 
     @Override
     public void prepareSuccessView(SearchByDepartureAirportOutputData outputData) {
-        clearView(outputData);
         SearchByDepartureAirportState state = viewModel.getState();
         List<Flight> departureFlights = outputData.getDepartureFlights();
         if (departureFlights.isEmpty()) {
@@ -52,12 +50,10 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
     /**
      * Prepares the failure view for the Search by Airport use case.
      *
-     * @param errorMessage the explanation of the failure
+     * @param outputData the error message output.
      */
     @Override
     public void prepareFailView(SearchByDepartureAirportOutputData outputData) {
-        // Clear the previous state of the UI before showing the error message
-        clearView(outputData);
 
         SearchByDepartureAirportState state = viewModel.getState();
 

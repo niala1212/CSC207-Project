@@ -23,6 +23,7 @@ import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
 import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
+import app.gui.SearchByDepartureAirportFrames.SearchByDepartureAirportFrame;
 import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
 import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;

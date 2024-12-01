@@ -4,7 +4,7 @@ package usecase.SearchByDepartureAirport;
  * Input Data for the Search Departures By Airport Use Case.
  */
 public class SearchByDepartureAirportInputData {
-    private final String airportCode; // IATA code for the airport (e.g., "JFK" for John F. Kennedy International Airport)
+    private final String airportCode;
 
     // Constructor to initialize the fields
     public SearchByDepartureAirportInputData(String airportCode) {
@@ -12,7 +12,7 @@ public class SearchByDepartureAirportInputData {
     }
 
     // Getter
-    public String getAirportCode() {
+    public final String getAirportCode() {
         return airportCode;
     }
 }

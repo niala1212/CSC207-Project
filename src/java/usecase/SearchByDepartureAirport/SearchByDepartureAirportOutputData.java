@@ -1,7 +1,8 @@
 package usecase.SearchByDepartureAirport;
 
-import entities.Flight;
 import java.util.List;
+
+import entities.Flight;
 
 /**
  * Output Data for the Search By Airport Use Case.
@@ -23,15 +24,15 @@ public class SearchByDepartureAirportOutputData {
         this.departureErrorMessage = departureErrorMessage;
     }
 
-    public List<Flight> getDepartureFlights() {
+    public final List<Flight> getDepartureFlights() {
         return departureFlights;
     }
 
-    public String getDepartureErrorMessage() {
+    public final String getDepartureErrorMessage() {
         return departureErrorMessage;
     }
 
-    public boolean isUseCaseFailed() {
+    public final boolean isUseCaseFailed() {
         return departureErrorMessage != null;
     }
 }

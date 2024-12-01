@@ -1,8 +1,12 @@
 package usecase.SearchByDepartureAirport;
 
-import entities.Flight;
 import java.util.List;
 
+import entities.Flight;
+
+/**
+ * The interactor for the Search Departure by airport use case.
+ */
 public class SearchByDepartureAirportInteractor implements SearchByDepartureAirportInputBoundary {
 
     private final SearchByDepartureAirportDataAccessInterface flightDataAccessObject;
@@ -14,6 +18,7 @@ public class SearchByDepartureAirportInteractor implements SearchByDepartureAirp
         this.searchByDepartureAirportPresenter = searchByDepartureAirportPresenter;
     }
 
+    @SuppressWarnings({"checkstyle:ReturnCount", "checkstyle:SuppressWarnings", "checkstyle:IllegalCatch", "checkstyle:CatchParameterName"})
     @Override
     public void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData) {
         String airportCode = searchByDepartureAirportInputData.getAirportCode();
@@ -32,11 +37,13 @@ public class SearchByDepartureAirportInteractor implements SearchByDepartureAirp
             // If no flights are found, notify failure
             if (foundFlights == null || foundFlights.isEmpty()) {
                 handleFailure("No flights found for the specified airport.");
-            } else {
+            }
+            else {
                 handleSuccess(foundFlights);
             }
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             handleFailure("An unexpected error occurred. Please try again later.");
         }
     }

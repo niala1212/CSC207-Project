@@ -1,74 +1,67 @@
 package adapters.SearchByDepartureAirport;
 
-import adapters.AbstractState;
-import entities.Flight;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.AbstractState;
+import entities.Flight;
+
 /**
- * The state for Search Departures by Airport view model
+ * The state for Search Departures by Airport view model.
  */
 public class SearchByDepartureAirportState extends AbstractState {
     private String airportName = "";
     private List<String> flightNumbers = new ArrayList<>();
-    private List<Flight> flights = new ArrayList<>();  // Full flight data
-    private String message = null;
+    private List<Flight> flights = new ArrayList<>();
+    private String message;
 
-    public String getAirportName() {
+    public final String getAirportName() {
         return airportName;
     }
 
-    public List<String> getFlightNumbers() {
+    public final List<String> getFlightNumbers() {
         return flightNumbers;
     }
 
-    public List<Flight> getFlights() {
+    public final List<Flight> getFlights() {
         return flights;
     }
 
-    public String getMessage() {
+    public final String getMessage() {
         return message;
     }
 
-    public void setAirportName(String airportName) {
+    public final void setAirportName(String airportName) {
         this.airportName = airportName;
     }
 
-    public void setFlightNumbers(List<String> flightNumbers) {
+    public final void setFlightNumbers(List<String> flightNumbers) {
         this.flightNumbers = flightNumbers;
     }
 
-    public void setFlights(List<Flight> flights) {
+    public final void setFlights(List<Flight> flights) {
         this.flights = flights;
     }
 
-    public void setMessage(String message) {
+    public final void setMessage(String message) {
         this.message = message;
     }
 
-    public boolean isSuccessful() {
+    public final boolean isSuccessful() {
         return message == null;
     }
 
-    // Notify view to clear results and set empty message
-    public void clearPreviousResults() {
-        this.message = "";  // Clear any message
-        this.flightNumbers = new ArrayList<>();  // Clear the flight list
-        this.flights = new ArrayList<>();  // Clear flight data
-    }
-
     /**
-     * The to-string to display all the flights
+     * The to-string to display all the flights.
      * @param flightNumber flight number of flight
      * @return string of all the flight details
      */
     public String getFlightDetailsString(String flightNumber) {
         for (Flight flight : flights) {
             if (flight.getFlightNumber().equals(flightNumber)) {
-                return flight.toString(); // Format this string as needed
+                return flight.toString();
             }
         }
-        return null; // Return null if no flight is found
+        return null;
     }
 }
