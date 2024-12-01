@@ -18,8 +18,23 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
     }
 
     @Override
-    public void execute(SearchByAirlineIDInputData searchByAirlineIDInputData) {
+    public void execute(SearchByAirlineIDInputData searchByAirlineIDInputData, String error) {
+        // If there's an error message, skip processing and show the error
+        if (error != null) {
+            SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(error);
+            searchByAirlineIDPresenter.prepareFailView(outputData);
+            return;
+        }
+
         String airlineId = searchByAirlineIDInputData.getAirlineIataCode();
+
+        // Additional check for empty or null airline ID
+        if (airlineId == null || airlineId.trim().isEmpty()) {
+            SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
+                    "Airline IATA code cannot be empty.");
+            searchByAirlineIDPresenter.prepareFailView(outputData);
+            return;
+        }
 
         try {
             List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirlineId(airlineId);
@@ -28,11 +43,13 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
                 SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
                         "Error retrieving flight data for the specified airline. Please try a different iata.");
                 searchByAirlineIDPresenter.prepareFailView(outputData);
+
             } else if (foundFlights.isEmpty()) {
                 // No flights found: Valid but empty result
                 SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
                         "No flights found for the specified airline.");
                 searchByAirlineIDPresenter.prepareSuccessView(outputData);
+
             } else {
                 // Flights found: Success
                 SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(foundFlights);

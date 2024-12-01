@@ -20,11 +20,21 @@ public class SearchByAirlineIDController {
      */
     public void execute(String airlineIataCode) {
         if (airlineIataCode == null || airlineIataCode.trim().isEmpty()) {
-            throw new IllegalArgumentException("Airline IATA code cannot be empty.");
+            // Send error to interactor
+            searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(null),
+                    "Airline IATA code cannot be empty.");
+            return;
         }
 
-        // Create input data and call the input boundary
-        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(airlineIataCode.trim());
-        searchByAirlineIDInteractor.execute(inputData);
+        String trimmedCode = airlineIataCode.trim();
+        if (!trimmedCode.matches("[A-Z0-9]{2}")) {
+            // Send validation error to interactor
+            searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(trimmedCode),
+                    "Invalid Airline IATA code.");
+            return;
+        }
+
+        // Valid input: Proceed with normal execution
+        searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(trimmedCode), null);
     }
 }

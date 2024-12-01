@@ -9,5 +9,5 @@ public interface SearchByAirlineIDInputBoundary {
      * Executes the search by Airline ID use case.
      * @param searchByAirlineIDInputData the input data
      */
-    void execute(SearchByAirlineIDInputData searchByAirlineIDInputData);
+    void execute(SearchByAirlineIDInputData searchByAirlineIDInputData, String error);
 }
