@@ -20,7 +20,7 @@ import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
 import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberPresenter;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
-import dataaccess.AllAPICalling;
+import data_access.AllAPICalling;
 import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
 import usecase.SearchAirportLanded.SearchAirportLandedInputBoundary;
 import usecase.SearchAirportLanded.SearchAirportLandedInteractor;

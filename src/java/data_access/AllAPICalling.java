@@ -1,4 +1,4 @@
-package dataaccess;
+package data_access;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

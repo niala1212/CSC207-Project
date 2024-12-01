@@ -19,22 +19,9 @@ public class SearchByAirlineIDController {
      * @param airlineIataCode the airline IATA code entered by the user.
      */
     public void execute(String airlineIataCode) {
-        if (airlineIataCode == null || airlineIataCode.trim().isEmpty()) {
-            // Send error to interactor
-            searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(null),
-                    "Airline IATA code cannot be empty.");
-            return;
-        }
-
         String trimmedCode = airlineIataCode.trim();
-        if (!trimmedCode.matches("[A-Z0-9]{2}")) {
-            // Send validation error to interactor
-            searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(trimmedCode),
-                    "Invalid Airline IATA code.");
-            return;
-        }
 
         // Valid input: Proceed with normal execution
-        searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(trimmedCode), null);
+        searchByAirlineIDInteractor.execute(new SearchByAirlineIDInputData(trimmedCode));
     }
 }

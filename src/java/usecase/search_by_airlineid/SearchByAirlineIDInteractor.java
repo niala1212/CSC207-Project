@@ -18,30 +18,34 @@ public class SearchByAirlineIDInteractor implements SearchByAirlineIDInputBounda
     }
 
     @Override
-    public void execute(SearchByAirlineIDInputData searchByAirlineIDInputData, String error) {
-        // If there's an error message, skip processing and show the error
-        if (error != null) {
-            SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(error);
-            searchByAirlineIDPresenter.prepareFailView(outputData);
-            return;
-        }
-
+    public void execute(SearchByAirlineIDInputData searchByAirlineIDInputData) {
         String airlineId = searchByAirlineIDInputData.getAirlineIataCode();
 
-        // Additional check for empty or null airline ID
+        // Validation: check if the airline ID is valid
         if (airlineId == null || airlineId.trim().isEmpty()) {
+            // Handle validation failure
             SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
                     "Airline IATA code cannot be empty.");
             searchByAirlineIDPresenter.prepareFailView(outputData);
             return;
         }
 
+        String trimmedCode = airlineId.trim();
+        if (!trimmedCode.matches("[A-Za-z0-9]{2}")) {
+            // Handle validation failure
+            SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
+                    "Invalid Airline IATA code.");
+            searchByAirlineIDPresenter.prepareFailView(outputData);
+            return;
+        }
+
+        // If validation passes, proceed with normal execution
         try {
-            List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirlineId(airlineId);
+            List<Flight> foundFlights = flightDataAccessObject.getFlightsByAirlineId(trimmedCode);
             if (foundFlights == null) {
                 // Critical failure: API or connection issue
                 SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(
-                        "Error retrieving flight data for the specified airline. Please try a different iata.");
+                        "Error retrieving flight data for the specified airline. Please try a different IATA.");
                 searchByAirlineIDPresenter.prepareFailView(outputData);
 
             } else if (foundFlights.isEmpty()) {
