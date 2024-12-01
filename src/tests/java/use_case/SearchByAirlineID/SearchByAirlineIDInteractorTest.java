@@ -42,7 +42,7 @@ public class SearchByAirlineIDInteractorTest {
         when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenReturn(flights);
 
         // Act: Execute the use case method
-        searchByAirlineIDInteractor.execute(inputData);
+        searchByAirlineIDInteractor.execute(inputData, null);
 
         // Assert: Verify the presenter was called with the correct output data
         verify(mockSearchByAirlineIDPresenter).prepareSuccessView(argThat(outputData ->
@@ -60,7 +60,7 @@ public class SearchByAirlineIDInteractorTest {
         when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenReturn(flights);
 
         // Act: Execute the use case method
-        searchByAirlineIDInteractor.execute(inputData);
+        searchByAirlineIDInteractor.execute(inputData, null);
 
         // Assert: Verify the presenter was called with an error message indicating no flights found
         verify(mockSearchByAirlineIDPresenter).prepareSuccessView(argThat(outputData ->
@@ -79,13 +79,12 @@ public class SearchByAirlineIDInteractorTest {
         when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenReturn(flights);
 
         // Act: Execute the use case method
-        searchByAirlineIDInteractor.execute(inputData);
+        searchByAirlineIDInteractor.execute(inputData, null);
 
         // Assert: Verify the presenter was called with an error message indicating a problem retrieving data
         verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
-                outputData.getErrorMessage().
-                        equals("Error retrieving flight data for the specified airline. " +
-                                "Please try a different iata.")));
+                outputData.getErrorMessage()
+                        .equals("Error retrieving flight data for the specified airline. Please try a different iata.")));
     }
 
     // Test case when an exception is thrown during the flight data access
@@ -98,10 +97,42 @@ public class SearchByAirlineIDInteractorTest {
         when(mockFlightDataAccessObject.getFlightsByAirlineId(airlineId)).thenThrow(new RuntimeException("API Error"));
 
         // Act: Execute the use case method
-        searchByAirlineIDInteractor.execute(inputData);
+        searchByAirlineIDInteractor.execute(inputData, null);
 
         // Assert: Verify the presenter was called with a failure message indicating an unexpected error
         verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
                 outputData.getErrorMessage().equals("An unexpected error occurred:\nAPI ERROR")));
+    }
+
+    // Test case for empty or invalid airline ID input
+    @Test
+    public void testExecute_EmptyOrInvalidAirlineId() {
+        // Arrange: Prepare mock data with an empty airline ID
+        String airlineId = "";  // Empty airline ID
+        SearchByAirlineIDInputData inputData = mock(SearchByAirlineIDInputData.class);
+        when(inputData.getAirlineIataCode()).thenReturn(airlineId);
+
+        // Act: Execute the use case method
+        searchByAirlineIDInteractor.execute(inputData, null);
+
+        // Assert: Verify the presenter was called with an error message about the invalid airline ID
+        verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
+                outputData.getErrorMessage().equals("Airline IATA code cannot be empty.")));
+    }
+
+    // Test case for null airline ID input
+    @Test
+    public void testExecute_NullAirlineId() {
+        // Arrange: Prepare mock data with a null airline ID
+        String airlineId = null;  // Null airline ID
+        SearchByAirlineIDInputData inputData = mock(SearchByAirlineIDInputData.class);
+        when(inputData.getAirlineIataCode()).thenReturn(airlineId);
+
+        // Act: Execute the use case method
+        searchByAirlineIDInteractor.execute(inputData, null);
+
+        // Assert: Verify the presenter was called with an error message about the null airline ID
+        verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
+                outputData.getErrorMessage().equals("Airline IATA code cannot be empty.")));
     }
 }

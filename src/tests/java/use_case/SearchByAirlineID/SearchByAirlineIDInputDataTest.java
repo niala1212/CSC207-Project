@@ -51,4 +51,24 @@ public class SearchByAirlineIDInputDataTest {
         // Assert that the IATA code is null
         assertNull("The IATA code should be null", inputData.getAirlineIataCode());
     }
+
+    // Test case for the constructor with an empty IATA code
+    @Test
+    public void testConstructorWithEmptyIataCode() {
+        // Create a new SearchByAirlineIDInputData object with an empty IATA code
+        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData("");
+
+        // Assert that the IATA code is empty
+        assertEquals("The IATA code should be an empty string", "", inputData.getAirlineIataCode());
+    }
+
+    // Test case for the constructor with a whitespace IATA code
+    @Test
+    public void testConstructorWithWhitespaceIataCode() {
+        // Create a new SearchByAirlineIDInputData object with a whitespace IATA code
+        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData("   ");
+
+        // Assert that the IATA code is a string with only whitespace
+        assertEquals("The IATA code should be '   '", "   ", inputData.getAirlineIataCode());
+    }
 }

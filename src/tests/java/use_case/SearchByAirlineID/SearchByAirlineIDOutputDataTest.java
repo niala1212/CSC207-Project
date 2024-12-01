@@ -56,16 +56,11 @@ public class SearchByAirlineIDOutputDataTest {
     }
 
     @Test
-    public void testGetFilteredFlightsWhenFailure() {
-        // Verify that getFilteredFlights() returns null in failure case
-        assertNull("Filtered flights should be null in failure case", failureOutputData.getFilteredFlights());
-    }
-
-    @Test
     public void testGetErrorMessageWhenSuccess() {
         // Verify that getErrorMessage() returns null in success case
         assertNull("Error message should be null in success case", successOutputData.getErrorMessage());
     }
+
     @Test
     public void testGetFilteredFlightsWhenSuccess() {
         // Verify that getFilteredFlights() returns the correct list in success case
@@ -80,5 +75,23 @@ public class SearchByAirlineIDOutputDataTest {
         assertNotNull("Error message should not be null in failure case", failureOutputData.getErrorMessage());
         assertEquals("The error message should match the input",
                 "No flights found for the specified airline.", failureOutputData.getErrorMessage());
+    }
+
+    // Edge case: test if the constructor handles null input
+    @Test
+    public void testConstructorWithNullFlights() {
+        // Test case where filteredFlights is null in the constructor
+        SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData((List<Flight>) null);
+        assertNull("Filtered flights should be null when input list is null", outputData.getFilteredFlights());
+        assertNull("Error message should be null when no error is passed", outputData.getErrorMessage());
+    }
+
+    // Edge case: test if the constructor handles null error message
+    @Test
+    public void testConstructorWithNullErrorMessage() {
+        // Test case where error message is null in the constructor
+        SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData((String) null);
+        assertNull("Filtered flights should be null when no flights are provided", outputData.getFilteredFlights());
+        assertNull("Error message should be null when no error message is provided", outputData.getErrorMessage());
     }
 }
