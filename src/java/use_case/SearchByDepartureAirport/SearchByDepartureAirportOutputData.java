@@ -8,30 +8,30 @@ import java.util.List;
  */
 public class SearchByDepartureAirportOutputData {
 
-    private final List<Flight> filteredFlights;
-    private final String errorMessage;
+    private final List<Flight> departureFlights;
+    private final String departureErrorMessage;
 
     // Constructor for success (with filtered flights)
     public SearchByDepartureAirportOutputData(List<Flight> filteredFlights) {
-        this.filteredFlights = filteredFlights;
-        this.errorMessage = null;
+        this.departureFlights = filteredFlights;
+        this.departureErrorMessage = null;
     }
 
     // Constructor for failure (when no flights are found or an error occurs)
-    public SearchByDepartureAirportOutputData(String errorMessage) {
-        this.filteredFlights = null;
-        this.errorMessage = errorMessage;
+    public SearchByDepartureAirportOutputData(String departureErrorMessage) {
+        this.departureFlights = null;
+        this.departureErrorMessage = departureErrorMessage;
     }
 
-    public List<Flight> getFilteredFlights() {
-        return filteredFlights;
+    public List<Flight> getDepartureFlights() {
+        return departureFlights;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getDepartureErrorMessage() {
+        return departureErrorMessage;
     }
 
     public boolean isUseCaseFailed() {
-        return errorMessage != null;
+        return departureErrorMessage != null;
     }
 }
