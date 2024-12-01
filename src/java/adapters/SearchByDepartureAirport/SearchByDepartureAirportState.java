@@ -64,4 +64,13 @@ public class SearchByDepartureAirportState extends AbstractState {
         }
         return null;
     }
+
+    /**
+     * Reset the state.
+     */
+    public final void clearPreviousResults() {
+        this.message = "";
+        this.flightNumbers = new ArrayList<>();
+        this.flights = new ArrayList<>();
+    }
 }

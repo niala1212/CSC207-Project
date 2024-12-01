@@ -25,12 +25,14 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
      */
     public void clearView(SearchByDepartureAirportOutputData outputData) {
         SearchByDepartureAirportState state = viewModel.getState();
+        state.clearPreviousResults();
         state.setMessage(outputData.getDepartureErrorMessage());
         viewModel.firePropertyChanged(errorPropertyName);
     }
 
     @Override
     public void prepareSuccessView(SearchByDepartureAirportOutputData outputData) {
+        clearView(outputData);
         SearchByDepartureAirportState state = viewModel.getState();
         List<Flight> departureFlights = outputData.getDepartureFlights();
         if (departureFlights.isEmpty()) {
@@ -54,7 +56,7 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
      */
     @Override
     public void prepareFailView(SearchByDepartureAirportOutputData outputData) {
-
+        clearView(outputData);
         SearchByDepartureAirportState state = viewModel.getState();
 
         // Set the error message in the state

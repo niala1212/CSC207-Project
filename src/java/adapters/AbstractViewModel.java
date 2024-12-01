@@ -105,4 +105,13 @@ public abstract class AbstractViewModel<T> {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         this.support.removePropertyChangeListener(listener);
     }
+
+    /**
+     * Reset the state to default.
+     */
+    public void clearView() {
+        // This could also trigger state-specific clearing logic (e.g., clear error messages)
+        setState(null);
+        firePropertyChanged("clearView");
+    }
 }
