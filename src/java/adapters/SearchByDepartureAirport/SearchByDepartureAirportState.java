@@ -51,6 +51,13 @@ public class SearchByDepartureAirportState extends AbstractState {
         return message == null;
     }
 
+    // Notify view to clear results and set empty message
+    public void clearPreviousResults() {
+        this.message = "";  // Clear any message
+        this.flightNumbers = new ArrayList<>();  // Clear the flight list
+        this.flights = new ArrayList<>();  // Clear flight data
+    }
+
     /**
      * The to-string to display all the flights
      * @param flightNumber flight number of flight

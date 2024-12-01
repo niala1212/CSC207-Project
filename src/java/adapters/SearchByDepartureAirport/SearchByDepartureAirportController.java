@@ -16,6 +16,9 @@ public class SearchByDepartureAirportController {
      * @param airportCode
      */
     public void execute(String airportCode) {
+        if (airportCode == null || airportCode.trim().isEmpty()) {
+            return;
+        }
         final SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData(airportCode);
         this.SearchByDepartureAirportInteractor.execute(inputData);
     }

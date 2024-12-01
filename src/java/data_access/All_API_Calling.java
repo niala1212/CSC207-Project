@@ -28,8 +28,8 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
         SeeWorldMapDataAccessInterface {
 
 //    private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9"; // Replace with your access key
-    private static final String ACCESSKEY = "977c40fee275141530975467ffa33986"; // Replace with your access key
-//    private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
+//    private static final String ACCESSKEY = "977c40fee275141530975467ffa33986"; // Replace with your access key
+    private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
 
     public static JSONArray API_Call(String apiUrl) {
         try {
@@ -259,7 +259,8 @@ public class All_API_Calling implements SearchByAirlineIDDataAccessInterface,
      */
     @Override
     public List<Flight> getDepartureFlightsByAirport(String airportCode) {
-        return List.of();
+        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY + "&dep_iata=" + airportCode;
+        return getFlightsFromURL(apiUrl);
     }
 }
 

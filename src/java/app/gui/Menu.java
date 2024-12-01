@@ -25,8 +25,10 @@ import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
 import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
+import app.gui.SearchByDepartureAirportFrames.SearchByDepartureAirportFrame;
 import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
 import net.miginfocom.swing.MigLayout;
+import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
 
 /**
  * The starting menu showing options: search by flight number, airlines, and airports.
@@ -59,6 +61,7 @@ public class Menu extends JFrame {
     private final JButton searchByFlightB = new JButton("Search By Flight Number");
     private final JButton searchByAirlineB = new JButton("Search By Airline");
     private final JButton searchByArrivalAirportB = new JButton("Search By Arrival Airport");
+    private final JButton searchByDepartureAirportB = new JButton("Search By Departure Airport");
     private final JButton searchByAirportB = new JButton("Search By Airport");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
@@ -143,6 +146,14 @@ public class Menu extends JFrame {
             // Opens the SearchByAirlineIDFrame to search for flights by airport
             SearchByArrivalAirportFrame searchByArrivalAirportFrame = new SearchByArrivalAirportFrame(
                     searchByArrivalAirportController, searchByArrivalAirportViewModel
+            );
+        });
+
+        searchByDepartureAirportB.setFont(buttonFont);
+        panel.add(searchByDepartureAirportB, "span, grow");
+        searchByDepartureAirportB.addActionListener(event -> {
+            SearchByDepartureAirportFrame searchByDepartureAirportFrame = new SearchByDepartureAirportFrame(
+                    searchByDepartureAirportViewModel, searchByDepartureAirportController
             );
         });
 
