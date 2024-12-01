@@ -1,6 +1,7 @@
 # CSC207 - _Aviation Project_
+## Group #193
 
-## Group:  
+### Members:  
 Anthony Stanimirov Bonev - anthonybonev  
 Abigail Alexis Burke - Silly-String  
 Linghan Andrew Mei - AwesomeAndrewMei  
@@ -13,12 +14,12 @@ API. This proposed software will be able to search for flight, airline, and airp
 data on maps.
 
 ## Contents:
-###### + _User Stories_
+#### + _User Stories_
 ###### - _Main Features_
-###### + _Installation Instructions_
-###### + _Usage_
-###### + _License_
-###### + _Feedback & Contributors_
+#### + _Installation Instructions_
+###### - _Usage_
+#### + _License_
+#### + _Feedback & Contributors_
 
 ## User Stories:
 Team Usecase: search by flight number
@@ -85,10 +86,21 @@ _private static final String ACCESSKEY = "..."_
 
 (eg: "ec7e1a44c6add94ea0d08a3b2b6baac8")
 ![img.png](example_api_access_code.png)
+
+***
+### Usage:
 6) Open the 'Main.java' file in the folder: \src\java\app
 
 and run the file to interact with the program.
 
-## Usage:
 ## License:
+This project is currently not licensed for public use.  
+Please do not use, fork, or distribute this code at this time.  
+The licensing terms will be updated in the future if anything changes.
+
 ## Feedback & Contributors:
+We’re not accepting code contributions at this time, but we welcome:
+- Suggestions for features or improvements (via issues)
+- General feedback on the project
+
+We’ll update this policy and the license when we’re ready for direct contributions.
