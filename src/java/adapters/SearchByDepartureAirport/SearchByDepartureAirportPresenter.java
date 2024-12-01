@@ -1,7 +1,7 @@
 package adapters.SearchByDepartureAirport;
 
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputBoundary;
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportOutputBoundary;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
 
 public class SearchByDepartureAirportPresenter implements SearchByDepartureAirportOutputBoundary {
     public SearchByDepartureAirportPresenter(SearchByDepartureAirportViewModel searchByDepartureAirportViewModel) {

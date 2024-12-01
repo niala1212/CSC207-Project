@@ -1,7 +1,7 @@
 package adapters.SeeWorldMap;
 
-import use_case.SeeWorldMap.SeeWorldMapInputBoundary;
-import use_case.SeeWorldMap.SeeWorldMapInputData;
+import usecase.SeeWorldMap.SeeWorldMapInputBoundary;
+import usecase.SeeWorldMap.SeeWorldMapInputData;
 
 
 public class SeeWorldMapController {
