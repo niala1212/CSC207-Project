@@ -9,66 +9,61 @@ public class SearchByAirlineIDInputDataTest {
 
     private SearchByAirlineIDInputData searchByAirlineIDInputData;
 
-    // Set up method to initialize the test environment
     @Before
     public void setUp() {
-        // Initialize the SearchByAirlineIDInputData object with a valid IATA code "AA"
+        // Initialize with a valid IATA code for setup
         searchByAirlineIDInputData = new SearchByAirlineIDInputData("AA");
     }
 
-    // Test case for the getter method of the IATA code
     @Test
     public void testGetAirlineIataCode() {
-        // Expected IATA code is "AA"
         String expected = "AA";
-
-        // Get the actual IATA code from the object
         String actual = searchByAirlineIDInputData.getAirlineIataCode();
-
-        // Assert that the expected value matches the actual value
         assertEquals("The airline IATA code should be 'AA'", expected, actual);
     }
 
-    // Test case for the constructor with a valid IATA code
     @Test
     public void testConstructorWithValidIataCode() {
-        // Define the expected IATA code
         String expectedIataCode = "AA";
-
-        // Create a new SearchByAirlineIDInputData object with the valid IATA code
         SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(expectedIataCode);
-
-        // Assert that the IATA code set by the constructor matches the expected IATA code
         assertEquals("The IATA code should match the input", expectedIataCode, inputData.getAirlineIataCode());
     }
 
-    // Test case for the constructor with a null IATA code
     @Test
     public void testConstructorWithNullIataCode() {
-        // Create a new SearchByAirlineIDInputData object with a null IATA code
         SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(null);
-
-        // Assert that the IATA code is null
         assertNull("The IATA code should be null", inputData.getAirlineIataCode());
     }
 
-    // Test case for the constructor with an empty IATA code
     @Test
     public void testConstructorWithEmptyIataCode() {
-        // Create a new SearchByAirlineIDInputData object with an empty IATA code
         SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData("");
-
-        // Assert that the IATA code is empty
         assertEquals("The IATA code should be an empty string", "", inputData.getAirlineIataCode());
     }
 
-    // Test case for the constructor with a whitespace IATA code
     @Test
     public void testConstructorWithWhitespaceIataCode() {
-        // Create a new SearchByAirlineIDInputData object with a whitespace IATA code
         SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData("   ");
-
-        // Assert that the IATA code is a string with only whitespace
         assertEquals("The IATA code should be '   '", "   ", inputData.getAirlineIataCode());
+    }
+
+    @Test
+    public void testConstructorWithTwoCharacterIataCode() {
+        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData("XY");
+        assertEquals("The IATA code should be 'XY'", "XY", inputData.getAirlineIataCode());
+    }
+
+    @Test
+    public void testConstructorWithLongIataCode() {
+        String longIataCode = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(longIataCode);
+        assertEquals("The IATA code should match the long input", longIataCode, inputData.getAirlineIataCode());
+    }
+
+    @Test
+    public void testConstructorWithSpecialCharacters() {
+        String specialCharsCode = "@$";
+        SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(specialCharsCode);
+        assertEquals("The IATA code should handle special characters", specialCharsCode, inputData.getAirlineIataCode());
     }
 }

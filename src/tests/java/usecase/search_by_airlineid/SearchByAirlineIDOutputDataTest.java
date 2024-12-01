@@ -6,6 +6,7 @@ import entities.Flight;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchByAirlineIDOutputDataTest {
@@ -16,7 +17,7 @@ public class SearchByAirlineIDOutputDataTest {
 
     @Before
     public void setUp() {
-        // Set up mock data for flights
+        // Mock data for flights
         flights = Arrays.asList(new Flight("AB123", "2024-11-26"),
                 new Flight("AB321", "2024-12-27")); // Assuming Flight is a valid entity
 
@@ -27,69 +28,73 @@ public class SearchByAirlineIDOutputDataTest {
 
     @Test
     public void testSuccessConstructor() {
-        // Test success constructor (with filtered flights)
         assertNotNull("Filtered flights should not be null", successOutputData.getFilteredFlights());
         assertNull("Error message should be null in success case", successOutputData.getErrorMessage());
-        assertEquals("The filtered flights list should match the input", flights,
-                successOutputData.getFilteredFlights());
+        assertEquals("The filtered flights list should match the input", flights, successOutputData.getFilteredFlights());
     }
 
     @Test
     public void testFailureConstructor() {
-        // Test failure constructor (with an error message)
         assertNull("Filtered flights should be null in failure case", failureOutputData.getFilteredFlights());
         assertNotNull("Error message should not be null in failure case", failureOutputData.getErrorMessage());
-        assertEquals("The error message should match the input",
-                "No flights found for the specified airline.", failureOutputData.getErrorMessage());
+        assertEquals("The error message should match the input", "No flights found for the specified airline.",
+                failureOutputData.getErrorMessage());
     }
 
     @Test
     public void testIsUseCaseFailed_Success() {
-        // Test isUseCaseFailed method for a success case (no error message)
         assertFalse("Use case should not be failed for success", successOutputData.isUseCaseFailed());
     }
 
     @Test
     public void testIsUseCaseFailed_Failure() {
-        // Test isUseCaseFailed method for a failure case (error message exists)
         assertTrue("Use case should be failed for failure", failureOutputData.isUseCaseFailed());
     }
 
     @Test
     public void testGetErrorMessageWhenSuccess() {
-        // Verify that getErrorMessage() returns null in success case
         assertNull("Error message should be null in success case", successOutputData.getErrorMessage());
     }
 
     @Test
     public void testGetFilteredFlightsWhenSuccess() {
-        // Verify that getFilteredFlights() returns the correct list in success case
         assertNotNull("Filtered flights should not be null in success case", successOutputData.getFilteredFlights());
-        assertEquals("The filtered flights should match the expected list", flights,
-                successOutputData.getFilteredFlights());
+        assertEquals("The filtered flights should match the expected list", flights, successOutputData.getFilteredFlights());
     }
 
     @Test
     public void testGetErrorMessageWhenFailure() {
-        // Verify that getErrorMessage() returns the correct message in failure case
         assertNotNull("Error message should not be null in failure case", failureOutputData.getErrorMessage());
-        assertEquals("The error message should match the input",
-                "No flights found for the specified airline.", failureOutputData.getErrorMessage());
+        assertEquals("The error message should match the input", "No flights found for the specified airline.",
+                failureOutputData.getErrorMessage());
     }
 
-    // Edge case: test if the constructor handles null input
+    @Test
+    public void testConstructorWithEmptyFlights() {
+        SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(Collections.emptyList());
+        assertNotNull("Filtered flights should not be null even if the list is empty", outputData.getFilteredFlights());
+        assertTrue("Filtered flights list should be empty", outputData.getFilteredFlights().isEmpty());
+        assertNull("Error message should be null when no error is passed", outputData.getErrorMessage());
+    }
+
+    @Test
+    public void testConstructorWithSpecialCharacterErrorMessage() {
+        String specialMessage = "Error: Flight not found! 🚀✈️";
+        SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData(specialMessage);
+        assertEquals("The error message should match the input with special characters", specialMessage,
+                outputData.getErrorMessage());
+        assertNull("Filtered flights should be null in failure case", outputData.getFilteredFlights());
+    }
+
     @Test
     public void testConstructorWithNullFlights() {
-        // Test case where filteredFlights is null in the constructor
         SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData((List<Flight>) null);
         assertNull("Filtered flights should be null when input list is null", outputData.getFilteredFlights());
         assertNull("Error message should be null when no error is passed", outputData.getErrorMessage());
     }
 
-    // Edge case: test if the constructor handles null error message
     @Test
     public void testConstructorWithNullErrorMessage() {
-        // Test case where error message is null in the constructor
         SearchByAirlineIDOutputData outputData = new SearchByAirlineIDOutputData((String) null);
         assertNull("Filtered flights should be null when no flights are provided", outputData.getFilteredFlights());
         assertNull("Error message should be null when no error message is provided", outputData.getErrorMessage());
