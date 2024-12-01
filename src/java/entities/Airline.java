@@ -4,11 +4,15 @@ package entities;
  * Represents an airline with relevant details.
  */
 public class Airline {
-    private String airlineCode;      // e.g., "AA" for American Airlines (the iata code)
-    private String name;             // Full name of the airline
+    // e.g., "AA" for American Airlines (the iata code)
+    private String airlineCode;
+    // Full name of the airline
+    private String name;
 
     // Constructors
-    public Airline() {}
+    public Airline() {
+
+    }
 
     public Airline(String airlineCode, String name) {
         this.airlineCode = airlineCode;
@@ -16,28 +20,26 @@ public class Airline {
     }
 
     // Getters
-    public String getAirlineCode() {
+    public final String getAirlineCode() {
         return airlineCode;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
     // Setters
-    public void setAirlineCode(String airlineCode) {
+    public final void setAirlineCode(String airlineCode) {
         this.airlineCode = airlineCode;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
     // string method
     @Override
     public String toString() {
-        return airlineCode + "{" +
-                ", Name ='" + name + '\'' +
-                '}';
+        return airlineCode + "{" + ", Name ='" + name + '\'' + '}';
     }
 }

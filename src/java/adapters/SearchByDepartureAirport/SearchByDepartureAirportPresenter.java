@@ -49,6 +49,11 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
         }
     }
 
+    /**
+     * Prepares the failure view for the Search by Airport use case.
+     *
+     * @param errorMessage the explanation of the failure
+     */
     @Override
     public void prepareFailView(SearchByDepartureAirportOutputData outputData) {
         // Clear the previous state of the UI before showing the error message

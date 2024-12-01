@@ -13,26 +13,25 @@ import javax.swing.SwingConstants;
 
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SearchByAirlineID.SearchByAirlineIDController;
-import adapters.SearchByAirlineID.SearchByAirlineIDViewModel;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportController;
 import adapters.SearchByDepartureAirport.SearchByDepartureAirportViewModel;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportController;
-import adapters.SearchByArrivalAirport.SearchByArrivalAirportViewModel;
-import adapters.SearchByFlightNumber.SearchByFlightNumberController;
-import adapters.SearchByFlightNumber.SearchByFlightNumberViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
-import app.gui.SearchByArrivalAirportFrames.SearchByArrivalAirportFrame;
-import app.gui.SearchByAirlineIDFrames.SearchByAirlineIDFrame;
-import app.gui.SearchByDepartureAirportFrames.SearchByDepartureAirportFrame;
+import adapters.search_by_airlineid.SearchByAirlineIDController;
+import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
+import adapters.search_by_arrival_airport.SearchByArrivalAirportViewModel;
+import adapters.search_by_flight_number.SearchByFlightNumberController;
+import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
 import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
+import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
+import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;
 import net.miginfocom.swing.MigLayout;
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
 
 /**
  * The starting menu showing options: search by flight number, airlines, and airports.
  */
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class Menu extends JFrame {
     // Constants for the menu UI layout and styling
     static final int MENU_WIDTH = 500;
@@ -69,6 +68,7 @@ public class Menu extends JFrame {
     ));
 
     // Constructor to initialize the frame with controllers and view models
+    @SuppressWarnings({"checkstyle:ParameterNumber", "checkstyle:SuppressWarnings"})
     public Menu(SearchByFlightNumberViewModel searchByFlightNumberViewModel,
                 SearchByFlightNumberController searchByFlightNumberController,
                 SearchByAirlineIDViewModel searchByAirlineIDViewModel,
@@ -108,6 +108,7 @@ public class Menu extends JFrame {
     }
 
     // Method to set up all the components of the menu
+    @SuppressWarnings({"checkstyle:MultipleStringLiterals", "checkstyle:SuppressWarnings"})
     private void setComponents() {
         // Set border for the main panel
         panel.setBorder(BorderFactory.createEmptyBorder(MENU_BORDER, 0, 0, 0));
@@ -172,7 +173,6 @@ public class Menu extends JFrame {
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
-//             Placeholder for world map functionality
             SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
                     seeWorldMapController, seeWorldMapViewModel
             );

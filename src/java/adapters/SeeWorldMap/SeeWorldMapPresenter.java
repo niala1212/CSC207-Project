@@ -1,8 +1,8 @@
 package adapters.SeeWorldMap;
 
 import entities.Flight;
-import use_case.SeeWorldMap.SeeWorldMapOutputBoundary;
-import use_case.SeeWorldMap.SeeWorldMapOutputData;
+import usecase.SeeWorldMap.SeeWorldMapOutputBoundary;
+import usecase.SeeWorldMap.SeeWorldMapOutputData;
 
 import java.awt.geom.Point2D;
 import java.util.Map;

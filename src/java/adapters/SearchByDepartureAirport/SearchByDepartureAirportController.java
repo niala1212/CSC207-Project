@@ -1,7 +1,7 @@
 package adapters.SearchByDepartureAirport;
 
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportInputBoundary;
-import use_case.SearchByDepartureAirport.SearchByDepartureAirportInputData;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportInputBoundary;
+import usecase.SearchByDepartureAirport.SearchByDepartureAirportInputData;
 
 
 public class SearchByDepartureAirportController {
