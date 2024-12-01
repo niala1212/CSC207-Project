@@ -1,28 +1,33 @@
 package adapters.SearchByDepartureAirport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import entities.Flight;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputBoundary;
 import use_case.SearchByDepartureAirport.SearchByDepartureAirportOutputData;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Presenter for the Departures by Airport use case
+ * Presenter for the Departures by Airport use case.
  */
 public class SearchByDepartureAirportPresenter implements SearchByDepartureAirportOutputBoundary {
 
     private SearchByDepartureAirportViewModel viewModel;
+    private final String errorPropertyName = "noFlightsError";
 
     public SearchByDepartureAirportPresenter(SearchByDepartureAirportViewModel searchByDepartureAirportViewModel) {
         this.viewModel = searchByDepartureAirportViewModel;
     }
 
+    /**
+     * Clears the previous results.
+     * @param outputData the output data containing flight information.
+     */
     public void clearView(SearchByDepartureAirportOutputData outputData) {
         SearchByDepartureAirportState state = viewModel.getState();
         state.clearPreviousResults();
         state.setMessage(outputData.getDepartureErrorMessage());
-        viewModel.firePropertyChanged("noFlightsError");
+        viewModel.firePropertyChanged(errorPropertyName);
     }
 
     @Override
@@ -32,8 +37,9 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
         List<Flight> departureFlights = outputData.getDepartureFlights();
         if (departureFlights.isEmpty()) {
             state.setMessage("No flights available for this airport.");
-            viewModel.firePropertyChanged("noFlightsError");
-        } else {
+            viewModel.firePropertyChanged(errorPropertyName);
+        }
+        else {
             String airportName = departureFlights.get(0).getDepartureAirport();
             List<String> flightNumbers = extractFlightNumbers(departureFlights);
             state.setAirportName(airportName);
@@ -45,11 +51,14 @@ public class SearchByDepartureAirportPresenter implements SearchByDepartureAirpo
 
     @Override
     public void prepareFailView(SearchByDepartureAirportOutputData outputData) {
-        clearView(outputData); // Clear the previous state of the UI before showing the error message
+        // Clear the previous state of the UI before showing the error message
+        clearView(outputData);
 
         SearchByDepartureAirportState state = viewModel.getState();
-        state.setMessage(outputData.getDepartureErrorMessage()); // Set the error message in the state
-        viewModel.firePropertyChanged("noFlightsError");
+
+        // Set the error message in the state
+        state.setMessage(outputData.getDepartureErrorMessage());
+        viewModel.firePropertyChanged(errorPropertyName);
     }
 
     private List<String> extractFlightNumbers(List<Flight> flights) {
