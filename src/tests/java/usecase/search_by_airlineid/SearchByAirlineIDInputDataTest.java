@@ -64,6 +64,7 @@ public class SearchByAirlineIDInputDataTest {
     public void testConstructorWithSpecialCharacters() {
         String specialCharsCode = "@$";
         SearchByAirlineIDInputData inputData = new SearchByAirlineIDInputData(specialCharsCode);
-        assertEquals("The IATA code should handle special characters", specialCharsCode, inputData.getAirlineIataCode());
+        assertEquals("The IATA code should handle special characters", specialCharsCode,
+                inputData.getAirlineIataCode());
     }
 }

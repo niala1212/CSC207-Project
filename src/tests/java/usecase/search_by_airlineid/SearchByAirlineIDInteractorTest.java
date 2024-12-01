@@ -68,7 +68,8 @@ public class SearchByAirlineIDInteractorTest {
 
         verify(mockSearchByAirlineIDPresenter).prepareFailView(argThat(outputData ->
                 outputData.getErrorMessage()
-                        .equals("Error retrieving flight data for the specified airline. Please try a different IATA.")));
+                        .equals("Error retrieving flight data for the specified airline." +
+                                " Please try a different IATA.")));
     }
 
     @Test

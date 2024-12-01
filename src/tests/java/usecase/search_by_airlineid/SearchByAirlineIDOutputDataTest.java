@@ -30,7 +30,8 @@ public class SearchByAirlineIDOutputDataTest {
     public void testSuccessConstructor() {
         assertNotNull("Filtered flights should not be null", successOutputData.getFilteredFlights());
         assertNull("Error message should be null in success case", successOutputData.getErrorMessage());
-        assertEquals("The filtered flights list should match the input", flights, successOutputData.getFilteredFlights());
+        assertEquals("The filtered flights list should match the input", flights,
+                successOutputData.getFilteredFlights());
     }
 
     @Test
@@ -59,7 +60,8 @@ public class SearchByAirlineIDOutputDataTest {
     @Test
     public void testGetFilteredFlightsWhenSuccess() {
         assertNotNull("Filtered flights should not be null in success case", successOutputData.getFilteredFlights());
-        assertEquals("The filtered flights should match the expected list", flights, successOutputData.getFilteredFlights());
+        assertEquals("The filtered flights should match the expected list", flights,
+                successOutputData.getFilteredFlights());
     }
 
     @Test
