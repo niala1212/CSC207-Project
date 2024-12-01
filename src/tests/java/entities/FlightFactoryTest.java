@@ -52,7 +52,7 @@ class FlightFactoryTest {
         assertEquals("15:10 UTC", flight.getEstimatedArrivalTime());
 
         // Assert that the coordinates are correctly set to "[40.7128, -74.006]"
-        assertEquals("[40.7128, -74.006]", flight.getCoordinates());
+        assertArrayEquals(new double[]{40.7128, -74.006}, flight.getCoordinates());
     }
 
     // Test case for creating a Flight object with null coordinates

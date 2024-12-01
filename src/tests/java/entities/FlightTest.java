@@ -44,7 +44,7 @@ class FlightTest {
         assertEquals("15:00 UTC", flight.getScheduledArrivalTime());
         assertEquals("12:10 UTC", flight.getEstimatedDepartureTime());
         assertEquals("15:10 UTC", flight.getEstimatedArrivalTime());
-        assertEquals("[40.7128, -74.006]", flight.getCoordinates());
+        assertArrayEquals(new double[]{40.7128, -74.006}, flight.getCoordinates());
     }
 
     // Test case for the toString() method of the Flight class
