@@ -71,6 +71,7 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
 
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
+        searchField.setColumns(1000000);
         searchField.setForeground(Color.GRAY);
         // Set initial color to gray for placeholder text
         searchField.setForeground(Color.GRAY);
