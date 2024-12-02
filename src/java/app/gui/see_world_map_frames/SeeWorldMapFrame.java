@@ -1,4 +1,4 @@
-package app.gui.SeeWorldMapFrames;
+package app.gui.see_world_map_frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
