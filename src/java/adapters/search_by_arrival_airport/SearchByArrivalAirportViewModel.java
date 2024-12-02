@@ -9,7 +9,7 @@ public class SearchByArrivalAirportViewModel extends AbstractViewModel<SearchByA
 
     public SearchByArrivalAirportViewModel() {
         // This is the initial state when searching by arrival airport
-        super(ViewState.SEARCHBYAIRPORTID);
+        super(ViewState.SEARCHBYARRIVALAIRPORT);
 
         // Seting the initial data state
         setState(new SearchByArrivalAirportState());
