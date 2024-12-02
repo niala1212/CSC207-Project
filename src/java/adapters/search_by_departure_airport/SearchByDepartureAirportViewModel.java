@@ -8,7 +8,7 @@ import adapters.AbstractViewModel;
 public class SearchByDepartureAirportViewModel extends AbstractViewModel<SearchByDepartureAirportState> {
 
     public SearchByDepartureAirportViewModel() {
-        super(ViewState.SEARCHBYAIRPORTID);
+        super(ViewState.SEARCHBYDEPARTUREAIRPORT);
         setState(new SearchByDepartureAirportState());
     }
 }

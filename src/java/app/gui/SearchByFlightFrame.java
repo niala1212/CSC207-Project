@@ -38,7 +38,6 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
     static final int SEARCH_BUTTON_HEIGHT = 40;
     static final int FONT_SIZE_LARGE = 20;
     static final int FONT_SIZE_SMALL = 15;
-    static final String PLACEHOLDER_TEXT = "Enter Flight Number (IATA code)";
     static final int ERROR_LABEL_WIDTH = 300;
 
     private final SearchByFlightNumberViewModel searchByFlightNumberViewModel;
