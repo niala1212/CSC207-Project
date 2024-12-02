@@ -248,7 +248,7 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
 
     @Override
     public List<Flight> getLandedFlightsByAirport(String airportCode) throws IOException {
-        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY
+        String apiUrl = URLBASE + ACCESSKEY
                 + "&arr_iata=" + airportCode + "&flight_status=landed";
         return getFlightsFromUrl(apiUrl);
     }
