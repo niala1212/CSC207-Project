@@ -1,11 +1,6 @@
 package app.gui.see_world_map_frames;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.HeadlessException;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
@@ -148,11 +143,45 @@ public class SeeWorldMapFrame extends JFrame implements PropertyChangeListener {
         mapLabel.setIcon(new ImageIcon(mapImage));
     }
 
+    private void showError(SeeWorldMapState seeWorldMapState) {
+        // Create a new image to overlay the error text
+        final int fontSize = 20;
+        BufferedImage mapImage = new BufferedImage(SWM_WIDTH, SWM_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = mapImage.createGraphics();
+
+        // Draw the base map image
+        ImageIcon baseMap = (ImageIcon) mapLabel.getIcon();
+        if (baseMap != null) {
+            g.drawImage(baseMap.getImage(), 0, 0, SWM_WIDTH, SWM_HEIGHT, null);
+        }
+        else {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, SWM_WIDTH, SWM_HEIGHT);
+        }
+
+        // Overlay the error message
+        g.setColor(Color.RED);
+        g.setFont(new Font("arial", Font.PLAIN, fontSize));
+        String errorMessage = "Error: No flights retrieved, please try to generate again or replace the API key.";
+
+        // Calculate the x and y to center the message
+        int x = (SWM_WIDTH - g.getFontMetrics().stringWidth(errorMessage)) / 2;
+        int y = SWM_HEIGHT / 2;
+
+        g.drawString(errorMessage, x, y);
+
+        g.dispose();
+        mapLabel.setIcon(new ImageIcon(mapImage));
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("flightDetails".equals(evt.getPropertyName())) {
             // Update the map when the state changes
             showResult(seeWorldMapViewModel.getState());
+        }
+        else if ("error".equals(evt.getPropertyName())) {
+            showError(seeWorldMapViewModel.getState());
         }
     }
 }
