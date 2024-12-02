@@ -42,7 +42,7 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
         addSearchBar();
         add(resultPanel, BorderLayout.CENTER);
 
-        setTitle("Flight Tracker Search By Flight Number");
+        setTitle("Flight Tracker Search For Landed Flights");
         setSize(SEARCHBYAIRPORT_WIDTH, SEARCHBYAIRPORT_HEIGHT);
         setVisible(true);
         // Request focus for the frame itself, not the text field
