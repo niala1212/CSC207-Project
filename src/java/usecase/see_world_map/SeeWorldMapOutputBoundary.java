@@ -1,4 +1,4 @@
-package usecase.SeeWorldMap;
+package usecase.see_world_map;
 
 /**
  * Output Boundary for the See world map use case.

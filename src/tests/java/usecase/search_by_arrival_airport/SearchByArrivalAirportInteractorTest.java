@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class SearchByArrivalAirportInteractorTest {
     }
 
     @Test
-    public void testExecute_FlightsFound() {
-        String airportCode = "JFK";
+    public void testExecute_FlightsFound() throws IOException {
+        // Arrange: Prepare mock data
+        String airportCode = "XYZ";
         List<Flight> flights = Arrays.asList(new Flight("AB123", "2024-11-26"),
                 new Flight("CD456", "2024-12-27"));
         SearchByArrivalAirportInputData inputData = mock(SearchByArrivalAirportInputData.class);
@@ -43,9 +45,10 @@ public class SearchByArrivalAirportInteractorTest {
     }
 
     @Test
-    public void testExecute_NoFlightsFound() {
-        String airportCode = "JFK";
-        List<Flight> flights = List.of();
+    public void testExecute_NoFlightsFound() throws IOException {
+        // Arrange: Prepare mock data with no flights
+        String airportCode = "XYZ";
+        List<Flight> flights = List.of();  // No flights
         SearchByArrivalAirportInputData inputData = mock(SearchByArrivalAirportInputData.class);
         when(inputData.getAirportCode()).thenReturn(airportCode);
         when(mockFlightDataAccessObject.getArrivalFlights(airportCode)).thenReturn(flights);
@@ -58,8 +61,9 @@ public class SearchByArrivalAirportInteractorTest {
     }
 
     @Test
-    public void testExecute_FlightDataAccessReturnsNull() {
-        String airportCode = "JFK";
+    public void testExecute_FlightDataAccessReturnsNull() throws IOException {
+        // Arrange: Prepare mock data with null flights
+        String airportCode = "XYZ";
         SearchByArrivalAirportInputData inputData = mock(SearchByArrivalAirportInputData.class);
         when(inputData.getAirportCode()).thenReturn(airportCode);
         when(mockFlightDataAccessObject.getArrivalFlights(airportCode)).thenReturn(null);
@@ -71,8 +75,9 @@ public class SearchByArrivalAirportInteractorTest {
     }
 
     @Test
-    public void testExecute_ExceptionThrown() {
-        String airportCode = "JFK";
+    public void testExecute_ExceptionThrown() throws IOException {
+        // Arrange: Prepare mock data with an exception being thrown by the data access object
+        String airportCode = "XYZ";
         SearchByArrivalAirportInputData inputData = mock(SearchByArrivalAirportInputData.class);
         when(inputData.getAirportCode()).thenReturn(airportCode);
         when(mockFlightDataAccessObject.getArrivalFlights(airportCode)).thenThrow(new RuntimeException("API Error"));

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class SearchByFlightNumberInteractorTest {
@@ -28,7 +29,7 @@ public class SearchByFlightNumberInteractorTest {
 
     // Test case when a flight is found by flight number
     @Test
-    public void testExecute_FlightFound() {
+    public void testExecute_FlightFound() throws IOException {
         // Arrange: Prepare mock data
         String flightNumber = "AB123";
         Flight foundFlight = new Flight(flightNumber, "2024-11-26"); // Example flight object
@@ -48,7 +49,7 @@ public class SearchByFlightNumberInteractorTest {
 
     // Test case when no flight is found by flight number
     @Test
-    public void testExecute_NoFlightFound() {
+    public void testExecute_NoFlightFound() throws IOException {
         // Arrange: Prepare mock data with no flight found
         String flightNumber = "AB123";
         SearchByFlightNumberInputData inputData = mock(SearchByFlightNumberInputData.class);
@@ -67,7 +68,7 @@ public class SearchByFlightNumberInteractorTest {
 
     // Test case when an exception occurs during data access
     @Test
-    public void testExecute_ExceptionThrown() {
+    public void testExecute_ExceptionThrown() throws IOException {
         // Arrange: Prepare mock data where an exception will be thrown
         String flightNumber = "AB123";
         SearchByFlightNumberInputData inputData = mock(SearchByFlightNumberInputData.class);

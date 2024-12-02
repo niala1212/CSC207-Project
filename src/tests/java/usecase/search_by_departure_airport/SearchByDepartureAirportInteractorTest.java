@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ class SearchByDepartureAirportInteractorTest {
     }
 
     @Test
-    void testExecute_NoFlightsFound() {
+    void testExecute_NoFlightsFound() throws IOException {
         // Arrange
         String airportCode = "YYZ";
         SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData(airportCode);
@@ -54,7 +55,7 @@ class SearchByDepartureAirportInteractorTest {
     }
 
     @Test
-    void testExecute_FlightsFound() {
+    void testExecute_FlightsFound() throws IOException {
         // Arrange
         String airportCode = "JFK";
         SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData(airportCode);
@@ -73,7 +74,7 @@ class SearchByDepartureAirportInteractorTest {
     }
 
     @Test
-    void testExecute_NullFlightsReturned() {
+    void testExecute_NullFlightsReturned() throws IOException {
         // Arrange
         String airportCode = "ORD";
         SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData(airportCode);
@@ -89,7 +90,7 @@ class SearchByDepartureAirportInteractorTest {
     }
 
     @Test
-    void testExecute_ExceptionThrownByDataAccess() {
+    void testExecute_ExceptionThrownByDataAccess() throws IOException {
         // Arrange
         String airportCode = "ATL";
         SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData(airportCode);

@@ -2,26 +2,27 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The representation of a map in our program.
  */
 public class Map {
     private int mapID;
-    private List<Flight> flightList;
+    private final List<Flight> flightList;
     private int zoomLevel;
     private double[] centreCoordinates;
 
-
-        // Default Constructor
+    // Default Constructor
     public Map() {
-        this.flightList = new ArrayList<>(); // Initialize to an empty list
+        // Initialize to an empty list
+        this.flightList = new ArrayList<>();
     }
 
     // Parameterized Constructor
     public Map(int mapID, List<Flight> flightList, int zoomLevel, double[] centreCoordinates) {
         this.mapID = mapID;
-        this.flightList = (flightList != null) ? flightList : new ArrayList<>(); // Ensure non-null list
+        this.flightList = Objects.requireNonNullElseGet(flightList, ArrayList::new);
         this.zoomLevel = zoomLevel;
         this.centreCoordinates = centreCoordinates;
     }
@@ -50,10 +51,12 @@ public class Map {
         if (flightList != null && flight != null) {
             for (Flight existingFlight : flightList) {
                 if (existingFlight.getFlightNumber().equalsIgnoreCase(flight.getFlightNumber())) {
-                    return; // Flight is already in the list, so we skip adding
+                    // Flight is already in the list, so we skip adding
+                    return;
                 }
             }
-            flightList.add(flight); // No duplicate found, so add the flight
+            // No duplicate found, so add the flight
+            flightList.add(flight);
         }
     }
 

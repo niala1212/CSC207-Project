@@ -17,6 +17,8 @@ public class Flight {
     //    ALL TIMES ARE GIVEN IN UTC
     private double[] currentLocation;
 
+    private final String utc = " UTC";
+
     public Flight(String flightNumber, String flightDate) {
         this.flightNumber = flightNumber;
         this.flightDate = flightDate;
@@ -25,8 +27,8 @@ public class Flight {
     public final void setCurrentLocation(double[] currentLocation) {
         this.currentLocation = currentLocation;
     }
-
     // Setters
+
     public final void setAirline(String airline) {
         this.airline = airline;
     }
@@ -43,21 +45,20 @@ public class Flight {
         this.status = flightStatus;
     }
 
-    @SuppressWarnings({"checkstyle:MultipleStringLiterals", "checkstyle:SuppressWarnings"})
     public final void setScheduledDepartureTime(String parse) {
-        this.scheduledDepartureTime = parse + "UTC";
+        this.scheduledDepartureTime = parse + utc;
     }
 
     public final void setEstimatedDepartureTime(String parse) {
-        this.estimatedDepartureTime = parse + "UTC";
+        this.estimatedDepartureTime = parse + utc;
     }
 
     public final void setScheduledArrivalTime(String parse) {
-        this.scheduledArrivalTime = parse + "UTC";
+        this.scheduledArrivalTime = parse + utc;
     }
 
     public final void setEstimatedArrivalTime(String parse) {
-        this.estimatedArrivalTime = parse + " UTC";
+        this.estimatedArrivalTime = parse + utc;
     }
 
     // Getters
