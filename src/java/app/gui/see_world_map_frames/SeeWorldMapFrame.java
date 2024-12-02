@@ -1,6 +1,12 @@
 package app.gui.see_world_map_frames;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
@@ -18,7 +24,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 import adapters.see_world_map.SeeWorldMapController;
 import adapters.see_world_map.SeeWorldMapState;
@@ -45,7 +50,7 @@ public class SeeWorldMapFrame extends JFrame implements PropertyChangeListener {
 
         setTitle("See World Map");
         setSize(SWM_WIDTH + FRAME_OFFSET, SWM_HEIGHT + FRAME_OFFSET);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
         initComponents();

@@ -33,10 +33,10 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
         SearchByArrivalAirportDataAccessInterface, SearchAirportLandedDataAccessInterface,
         SeeWorldMapDataAccessInterface {
 
-    // private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9";
+    private static final String ACCESSKEY = "f3b8e30f646315a2874f86284f52d5b9";
     // private static final String ACCESSKEY = "977c40fee275141530975467ffa33986";
     // private static final String ACCESSKEY = "388c9c835384d719501c30fb8937f7d9";
-    private static final String ACCESSKEY = "10f6eb4582080b68c57443f13f40d279";
+    //    private static final String ACCESSKEY = "10f6eb4582080b68c57443f13f40d279";
     private static final String URLBASE = "https://api.aviationstack.com/v1/flights?access_key=";
     /**
      * Makes an HTTP GET request to the given API URL and returns the data as a JSON array.
@@ -248,8 +248,7 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
 
     @Override
     public List<Flight> getLandedFlightsByAirport(String airportCode) throws IOException {
-        String apiUrl = URLBASE + ACCESSKEY
-                + "&arr_iata=" + airportCode + "&flight_status=landed";
+        String apiUrl = URLBASE + ACCESSKEY + "&arr_iata=" + airportCode + "&flight_status=landed";
         return getFlightsFromUrl(apiUrl);
     }
 }

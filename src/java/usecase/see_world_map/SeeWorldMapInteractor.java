@@ -24,7 +24,7 @@ public class SeeWorldMapInteractor implements SeeWorldMapInputBoundary {
 
         try {
             List<Flight> foundFlights = flightDataAccessObject.getRandomFlights();
-            System.out.println(foundFlights);
+            //            System.out.println(foundFlights);
             if (foundFlights == null) {
                 // Critical failure: API or connection issue
                 SeeWorldMapOutputData outputData = new SeeWorldMapOutputData(
