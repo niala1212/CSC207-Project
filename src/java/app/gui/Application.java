@@ -2,9 +2,9 @@ package app.gui;
 
 import javax.swing.JFrame;
 
-import adapters.SearchAirportLanded.SearchAirportLandedController;
-import adapters.SearchAirportLanded.SearchAirportLandedPresenter;
-import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
+import adapters.search_airport_landed.SearchAirportLandedController;
+import adapters.search_airport_landed.SearchAirportLandedPresenter;
+import adapters.search_airport_landed.SearchAirportLandedViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapPresenter;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
@@ -21,10 +21,10 @@ import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberPresenter;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
 import dataaccess.AllAPICalling;
-import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
-import usecase.SearchAirportLanded.SearchAirportLandedInputBoundary;
-import usecase.SearchAirportLanded.SearchAirportLandedInteractor;
-import usecase.SearchAirportLanded.SearchAirportLandedOutputBoundary;
+import usecase.search_airport_landed.SearchAirportLandedDataAccessInterface;
+import usecase.search_airport_landed.SearchAirportLandedInputBoundary;
+import usecase.search_airport_landed.SearchAirportLandedInteractor;
+import usecase.search_airport_landed.SearchAirportLandedOutputBoundary;
 import usecase.search_by_airlineid.SearchByAirlineIDDataAccessInterface;
 import usecase.search_by_airlineid.SearchByAirlineIDInputBoundary;
 import usecase.search_by_airlineid.SearchByAirlineIDInteractor;

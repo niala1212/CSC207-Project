@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 import entities.Flight;
 import entities.FlightFactory;
-import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
+import usecase.search_airport_landed.SearchAirportLandedDataAccessInterface;
 import usecase.SeeWorldMap.SeeWorldMapDataAccessInterface;
 import usecase.search_by_airlineid.SearchByAirlineIDDataAccessInterface;
 import usecase.search_by_arrival_airport.SearchByArrivalAirportDataAccessInterface;
@@ -283,6 +283,8 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
 
     @Override
     public List<Flight> getLandedFlightsByAirport(String airportCode) {
-        return List.of();
+        String apiUrl = "https://api.aviationstack.com/v1/flights?access_key=" + ACCESSKEY
+                + "&arr_iata=" + airportCode + "&flight_status=landed";
+        return getFlightsFromUrl(apiUrl);
     }
 }

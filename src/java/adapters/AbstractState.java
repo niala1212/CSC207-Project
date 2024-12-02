@@ -4,7 +4,7 @@ package adapters;
  * The Abstract state with flight details.
  */
 public abstract class AbstractState {
-    private String searchError;
+    private String error;
     private String flightNumber;
     private String departureTime;
     private String arrivalTime;
@@ -13,8 +13,8 @@ public abstract class AbstractState {
     private String status;
 
     // Getters for UI access
-    public final String getSearchError() {
-        return searchError;
+    public final String getError() {
+        return error;
     }
 
     public final String getFlightNumber() {
@@ -42,8 +42,8 @@ public abstract class AbstractState {
     }
 
     // Setters for UI access
-    public final void setSearchError(String searchError) {
-        this.searchError = searchError;
+    public final void setError(String error) {
+        this.error = error;
     }
 
     public final void setFlightNumber(String flightNumber) {

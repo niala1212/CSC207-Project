@@ -1,6 +1,8 @@
-package usecase.SearchAirportLanded;
+package usecase.search_airport_landed;
 
 import entities.Flight;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,23 +10,24 @@ import java.util.List;
  */
 public class SearchAirportLandedOutputData {
 
-    private final List<Flight> filteredFlights;
+    private final List<FlightOutputData> flightOutputDataList = new ArrayList<FlightOutputData>();
     private final String errorMessage;
 
     // Constructor for success (with filtered flights)
     public SearchAirportLandedOutputData(List<Flight> filteredFlights) {
-        this.filteredFlights = filteredFlights;
+        for (Flight flight : filteredFlights) {
+            this.flightOutputDataList.add(new FlightOutputData(flight));
+        }
         this.errorMessage = null;
     }
 
     // Constructor for failure (when no flights are found or an error occurs)
     public SearchAirportLandedOutputData(String errorMessage) {
-        this.filteredFlights = null;
         this.errorMessage = errorMessage;
     }
 
-    public List<Flight> getFilteredFlights() {
-        return filteredFlights;
+    public List<FlightOutputData> getFlightOutputData() {
+        return flightOutputDataList;
     }
 
     public String getErrorMessage() {
