@@ -1,11 +1,14 @@
 package adapters.search_airport_landed;
 
+import java.util.List;
+
 import usecase.search_airport_landed.FlightOutputData;
 import usecase.search_airport_landed.SearchAirportLandedOutputBoundary;
 import usecase.search_airport_landed.SearchAirportLandedOutputData;
 
-import java.util.List;
-
+/**
+ * The Search by Landed Airport Presenter.
+ */
 public class SearchAirportLandedPresenter implements SearchAirportLandedOutputBoundary {
 
     private SearchAirportLandedViewModel viewModel;

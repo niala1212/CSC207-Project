@@ -1,10 +1,11 @@
 package usecase.search_airport_landed;
 
-import entities.Flight;
 import java.util.List;
 
+import entities.Flight;
+
 /**
- * The Search by Airport Interactor.
+ * The Search by Landed Airport Interactor.
  */
 public class SearchAirportLandedInteractor implements SearchAirportLandedInputBoundary {
 
@@ -43,10 +44,10 @@ public class SearchAirportLandedInteractor implements SearchAirportLandedInputBo
                 searchAirportLandedPresenter.prepareSuccessView(outputData);
             }
         }
-        catch (Exception e) {
+        catch (Exception error) {
             // Unexpected failure: Handle exceptions
             SearchAirportLandedOutputData outputData = new SearchAirportLandedOutputData(
-                    "An unexpected error occurred: " + e.getMessage());
+                    "An unexpected error occurred: " + error.getMessage());
             searchAirportLandedPresenter.prepareFailView(outputData);
         }
     }
