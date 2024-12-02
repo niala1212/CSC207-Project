@@ -18,7 +18,8 @@ public class SearchByDepartureAirportInteractor implements SearchByDepartureAirp
         this.searchByDepartureAirportPresenter = searchByDepartureAirportPresenter;
     }
 
-    @SuppressWarnings({"checkstyle:ReturnCount", "checkstyle:SuppressWarnings", "checkstyle:IllegalCatch", "checkstyle:CatchParameterName"})
+    @SuppressWarnings({"checkstyle:ReturnCount", "checkstyle:SuppressWarnings", "checkstyle:IllegalCatch",
+                       "checkstyle:CatchParameterName"})
     @Override
     public void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData) {
         String airportCode = searchByDepartureAirportInputData.getAirportCode();
