@@ -156,5 +156,9 @@ public class SearchByArrivalAirportFrame extends JFrame implements PropertyChang
                 displayError(state.getMessage());
             }
         }
+        else if ("noFlightsError".equals(event.getPropertyName())) {
+            // Handle errors that come from failure (e.g., API errors, invalid IATA codes)
+            displayError(state.getMessage());
+        }
     }
 }

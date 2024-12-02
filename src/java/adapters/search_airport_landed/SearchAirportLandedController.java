@@ -1,7 +1,7 @@
-package adapters.SearchAirportLanded;
+package adapters.search_airport_landed;
 
-import usecase.SearchAirportLanded.SearchAirportLandedInputBoundary;
-import usecase.SearchAirportLanded.SearchAirportLandedInputData;
+import usecase.search_airport_landed.SearchAirportLandedInputBoundary;
+import usecase.search_airport_landed.SearchAirportLandedInputData;
 
 
 public class SearchAirportLandedController {
@@ -13,7 +13,7 @@ public class SearchAirportLandedController {
 
     /**
      * Executes the search by flight number use case.
-     * @param airportCode
+     * @param airportCode input
      */
     public void execute(String airportCode) {
         final SearchAirportLandedInputData inputData = new SearchAirportLandedInputData(airportCode);

@@ -37,7 +37,7 @@ public class SeeWorldMapPresenter implements SeeWorldMapOutputBoundary {
     public void prepareFailView(SeeWorldMapOutputData error) {
         // Update the SearchViewModel to show the error message
         SeeWorldMapState state = seeWorldMapViewModel.getState();
-        state.setSearchError(error.getErrorMessage());
+        state.setError(error.getErrorMessage());
         // Notify View to update the error message
         seeWorldMapViewModel.firePropertyChanged("error");
     }

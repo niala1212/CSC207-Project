@@ -1,8 +1,8 @@
 package app.gui;
 
 import adapters.AbstractState;
-import adapters.SearchAirportLanded.SearchAirportLandedController;
-import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
+import adapters.search_airport_landed.SearchAirportLandedController;
+import adapters.search_airport_landed.SearchAirportLandedViewModel;
 import adapters.search_by_departure_airport.SearchByDepartureAirportController;
 import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
 import net.miginfocom.swing.MigLayout;
@@ -14,19 +14,18 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
-public class SearchByAirportFrame extends JFrame implements PropertyChangeListener {
+public class SearchAirportLandedFrame extends JFrame implements PropertyChangeListener {
     static final int SEARCHBYAIRPORT_WIDTH = 600;
     static final int SEARCHBYAIRPORT_HEIGHT = 600;
     static final String SEARCHBYAIRPORT_FONT = "Arial";
 
-    private final SearchByDepartureAirportViewModel searchByDepartureAirportViewModel;
-    private final SearchByDepartureAirportController searchByDepartureAirportController;
     private final SearchAirportLandedViewModel searchAirportLandedViewModel;
     private final SearchAirportLandedController searchAirportLandedController;
 
     // search panel
-    private final String placeholderText = "Enter Airport Code (IATA code)";
+    private final String placeholderText = "Enter Airport Code (IATA code) e.g. YYZ";
     private final JPanel searchPanel = new JPanel(new MigLayout("insets 10"));
 
     // result panel
@@ -34,19 +33,16 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
     private final JScrollPane scrollPane = new JScrollPane();
     private final JPanel resultPanel = new JPanel(new MigLayout("insets 10, fill"));
 
-    public SearchByAirportFrame(SearchByDepartureAirportController searchByDepartureAirportController,
-                                SearchByDepartureAirportViewModel searchByDepartureAirportViewModel,
-                                SearchAirportLandedController searchAirportLandedController,
-                                SearchAirportLandedViewModel searchAirportLandedViewModel) throws HeadlessException {
-        this.searchByDepartureAirportViewModel = searchByDepartureAirportViewModel;
-        this.searchByDepartureAirportController = searchByDepartureAirportController;
+    public SearchAirportLandedFrame(SearchAirportLandedController searchAirportLandedController,
+                                    SearchAirportLandedViewModel searchAirportLandedViewModel) throws HeadlessException {
         this.searchAirportLandedViewModel = searchAirportLandedViewModel;
         this.searchAirportLandedController = searchAirportLandedController;
+        searchAirportLandedViewModel.addPropertyChangeListener(this);
 
         addSearchBar();
         add(resultPanel, BorderLayout.CENTER);
 
-        setTitle("Flight Tracker Search By Flight Number");
+        setTitle("Flight Tracker Search For Landed Flights");
         setSize(SEARCHBYAIRPORT_WIDTH, SEARCHBYAIRPORT_HEIGHT);
         setVisible(true);
         // Request focus for the frame itself, not the text field
@@ -84,48 +80,34 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
         JButton searchButton = new JButton("Search");
         searchButton.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.BOLD, 15));
         searchPanel.add(searchButton, "height 40, grow, wrap");
-
-        // Create a JComboBox (dropdown) with options
-        String[] options = {
-            "Search for Departing Flights", "Search for Already Landed Flights"};
-        JComboBox<String> dropdown = new JComboBox<>(options);
-        dropdown.setFont(new Font(SEARCHBYAIRPORT_FONT, Font.PLAIN, 20));
-        dropdown.setForeground(Color.DARK_GRAY);
-        dropdown.setBackground(Color.PINK);
-        searchPanel.add(dropdown, "height 40, grow, span");
-
         // the search button will execute a different use case depending on the selected option in the JComboBox
         searchButton.addActionListener(event -> {
             System.out.println(searchField.getText());
-            String selectedUseCase = (String) dropdown.getSelectedItem();
-            switch (selectedUseCase) {
-                case "Search for Departing Flights":
-                    searchByDepartureAirportController.execute(searchField.getText());
-                    break;
-                case "Search for Already Landed Flights":
-                    searchAirportLandedController.execute(searchField.getText());
-                    break;
-                default:
-                    System.out.println("Error. Selected:" + selectedUseCase);
-            }
+            searchAirportLandedController.execute(searchField.getText());
         });
 
         add(searchPanel, BorderLayout.NORTH);
     }
 
-    private void showResult(AbstractState state) {
-        String[] columnNames = {"IATA Flight Number", "Arrival Time", "Departure Time", "Departure Airport", "Arrival Airport", "Status"};
-        Object[][] data = {{
-                state.getFlightNumber(),
-                state.getArrivalTime(),
-                state.getDepartureTime(),
-                state.getDepartureAirport(),
-                state.getArrivalAirport(),
-                state.getStatus()},
+    private void showResult(List<AbstractState> states) {
+        String[] columnNames = {"IATA Flight Number", "Arrival Time",
+            "Departure Time", "Departure Airport", "Arrival Airport", "Status"};
+        // Matrix of flight information. Each row is a flight.
+        String[][] data = new String[states.size()][columnNames.length];
+        int i = 0;
+        for (AbstractState state : states) {
+            String[] flightData = {
+                    state.getFlightNumber(),
+                    state.getArrivalTime(),
+                    state.getDepartureTime(),
+                    state.getDepartureAirport(),
+                    state.getArrivalAirport(),
+                    state.getStatus()};
+            data[i] = flightData;
+            i++;
+        }
 
-        };
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-
         JTable table = new JTable(tableModel);
         scrollPane.setViewportView(table);
 
@@ -158,17 +140,11 @@ public class SearchByAirportFrame extends JFrame implements PropertyChangeListen
      */
     @Override
     public void propertyChange(PropertyChangeEvent event) {
-        if ("departureFlightDetails".equals(event.getPropertyName())) {
-            showResult(searchByDepartureAirportViewModel.getState());
-        }
-        else if ("departureFlightError".equals(event.getPropertyName())) {
-            showError(searchByDepartureAirportViewModel.getState().getSearchError());
-        }
-        else if ("landedFlightDetails".equals(event.getPropertyName())) {
-            showResult(searchAirportLandedViewModel.getState());
+        if ("landedFlightDetails".equals(event.getPropertyName())) {
+            showResult(searchAirportLandedViewModel.getState().getFlightStates());
         }
         else if ("landedFlightError".equals(event.getPropertyName())) {
-            showError(searchAirportLandedViewModel.getState().getSearchError());
+            showError(searchAirportLandedViewModel.getState().getError());
         }
     }
 }

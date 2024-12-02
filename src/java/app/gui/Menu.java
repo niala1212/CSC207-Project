@@ -12,10 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import adapters.SearchAirportLanded.SearchAirportLandedController;
-import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.see_world_map.SeeWorldMapController;
-import adapters.see_world_map.SeeWorldMapViewModel;
+import adapters.search_airport_landed.SearchAirportLandedController;
+import adapters.search_airport_landed.SearchAirportLandedViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDController;
 import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
@@ -24,10 +22,12 @@ import adapters.search_by_departure_airport.SearchByDepartureAirportController;
 import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
 import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
-import app.gui.see_world_map_frames.SeeWorldMapFrame;
+import adapters.see_world_map.SeeWorldMapController;
+import adapters.see_world_map.SeeWorldMapViewModel;
 import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
 import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;
 import app.gui.search_by_departure_airport_frames.SearchByDepartureAirportFrame;
+import app.gui.see_world_map_frames.SeeWorldMapFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -36,8 +36,8 @@ import net.miginfocom.swing.MigLayout;
 @SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class Menu extends JFrame {
     // Constants for the menu UI layout and styling
-    static final int MENU_WIDTH = 500;
-    static final int MENU_HEIGHT = 300;
+    static final int MENU_WIDTH = 600;
+    static final int MENU_HEIGHT = 400;
     static final int MENU_BORDER = 10;
     static final int MENU_BUTTON_FONT_SIZE = 20;
     static final int MENU_TITLE_FONT_SIZE = 30;
@@ -63,7 +63,7 @@ public class Menu extends JFrame {
     private final JButton searchByAirlineB = new JButton("Search By Airline");
     private final JButton searchByArrivalAirportB = new JButton("Search By Arrival Airport");
     private final JButton searchByDepartureAirportB = new JButton("Search By Departure Airport");
-    private final JButton searchByAirportB = new JButton("Search By Airport");
+    private final JButton searchAirportLanded = new JButton("Search for Landed Flights at Airport");
     private final JButton seeWorldMapB = new JButton("See World Map");
     private final JPanel panel = new JPanel(new MigLayout(
             "insets" + MENU_BORDER + ", fill"
@@ -161,17 +161,16 @@ public class Menu extends JFrame {
         });
 
         // Setup Search By Airport button and action listener
-        searchByAirportB.setFont(buttonFont);
-        panel.add(searchByAirportB, "span, grow");
-        searchByAirportB.addActionListener(event -> {
+        searchAirportLanded.setFont(buttonFont);
+        panel.add(searchAirportLanded, "span, grow");
+        searchAirportLanded.addActionListener(event -> {
             // Opens the SearchByAirlineIDFrame to search for flights by airport
-            SearchByAirportFrame searchByAirportFrame = new SearchByAirportFrame(
-                    searchByDepartureAirportController, searchByDepartureAirportViewModel,
+            SearchAirportLandedFrame searchAirportLandedFrame = new SearchAirportLandedFrame(
                     searchAirportLandedController, searchAirportLandedViewModel
             );
         });
 
-        // Setup See World Map button (to be implemented later)
+        // Setup See World Map button
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
@@ -180,8 +179,8 @@ public class Menu extends JFrame {
                         seeWorldMapController, seeWorldMapViewModel
                 );
             }
-            catch (IOException e) {
-                throw new RuntimeException(e);
+            catch (IOException error) {
+                throw new RuntimeException(error);
             }
         });
 

@@ -23,6 +23,8 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
         state.setFlightNumber(response.getFlightNumber());
         state.setDepartureTime(response.getDepartureTime());
         state.setArrivalTime(response.getArrivalTime());
+        state.setArrivalAirport(response.getArrivalAirport());
+        state.setDepartureAirport(response.getDepartureAirport());
         state.setStatus(response.getStatus());
 
         // Notify ViewModel to update the flight details by firing property change
@@ -33,7 +35,7 @@ public class SearchByFlightNumberPresenter implements SearchByFlightNumberOutput
     public void prepareFailView(SearchByFlightNumberOutputData error) {
         // Update the SearchViewModel to show error message if failure
         SearchByFlightNumberState state = searchByFlightNumberViewModel.getState();
-        state.setSearchError(error.getErrorMessage());
+        state.setError(error.getErrorMessage());
 
         // Notify ViewModel to update the error message
         searchByFlightNumberViewModel.firePropertyChanged("error");

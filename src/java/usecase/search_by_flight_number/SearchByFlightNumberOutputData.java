@@ -39,6 +39,14 @@ public class SearchByFlightNumberOutputData {
         return (filteredFlight != null) ? filteredFlight.getScheduledArrivalTime() : null;
     }
 
+    public String getDepartureAirport() {
+        return (filteredFlight != null) ? filteredFlight.getDepartureAirport() : null;
+    }
+
+    public String getArrivalAirport() {
+        return (filteredFlight != null) ? filteredFlight.getArrivalAirport() : null;
+    }
+
     public final String getStatus() {
         return (filteredFlight != null) ? filteredFlight.getStatus() : null;
     }
