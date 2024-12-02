@@ -71,6 +71,7 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
 
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
+        searchField.setColumns(1000000);
         searchField.setForeground(Color.GRAY);
         // Set initial color to gray for placeholder text
         searchField.setForeground(Color.GRAY);
@@ -109,11 +110,14 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
     }
 
     private void showResult(SearchByFlightNumberState searchByFlightNumberState) {
-        String[] columnNames = {"IATA Flight Number", "Arrival Time", "Departure Time", "Status"};
+        String[] columnNames = {"IATA Flight Number", "Arrival Time", "Departure Time",
+            "Arrival Airport", "Departure Airport", "Status"};
         Object[][] data = {{
             searchByFlightNumberState.getFlightNumber(),
             searchByFlightNumberState.getArrivalTime(),
             searchByFlightNumberState.getDepartureTime(),
+            searchByFlightNumberState.getArrivalAirport(),
+            searchByFlightNumberState.getDepartureAirport(),
             searchByFlightNumberState.getStatus()},
         };
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
@@ -152,7 +156,7 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
             showResult(searchByFlightNumberViewModel.getState());
         }
         else if ("error".equals(event.getPropertyName())) {
-            showError(searchByFlightNumberViewModel.getState().getSearchError());
+            showError(searchByFlightNumberViewModel.getState().getError());
         }
     }
 }

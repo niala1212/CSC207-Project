@@ -1,4 +1,4 @@
-package usecase.SearchAirportLanded;
+package usecase.search_airport_landed;
 
 /**
  * Input Boundary for actions which are related to searching by Airport.
