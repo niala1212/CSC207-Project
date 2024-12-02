@@ -38,7 +38,10 @@ public class SeeWorldMapInteractor implements SeeWorldMapInputBoundary {
             }
         }
         catch (IOException error) {
-            throw new RuntimeException(error);
+            // Critical failure: Program runtime error or file missing.
+            SeeWorldMapOutputData outputData = new SeeWorldMapOutputData(
+                    "Error with program runtime. Please check relevant files and try again");
+            seeWorldMapPresenter.prepareFailView(outputData);
         }
     }
 }
