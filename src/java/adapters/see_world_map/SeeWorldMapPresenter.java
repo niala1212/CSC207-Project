@@ -1,11 +1,11 @@
-package adapters.SeeWorldMap;
-
-import entities.Flight;
-import usecase.SeeWorldMap.SeeWorldMapOutputBoundary;
-import usecase.SeeWorldMap.SeeWorldMapOutputData;
+package adapters.see_world_map;
 
 import java.awt.geom.Point2D;
 import java.util.Map;
+
+import entities.Flight;
+import usecase.see_world_map.SeeWorldMapOutputBoundary;
+import usecase.see_world_map.SeeWorldMapOutputData;
 
 /**
  * The Presenter for the SeeWorldMap Use Case.

@@ -3,6 +3,7 @@ package app.gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,8 +14,8 @@ import javax.swing.SwingConstants;
 
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SeeWorldMap.SeeWorldMapController;
-import adapters.SeeWorldMap.SeeWorldMapViewModel;
+import adapters.see_world_map.SeeWorldMapController;
+import adapters.see_world_map.SeeWorldMapViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDController;
 import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
@@ -174,9 +175,14 @@ public class Menu extends JFrame {
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
-            SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
-                    seeWorldMapController, seeWorldMapViewModel
-            );
+            try {
+                SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
+                        seeWorldMapController, seeWorldMapViewModel
+                );
+            }
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         // Add the panel to the center of the frame

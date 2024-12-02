@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class SearchByArrivalAirportInteractorTest {
 
     // Test case when flights are found for the given arrival airport code
     @Test
-    public void testExecute_FlightsFound() {
+    public void testExecute_FlightsFound() throws IOException {
         // Arrange: Prepare mock data
         String airportCode = "XYZ";
         List<Flight> flights = Arrays.asList(new Flight("AB123", "2024-11-26"),
@@ -52,7 +53,7 @@ public class SearchByArrivalAirportInteractorTest {
 
     // Test case when no flights are found for the given arrival airport code
     @Test
-    public void testExecute_NoFlightsFound() {
+    public void testExecute_NoFlightsFound() throws IOException {
         // Arrange: Prepare mock data with no flights
         String airportCode = "XYZ";
         List<Flight> flights = List.of();  // No flights
@@ -71,7 +72,7 @@ public class SearchByArrivalAirportInteractorTest {
 
     // Test case when the flight data access returns null
     @Test
-    public void testExecute_FlightDataAccessReturnsNull() {
+    public void testExecute_FlightDataAccessReturnsNull() throws IOException {
         // Arrange: Prepare mock data with null flights
         String airportCode = "XYZ";
         List<Flight> flights = null;  // Simulate no data from the data access layer
@@ -89,7 +90,7 @@ public class SearchByArrivalAirportInteractorTest {
 
     // Test case when an exception is thrown during the flight data access
     @Test
-    public void testExecute_ExceptionThrown() {
+    public void testExecute_ExceptionThrown() throws IOException {
         // Arrange: Prepare mock data with an exception being thrown by the data access object
         String airportCode = "XYZ";
         SearchByArrivalAirportInputData inputData = mock(SearchByArrivalAirportInputData.class);

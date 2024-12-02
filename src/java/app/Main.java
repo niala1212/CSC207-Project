@@ -13,6 +13,6 @@ public class Main {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application());
+        SwingUtilities.invokeLater(Application::new);
     }
 }

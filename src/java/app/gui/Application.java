@@ -5,9 +5,9 @@ import javax.swing.JFrame;
 import adapters.SearchAirportLanded.SearchAirportLandedController;
 import adapters.SearchAirportLanded.SearchAirportLandedPresenter;
 import adapters.SearchAirportLanded.SearchAirportLandedViewModel;
-import adapters.SeeWorldMap.SeeWorldMapController;
-import adapters.SeeWorldMap.SeeWorldMapPresenter;
-import adapters.SeeWorldMap.SeeWorldMapViewModel;
+import adapters.see_world_map.SeeWorldMapController;
+import adapters.see_world_map.SeeWorldMapPresenter;
+import adapters.see_world_map.SeeWorldMapViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDController;
 import adapters.search_by_airlineid.SearchByAirlineIDPresenter;
 import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
@@ -25,6 +25,10 @@ import usecase.SearchAirportLanded.SearchAirportLandedDataAccessInterface;
 import usecase.SearchAirportLanded.SearchAirportLandedInputBoundary;
 import usecase.SearchAirportLanded.SearchAirportLandedInteractor;
 import usecase.SearchAirportLanded.SearchAirportLandedOutputBoundary;
+import usecase.see_world_map.SeeWorldMapDataAccessInterface;
+import usecase.see_world_map.SeeWorldMapInputBoundary;
+import usecase.see_world_map.SeeWorldMapInteractor;
+import usecase.see_world_map.SeeWorldMapOutputBoundary;
 import usecase.search_by_airlineid.SearchByAirlineIDDataAccessInterface;
 import usecase.search_by_airlineid.SearchByAirlineIDInputBoundary;
 import usecase.search_by_airlineid.SearchByAirlineIDInteractor;
@@ -41,10 +45,6 @@ import usecase.search_by_flight_number.SearchByFlightNumberDataAccessInterface;
 import usecase.search_by_flight_number.SearchByFlightNumberInputBoundary;
 import usecase.search_by_flight_number.SearchByFlightNumberInteractor;
 import usecase.search_by_flight_number.SearchByFlightNumberOutputBoundary;
-import usecase.SeeWorldMap.SeeWorldMapDataAccessInterface;
-import usecase.SeeWorldMap.SeeWorldMapInputBoundary;
-import usecase.SeeWorldMap.SeeWorldMapInteractor;
-import usecase.SeeWorldMap.SeeWorldMapOutputBoundary;
 
 /**
  * The Application class is responsible for initializing the different use cases and presenting the GUI.

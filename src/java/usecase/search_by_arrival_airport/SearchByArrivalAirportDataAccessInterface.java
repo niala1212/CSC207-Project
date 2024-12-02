@@ -1,5 +1,6 @@
 package usecase.search_by_arrival_airport;
 
+import java.io.IOException;
 import java.util.List;
 
 import entities.Flight;
@@ -15,6 +16,6 @@ public interface SearchByArrivalAirportDataAccessInterface {
      * @param airportCode the IATA code of the airport
      * @return a list of arrivalflights for the given airport
      */
-    List<Flight> getArrivalFlights(String airportCode);
+    List<Flight> getArrivalFlights(String airportCode) throws IOException;
 
 }
