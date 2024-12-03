@@ -1,28 +1,41 @@
 package app.gui;
 
-import adapters.AbstractState;
-import adapters.search_airport_landed.SearchAirportLandedController;
-import adapters.search_airport_landed.SearchAirportLandedViewModel;
-import adapters.search_by_departure_airport.SearchByDepartureAirportController;
-import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import adapters.AbstractState;
+import adapters.search_airport_landed.SearchAirportLandedController;
+import adapters.search_airport_landed.SearchAirportLandedViewModel;
+import net.miginfocom.swing.MigLayout;
+
+/**
+ * The JFrame for the Search Airport Landed use case.
+ */
+@SuppressWarnings({"checkstyle:ClassDataAbstractionCoupling", "checkstyle:SuppressWarnings"})
 public class SearchAirportLandedFrame extends JFrame implements PropertyChangeListener {
     static final int SEARCHBYAIRPORT_WIDTH = 600;
     static final int SEARCHBYAIRPORT_HEIGHT = 600;
     static final String SEARCHBYAIRPORT_FONT = "Arial";
 
-    private final SearchAirportLandedViewModel searchAirportLandedViewModel;
-    private final SearchAirportLandedController searchAirportLandedController;
+    private final SearchAirportLandedViewModel viewModel;
+    private final SearchAirportLandedController controller;
 
     // search panel
     private final String placeholderText = "Enter Airport Code (IATA code) e.g. YYZ";
@@ -33,11 +46,11 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
     private final JScrollPane scrollPane = new JScrollPane();
     private final JPanel resultPanel = new JPanel(new MigLayout("insets 10, fill"));
 
-    public SearchAirportLandedFrame(SearchAirportLandedController searchAirportLandedController,
-                                    SearchAirportLandedViewModel searchAirportLandedViewModel) throws HeadlessException {
-        this.searchAirportLandedViewModel = searchAirportLandedViewModel;
-        this.searchAirportLandedController = searchAirportLandedController;
-        searchAirportLandedViewModel.addPropertyChangeListener(this);
+    public SearchAirportLandedFrame(SearchAirportLandedController controller,
+                                    SearchAirportLandedViewModel viewModel) throws HeadlessException {
+        this.viewModel = viewModel;
+        this.controller = controller;
+        viewModel.addPropertyChangeListener(this);
 
         addSearchBar();
         add(resultPanel, BorderLayout.CENTER);
@@ -49,6 +62,7 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
         requestFocusInWindow();
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
         searchField.setColumns(1000000);
@@ -64,6 +78,7 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
                     searchField.setForeground(Color.BLACK);
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
                 // Restore placeholder text if the field is empty
@@ -83,7 +98,7 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
         // the search button will execute a different use case depending on the selected option in the JComboBox
         searchButton.addActionListener(event -> {
             System.out.println(searchField.getText());
-            searchAirportLandedController.execute(searchField.getText());
+            controller.execute(searchField.getText());
         });
 
         add(searchPanel, BorderLayout.NORTH);
@@ -117,6 +132,7 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
         resultPanel.revalidate();
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     private void showError(String errorMessage) {
         // html ensures the text wraps
         errorLabel.setText("<html><body style='width: 300px;'>" + errorMessage + "</body></html>");
@@ -141,10 +157,10 @@ public class SearchAirportLandedFrame extends JFrame implements PropertyChangeLi
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if ("landedFlightDetails".equals(event.getPropertyName())) {
-            showResult(searchAirportLandedViewModel.getState().getFlightStates());
+            showResult(viewModel.getState().getFlightStates());
         }
         else if ("landedFlightError".equals(event.getPropertyName())) {
-            showError(searchAirportLandedViewModel.getState().getError());
+            showError(viewModel.getState().getError());
         }
     }
 }

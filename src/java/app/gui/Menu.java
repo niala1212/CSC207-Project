@@ -11,10 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import adapters.search_airport_landed.SearchAirportLandedController;
-import adapters.search_airport_landed.SearchAirportLandedViewModel;
 import adapters.SeeWorldMap.SeeWorldMapController;
 import adapters.SeeWorldMap.SeeWorldMapViewModel;
+import adapters.search_airport_landed.SearchAirportLandedController;
+import adapters.search_airport_landed.SearchAirportLandedViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDController;
 import adapters.search_by_airlineid.SearchByAirlineIDViewModel;
 import adapters.search_by_arrival_airport.SearchByArrivalAirportController;
