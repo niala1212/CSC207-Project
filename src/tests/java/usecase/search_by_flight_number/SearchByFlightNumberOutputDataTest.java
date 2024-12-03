@@ -20,8 +20,8 @@ public class SearchByFlightNumberOutputDataTest {
 
         // Assertions to check if the times are set correctly
         Assert.assertEquals("123", outputData.getFlightNumber());
-        Assert.assertEquals("2024-11-26T10:00UTC", outputData.getDepartureTime());
-        Assert.assertEquals("2024-11-26T14:00UTC", outputData.getArrivalTime());
+        Assert.assertEquals("2024-11-26T10:00 UTC", outputData.getDepartureTime());
+        Assert.assertEquals("2024-11-26T14:00 UTC", outputData.getArrivalTime());
         Assert.assertNull(outputData.getErrorMessage());  // Ensure there's no error message
     }
 

@@ -22,7 +22,9 @@ public abstract class AbstractViewModel<T> {
      * Enum representing the different states of the application's view.
      * <ul>
      *     <li>{@link #SEARCHBYFLIGHT} - Search by flight number.</li>
-     *     <li>{@link #SEARCHBYAIRPORTID} - Search by airport ID.</li>
+     *     <li>{@link #SEARCHBYARRIVALAIRPORT} - Search by arrival airport.</li>
+     *     <li>{@link #SEARCHBYDEPARTUREAIRPORT} - Search by departure airport.</li>
+     *     <li>{@link #SEARCHBYAIRPORTLANDED} - Search for landed flights at airport.</li>
      *     <li>{@link #SEARCHBYAIRLINEID} - Search by airline ID.</li>
      *     <li>{@link #WORLDMAP} - Display world map.</li>
      *     <li>{@link #MENU} - Show the main menu.</li>
@@ -30,7 +32,9 @@ public abstract class AbstractViewModel<T> {
      */
     public enum ViewState {
         SEARCHBYFLIGHT,
-        SEARCHBYAIRPORTID,
+        SEARCHBYARRIVALAIRPORT,
+        SEARCHBYDEPARTUREAIRPORT,
+        SEARCHBYAIRPORTLANDED,
         SEARCHBYAIRLINEID,
         WORLDMAP,
         MENU
