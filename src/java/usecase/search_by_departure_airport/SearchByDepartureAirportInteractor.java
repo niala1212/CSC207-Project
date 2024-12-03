@@ -13,7 +13,8 @@ public class SearchByDepartureAirportInteractor implements SearchByDepartureAirp
     private final SearchByDepartureAirportOutputBoundary searchByDepartureAirportPresenter;
 
     public SearchByDepartureAirportInteractor(SearchByDepartureAirportDataAccessInterface flightDataAccessObject,
-                                              SearchByDepartureAirportOutputBoundary searchByDepartureAirportPresenter) {
+                                              SearchByDepartureAirportOutputBoundary
+                                                      searchByDepartureAirportPresenter) {
         this.flightDataAccessObject = flightDataAccessObject;
         this.searchByDepartureAirportPresenter = searchByDepartureAirportPresenter;
     }
