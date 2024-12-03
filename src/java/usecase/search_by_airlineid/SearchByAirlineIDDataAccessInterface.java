@@ -1,5 +1,6 @@
 package usecase.search_by_airlineid;
 
+import java.io.IOException;
 import java.util.List;
 
 import entities.Flight;
@@ -15,5 +16,5 @@ public interface SearchByAirlineIDDataAccessInterface {
      * @param airlineId the (IATA) code of the airline
      * @return a list of flights for the given airline ID
      */
-    List<Flight> getFlightsByAirlineId(String airlineId);
+    List<Flight> getFlightsByAirlineId(String airlineId) throws IOException;
 }

@@ -3,6 +3,7 @@ package app.gui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,8 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import adapters.SeeWorldMap.SeeWorldMapController;
-import adapters.SeeWorldMap.SeeWorldMapViewModel;
 import adapters.search_airport_landed.SearchAirportLandedController;
 import adapters.search_airport_landed.SearchAirportLandedViewModel;
 import adapters.search_by_airlineid.SearchByAirlineIDController;
@@ -23,10 +22,12 @@ import adapters.search_by_departure_airport.SearchByDepartureAirportController;
 import adapters.search_by_departure_airport.SearchByDepartureAirportViewModel;
 import adapters.search_by_flight_number.SearchByFlightNumberController;
 import adapters.search_by_flight_number.SearchByFlightNumberViewModel;
-import app.gui.SeeWorldMapFrames.SeeWorldMapFrame;
+import adapters.see_world_map.SeeWorldMapController;
+import adapters.see_world_map.SeeWorldMapViewModel;
 import app.gui.search_by_airlineid_frames.SearchByAirlineIDFrame;
 import app.gui.search_by_arrival_airport_frames.SearchByArrivalAirportFrame;
 import app.gui.search_by_departure_airport_frames.SearchByDepartureAirportFrame;
+import app.gui.see_world_map_frames.SeeWorldMapFrame;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -169,13 +170,18 @@ public class Menu extends JFrame {
             );
         });
 
-        // Setup See World Map button (to be implemented later)
+        // Setup See World Map button
         seeWorldMapB.setFont(buttonFont);
         panel.add(seeWorldMapB, "span, grow");
         seeWorldMapB.addActionListener(event -> {
-            SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
-                    seeWorldMapController, seeWorldMapViewModel
-            );
+            try {
+                SeeWorldMapFrame seeWorldMapFrame = new SeeWorldMapFrame(
+                        seeWorldMapController, seeWorldMapViewModel
+                );
+            }
+            catch (IOException error) {
+                throw new RuntimeException(error);
+            }
         });
 
         // Add the panel to the center of the frame

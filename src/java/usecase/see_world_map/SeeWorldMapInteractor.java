@@ -1,7 +1,9 @@
-package usecase.SeeWorldMap;
+package usecase.see_world_map;
+
+import java.io.IOException;
+import java.util.List;
 
 import entities.Flight;
-import java.util.List;
 
 /**
  * The SeeWorldMap Interactor.
@@ -18,25 +20,27 @@ public class SeeWorldMapInteractor implements SeeWorldMapInputBoundary {
     }
 
     @Override
-    public void execute(SeeWorldMapInputData seeWorldMapInputData) {
+    public void execute(SeeWorldMapInputData seeWorldMapInputData) throws IOException {
 
         try {
             List<Flight> foundFlights = flightDataAccessObject.getRandomFlights();
-            System.out.println(foundFlights);
+            //            System.out.println(foundFlights);
             if (foundFlights == null) {
                 // Critical failure: API or connection issue
                 SeeWorldMapOutputData outputData = new SeeWorldMapOutputData(
                         "Error retrieving the flight data, please try again");
                 seeWorldMapPresenter.prepareFailView(outputData);
-            } else {
+            }
+            else {
                 // Flight found: Success
                 SeeWorldMapOutputData outputData = new SeeWorldMapOutputData(foundFlights);
                 seeWorldMapPresenter.prepareSuccessView(outputData);
             }
-        } catch (Exception e) {
-            // Unexpected failure: Handle exceptions
+        }
+        catch (IOException error) {
+            // Critical failure: Program runtime error or file missing.
             SeeWorldMapOutputData outputData = new SeeWorldMapOutputData(
-                    "An unexpected error occurred: " + e.getMessage());
+                    "Error with program runtime. Please check relevant files and try again");
             seeWorldMapPresenter.prepareFailView(outputData);
         }
     }

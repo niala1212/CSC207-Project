@@ -1,8 +1,9 @@
-package adapters.SeeWorldMap;
+package adapters.see_world_map;
 
-import usecase.SeeWorldMap.SeeWorldMapInputBoundary;
-import usecase.SeeWorldMap.SeeWorldMapInputData;
+import java.io.IOException;
 
+import usecase.see_world_map.SeeWorldMapInputBoundary;
+import usecase.see_world_map.SeeWorldMapInputData;
 
 public class SeeWorldMapController {
     private final SeeWorldMapInputBoundary seeWorldMapInteractor;
@@ -13,9 +14,9 @@ public class SeeWorldMapController {
 
     /**
      * Executes the see world map use case.
+     * @throws IOException in the event of an error
      */
-//    MAKE SURE TO FIX THE NULL THING
-    public void execute() {
+    public void execute() throws IOException {
         final SeeWorldMapInputData inputData = new SeeWorldMapInputData("");
         this.seeWorldMapInteractor.execute(inputData);
     }

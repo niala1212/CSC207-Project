@@ -14,26 +14,37 @@ public class FlightFactory {
      *             [flightNumber, flightDate, Airline, Dep_Airport,
      *         Arr_Airport, Status, departureScheduled, departureEstimated,
      *         arrivalScheduled, arrivalEstimated]
-     * @param coordinates given as <latitude, longitude>
+     * @param coordinates given as (latitude, longitude).
      * @return Populated flight class
      */
 
-    @SuppressWarnings({"checkstyle:MagicNumber", "checkstyle:SuppressWarnings"})
     public static Flight create(List<String> flightInfo, double[] coordinates) {
-        Flight flight = new Flight(flightInfo.get(0), flightInfo.get(1));
+        // Constants for indices in flightInfo
+        final int flightNumberIndex = 0;
+        final int flightCodeIndex = 1;
+        final int airlineIndex = 2;
+        final int departureAirportIndex = 3;
+        final int arrivalAirportIndex = 4;
+        final int statusIndex = 5;
+        final int scheduledDepartureIndex = 6;
+        final int estimatedDepartureIndex = 7;
+        final int scheduledArrivalIndex = 8;
+        final int estimatedArrivalIndex = 9;
+
+        Flight flight = new Flight(flightInfo.get(flightNumberIndex), flightInfo.get(flightCodeIndex));
 
         if (coordinates != null) {
             flight.setCurrentLocation(coordinates);
         }
 
-        flight.setAirline(flightInfo.get(2));
-        flight.setDepartureAirport(flightInfo.get(3));
-        flight.setArrivalAirport(flightInfo.get(4));
-        flight.setStatus(flightInfo.get(5));
-        flight.setScheduledDepartureTime(flightInfo.get(6));
-        flight.setEstimatedDepartureTime(flightInfo.get(7));
-        flight.setScheduledArrivalTime(flightInfo.get(8));
-        flight.setEstimatedArrivalTime(flightInfo.get(9));
+        flight.setAirline(flightInfo.get(airlineIndex));
+        flight.setDepartureAirport(flightInfo.get(departureAirportIndex));
+        flight.setArrivalAirport(flightInfo.get(arrivalAirportIndex));
+        flight.setStatus(flightInfo.get(statusIndex));
+        flight.setScheduledDepartureTime(flightInfo.get(scheduledDepartureIndex));
+        flight.setEstimatedDepartureTime(flightInfo.get(estimatedDepartureIndex));
+        flight.setScheduledArrivalTime(flightInfo.get(scheduledArrivalIndex));
+        flight.setEstimatedArrivalTime(flightInfo.get(estimatedArrivalIndex));
 
         return flight;
     }

@@ -1,13 +1,13 @@
-package adapters.SeeWorldMap;
-
-import adapters.AbstractState;
-import entities.Flight;
+package adapters.see_world_map;
 
 import java.awt.geom.Point2D;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import adapters.AbstractState;
+import entities.Flight;
 
 /**
  * The state for the See World Map ViewModel.

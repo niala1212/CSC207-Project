@@ -43,11 +43,10 @@ public class Airport {
     // Setters
     /**
      * Gets the airport code.
-     * @param airportCode code for airport
+     * @param airportCodes code for airport
      */
-    @SuppressWarnings({"checkstyle:HiddenField", "checkstyle:SuppressWarnings"})
-    public final void setairportCode(String airportCode) {
-        this.airportCode = airportCode;
+    public final void setairportCode(String airportCodes) {
+        this.airportCode = airportCodes;
     }
 
     public final void setName(String name) {
@@ -59,7 +58,6 @@ public class Airport {
     }
 
     // To String method
-    @SuppressWarnings({"checkstyle:AvoidInlineConditionals", "checkstyle:SuppressWarnings"})
     @Override
     public String toString() {
         return "Airport{" + "Airport Code = '" + airportCode + '\'' + ", Name = '" + name + '\'' + ", Location = "
