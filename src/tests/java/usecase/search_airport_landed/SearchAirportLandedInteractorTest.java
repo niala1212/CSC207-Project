@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class SearchAirportLandedInteractorTest {
     }
 
     @Test
-    public void testExecute_FlightsFound() {
+    public void testExecute_FlightsFound() throws IOException {
         String airportCode = "YVR";
         List<Flight> flights = Arrays.asList(new Flight("AB123", "2024-11-26"),
                 new Flight("AB321", "2024-12-27"));
@@ -43,7 +44,7 @@ public class SearchAirportLandedInteractorTest {
     }
 
     @Test
-    public void testExecute_NoFlightsFound() {
+    public void testExecute_NoFlightsFound() throws IOException {
         String airportCode = "YVR";
         List<Flight> flights = List.of();
         SearchAirportLandedInputData inputData = mock(SearchAirportLandedInputData.class);
@@ -58,7 +59,7 @@ public class SearchAirportLandedInteractorTest {
     }
 
     @Test
-    public void testExecute_FlightDataAccessReturnsNull() {
+    public void testExecute_FlightDataAccessReturnsNull() throws IOException {
         String airportCode = "asdss";
         SearchAirportLandedInputData inputData = mock(SearchAirportLandedInputData.class);
         when(inputData.getAirportCode()).thenReturn(airportCode);
@@ -73,7 +74,7 @@ public class SearchAirportLandedInteractorTest {
     }
 
     @Test
-    public void testExecute_ExceptionThrown() {
+    public void testExecute_ExceptionThrown() throws IOException {
         String airportID = "YVR";
         SearchAirportLandedInputData inputData = mock(SearchAirportLandedInputData.class);
         when(inputData.getAirportCode()).thenReturn(airportID);

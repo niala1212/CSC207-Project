@@ -105,4 +105,22 @@ class SearchByDepartureAirportInteractorTest {
                 outputData.getDepartureErrorMessage().equals("An unexpected error occurred. Please try again later.")));
         verify(mockDataAccess).getDepartureFlightsByAirport(airportCode);
     }
+
+    @Test
+    void testExecute_InvalidAirportCode_ShortCode() {
+        SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData("J");
+        interactor.execute(inputData);
+        verify(mockPresenter).prepareFailView(argThat(outputData ->
+                outputData.getDepartureErrorMessage().equals("Invalid airport code: J")));
+        verifyNoInteractions(mockDataAccess);
+    }
+
+    @Test
+    void testExecute_NullAirportCode() {
+        SearchByDepartureAirportInputData inputData = new SearchByDepartureAirportInputData(null);
+        interactor.execute(inputData);
+        verify(mockPresenter).prepareFailView(argThat(outputData ->
+                outputData.getDepartureErrorMessage().equals("Invalid airport code: null")));
+        verifyNoInteractions(mockDataAccess);
+    }
 }
