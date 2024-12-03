@@ -34,8 +34,7 @@ public class SearchAirportLandedInteractor implements SearchAirportLandedInputBo
             else if (foundFlights.isEmpty()) {
                 // No flights found by the API
                 SearchAirportLandedOutputData outputData = new SearchAirportLandedOutputData(
-                        "Sorry, no landed flights have been found at the airport \"" + airportCode
-                                + "\"");
+                        "Sorry, no landed flights have been found at the airport \"" + airportCode + "\"");
                 searchAirportLandedPresenter.prepareFailView(outputData);
             }
             else {

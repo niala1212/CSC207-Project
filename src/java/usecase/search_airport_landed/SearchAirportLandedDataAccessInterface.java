@@ -1,7 +1,8 @@
 package usecase.search_airport_landed;
 
-import entities.Flight;
 import java.util.List;
+
+import entities.Flight;
 
 /**
  * Data Access Interface for the Search Airport Landed Use Case.

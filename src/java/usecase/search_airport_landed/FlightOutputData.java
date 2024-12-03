@@ -2,6 +2,9 @@ package usecase.search_airport_landed;
 
 import entities.Flight;
 
+/**
+ * Output Data for a specific flight.
+ */
 public class FlightOutputData {
     private final Flight flight;
 
@@ -10,6 +13,10 @@ public class FlightOutputData {
     }
 
     // Getters with null checks
+    public final Flight getFlight() {
+        return flight;
+    }
+
     public final String getFlightNumber() {
         return (flight != null) ? flight.getFlightNumber() : null;
     }
@@ -22,11 +29,11 @@ public class FlightOutputData {
         return (flight != null) ? flight.getScheduledArrivalTime() : null;
     }
 
-    public String getDepartureAirport() {
+    public final String getDepartureAirport() {
         return (flight != null) ? flight.getDepartureAirport() : null;
     }
 
-    public String getArrivalAirport() {
+    public final String getArrivalAirport() {
         return (flight != null) ? flight.getArrivalAirport() : null;
     }
 

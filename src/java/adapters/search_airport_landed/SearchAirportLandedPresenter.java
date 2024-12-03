@@ -21,7 +21,7 @@ public class SearchAirportLandedPresenter implements SearchAirportLandedOutputBo
     public void prepareSuccessView(SearchAirportLandedOutputData outputData) {
         // Making the state from the viewModel
         SearchAirportLandedState searchAirportLandedState = viewModel.getState();
-        List<FlightOutputData> filteredFlights = outputData.getFlightOutputData();
+        List<FlightOutputData> filteredFlights = outputData.getFlightOutputDataList();
         for (FlightOutputData flightOutputData : filteredFlights) {
             FlightState flightState = new FlightState();
             flightState.setFlightNumber(flightOutputData.getFlightNumber());
