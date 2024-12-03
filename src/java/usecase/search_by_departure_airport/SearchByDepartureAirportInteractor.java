@@ -13,12 +13,14 @@ public class SearchByDepartureAirportInteractor implements SearchByDepartureAirp
     private final SearchByDepartureAirportOutputBoundary searchByDepartureAirportPresenter;
 
     public SearchByDepartureAirportInteractor(SearchByDepartureAirportDataAccessInterface flightDataAccessObject,
-                                              SearchByDepartureAirportOutputBoundary searchByDepartureAirportPresenter) {
+                                              SearchByDepartureAirportOutputBoundary
+                                                      searchByDepartureAirportPresenter) {
         this.flightDataAccessObject = flightDataAccessObject;
         this.searchByDepartureAirportPresenter = searchByDepartureAirportPresenter;
     }
 
-    @SuppressWarnings({"checkstyle:ReturnCount", "checkstyle:SuppressWarnings", "checkstyle:IllegalCatch", "checkstyle:CatchParameterName"})
+    @SuppressWarnings({"checkstyle:ReturnCount", "checkstyle:SuppressWarnings", "checkstyle:IllegalCatch",
+                       "checkstyle:CatchParameterName"})
     @Override
     public void execute(SearchByDepartureAirportInputData searchByDepartureAirportInputData) {
         String airportCode = searchByDepartureAirportInputData.getAirportCode();

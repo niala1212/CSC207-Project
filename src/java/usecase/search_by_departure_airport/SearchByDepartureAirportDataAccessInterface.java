@@ -16,5 +16,6 @@ public interface SearchByDepartureAirportDataAccessInterface {
      * @param airportCode the IATA code of the airport
      * @return a list of flights for the given airport
      */
+    @SuppressWarnings({"checkstyle:JavadocMethod", "checkstyle:SuppressWarnings"})
     List<Flight> getDepartureFlightsByAirport(String airportCode) throws IOException;
 }
