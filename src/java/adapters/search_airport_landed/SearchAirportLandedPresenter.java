@@ -1,11 +1,14 @@
 package adapters.search_airport_landed;
 
+import java.util.List;
+
 import usecase.search_airport_landed.FlightOutputData;
 import usecase.search_airport_landed.SearchAirportLandedOutputBoundary;
 import usecase.search_airport_landed.SearchAirportLandedOutputData;
 
-import java.util.List;
-
+/**
+ * The Search by Landed Airport Presenter.
+ */
 public class SearchAirportLandedPresenter implements SearchAirportLandedOutputBoundary {
 
     private SearchAirportLandedViewModel viewModel;
@@ -18,7 +21,7 @@ public class SearchAirportLandedPresenter implements SearchAirportLandedOutputBo
     public void prepareSuccessView(SearchAirportLandedOutputData outputData) {
         // Making the state from the viewModel
         SearchAirportLandedState searchAirportLandedState = viewModel.getState();
-        List<FlightOutputData> filteredFlights = outputData.getFlightOutputData();
+        List<FlightOutputData> filteredFlights = outputData.getFlightOutputDataList();
         for (FlightOutputData flightOutputData : filteredFlights) {
             FlightState flightState = new FlightState();
             flightState.setFlightNumber(flightOutputData.getFlightNumber());

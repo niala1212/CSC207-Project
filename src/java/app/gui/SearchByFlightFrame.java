@@ -36,8 +36,6 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
     static final String SEARCHBYFLIGHT_FONT = "Arial";
     static final int SEARCH_FIELD_HEIGHT = 40;
     static final int SEARCH_BUTTON_HEIGHT = 40;
-    static final int FONT_SIZE_LARGE = 20;
-    static final int FONT_SIZE_SMALL = 15;
     static final int ERROR_LABEL_WIDTH = 300;
 
     private final SearchByFlightNumberViewModel searchByFlightNumberViewModel;
@@ -68,6 +66,7 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
         requestFocusInWindow();
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     private void addSearchBar() {
         JTextField searchField = new JTextField(placeholderText);
         searchField.setColumns(1000000);
@@ -95,10 +94,10 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
             }
         });
         searchPanel.add(searchField, "height 40, grow");
-        searchField.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.PLAIN, FONT_SIZE_LARGE));
+        searchField.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.PLAIN, 20));
 
         JButton searchButton = new JButton("Search");
-        searchButton.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.PLAIN, FONT_SIZE_SMALL));
+        searchButton.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.PLAIN, 15));
         searchPanel.add(searchButton, "height 40, grow");
         searchButton.addActionListener(event -> {
             System.out.println(searchField.getText());
@@ -129,12 +128,13 @@ public class SearchByFlightFrame extends JFrame implements PropertyChangeListene
         resultPanel.revalidate();
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     private void showError(String errorMessage) {
         // html ensures the text wraps
         errorLabel.setText("<html><body style='width: 300px;'>" + errorMessage + "</body></html>");
 
         errorLabel.setForeground(Color.RED);
-        errorLabel.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.BOLD, FONT_SIZE_LARGE));
+        errorLabel.setFont(new Font(SEARCHBYFLIGHT_FONT, Font.BOLD, 20));
         errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         errorLabel.setVerticalAlignment(SwingConstants.CENTER);
 

@@ -1,10 +1,13 @@
 package adapters.search_airport_landed;
 
-import adapters.AbstractState;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.AbstractState;
+
+/**
+ * State containing list of flight states for Search Airport Landed use case.
+ */
 public class SearchAirportLandedState {
     private String error;
     private List<AbstractState> flightStates = new ArrayList<AbstractState>();
@@ -21,6 +24,10 @@ public class SearchAirportLandedState {
         return flightStates;
     }
 
+    /**
+     * Add a flight state.
+     * @param state flight state to add.
+     */
     public final void addFlightState(FlightState state) {
         this.flightStates.add(state);
     }
