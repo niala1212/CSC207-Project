@@ -15,6 +15,7 @@ public interface SearchByAirlineIDDataAccessInterface {
      *
      * @param airlineId the (IATA) code of the airline
      * @return a list of flights for the given airline ID
+     * @throws IOException when API not callable.
      */
     List<Flight> getFlightsByAirlineId(String airlineId) throws IOException;
 }

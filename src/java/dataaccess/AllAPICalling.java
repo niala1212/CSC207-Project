@@ -82,7 +82,7 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
      * @param flightNumber the IATA code of the flight (e.g., "AC8880")
      * @param flightDate   the date of the flight in the format "yyyy-MM-dd" (e.g., "2024-11-27")
      * @return a `Flight` object containing the flight details or `null` if no matching flight data is found.
-     * @throws IOException in the even that api is not callable.
+     * @throws IOException in the event that api is not callable.
      */
     @Override
     public Flight getFlightByFlightNumber(String flightNumber, String flightDate) throws IOException {
@@ -122,6 +122,12 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
     }
 
     @Override
+    public List<Flight> getLandedFlightsByAirport(String airportCode) throws IOException {
+        String apiUrl = URLBASE + ACCESSKEY + "&arr_iata=" + airportCode + "&flight_status=landed";
+        return getFlightsFromUrl(apiUrl);
+    }
+
+    @Override
     public List<Flight> getArrivalFlights(String AirportID) throws IOException {
         String apiUrl = URLBASE + ACCESSKEY + "&arr_iata=" + AirportID;
         return getFlightsFromUrl(apiUrl);
@@ -132,18 +138,6 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
         final int indexRange = 14000;
         Random rand = new Random();
         String apiUrl = URLBASE + ACCESSKEY + "&flight_status=" + "active" + "&offset=" + rand.nextInt(indexRange);
-        return getFlightsFromUrl(apiUrl);
-    }
-
-    /**
-     * Retrieves all flights arriving at a specific airport that have landed.
-     *
-     * @param AirportID The IATA code for the arrival airport.
-     * @return A list of landed flights at the specified airport.
-     * @throws IOException if api is not callable.
-     */
-    public List<Flight> searchByLandedAtAirport(String AirportID) throws IOException {
-        String apiUrl = URLBASE + ACCESSKEY + "&arr_iata=" + AirportID + "&flight_status=landed";
         return getFlightsFromUrl(apiUrl);
     }
 
@@ -238,18 +232,5 @@ public class AllAPICalling implements SearchByAirlineIDDataAccessInterface,
         String time = times.getString(type);
         LocalDateTime source = LocalDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         return source.format(formatter);
-    }
-
-    /**
-     * Retrieves all flights departing or arriving at the given airport code.
-     *
-     * @param airportCode the IATA code of the airport
-     * @return a list of flights for the given airport
-     */
-
-    @Override
-    public List<Flight> getLandedFlightsByAirport(String airportCode) throws IOException {
-        String apiUrl = URLBASE + ACCESSKEY + "&arr_iata=" + airportCode + "&flight_status=landed";
-        return getFlightsFromUrl(apiUrl);
     }
 }

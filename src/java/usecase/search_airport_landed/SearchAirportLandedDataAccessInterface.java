@@ -15,6 +15,7 @@ public interface SearchAirportLandedDataAccessInterface {
      *
      * @param airportCode the IATA code of the airport
      * @return a list of flights for the given airport
+     * @throws IOException when API not callable.
      */
     List<Flight> getLandedFlightsByAirport(String airportCode) throws IOException;
 }
